@@ -1,0 +1,3899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiomie — Illustrator & Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Big+Shoulders+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1714;
+    --blush: #E8C4B2;
+    --sage: #8BA888;
+    --rose: #C4736A;
+    --gold: #C9A96E;
+    --muted: #7A7268;
+    --border: rgba(26,23,20,0.12);
+  }
+
+  /* ===== BIG SHOULDERS DISPLAY HEADING RULES ===== */
+  h1, h2, h3,
+  .hero-title, .section-title, .page-title, .about-name,
+  .admin-section-title, .modal-title, .shop-banner-title,
+  .admin-login-title, .footer-logo, .nav-logo,
+  .comm-info h3, .partners-intro h3 {
+    font-family: 'Cinzel', serif !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero-title em, .about-name em, .shop-banner-title em,
+  .modal-title em, .admin-section-title em, .partners-intro h3 em,
+  .comm-info h3 em, .footer-logo em, .nav-logo em,
+  .admin-login-title em {
+    font-style: italic;
+    font-weight: 700;
+  }
+
+
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ===== CURSOR ===== */
+  * { cursor: none; }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--rose);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--rose);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.35s ease, width 0.3s, height 0.3s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s, background 0.4s, border-color 0.4s;
+  }
+  /* Dark variant for About page */
+  nav.nav-dark {
+    background: rgba(30,24,40,0.88);
+    border-bottom-color: rgba(240,238,248,0.07);
+  }
+  nav.nav-dark .nav-logo { color: #F0EEF8; }
+  nav.nav-dark .nav-logo em { color: #E8856A; }
+  nav.nav-dark .nav-links a { color: rgba(240,238,248,0.45); }
+  nav.nav-dark .nav-links a:hover { color: #F0EEF8; }
+  nav.nav-dark .nav-links a.active { color: #F0EEF8; }
+  nav.nav-dark .nav-links a::after { background: #E8856A; }
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--rose);
+    transform: scaleX(0);
+    transition: transform 0.25s;
+    transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--ink); }
+
+  /* ===== PAGES ===== */
+  .page { display: none; min-height: 100vh; padding-top: 80px; }
+  .page.active { display: block; }
+  /* About page hero fills full viewport behind fixed nav */
+  #page-about { padding-top: 0 !important; }
+  /* Force dark bg across entire viewport when on About */
+  body.on-about { background: #1E1828 !important; }
+  body.on-about nav { background: rgba(30,24,40,0.88) !important; border-bottom-color: rgba(240,238,248,0.07) !important; }
+  body.on-about .nav-logo { color: #F0EEF8 !important; }
+  body.on-about .nav-links a { color: rgba(240,238,248,0.45) !important; }
+  body.on-about .nav-links a:hover,
+  body.on-about .nav-links a.active { color: #F0EEF8 !important; }
+  body.on-about .nav-links a::after { background: #C4736A !important; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.15s ease forwards; opacity: 0; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.3s ease forwards; opacity: 0; }
+  .fade-up-4 { animation: fadeUp 0.7s 0.45s ease forwards; opacity: 0; }
+
+  /* ===== HOME PAGE ===== */
+  .hero {
+    min-height: calc(100vh - 80px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 3rem;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.0;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: #4A6B62;
+    display: block;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.25s, transform 0.2s;
+    border: none;
+  }
+  .btn-primary:hover { background: var(--rose); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 0.9rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-art-grid {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 3px;
+  }
+  .hero-art-piece {
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-art-piece:first-child {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+  .art-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+  }
+  .hero-art-piece:hover .art-placeholder { transform: scale(1.05); }
+
+  .ap-1 { background: linear-gradient(135deg, #E8C4B2 0%, #C4736A 100%); }
+  .ap-2 { background: linear-gradient(135deg, #8BA888 0%, #5C7A6B 100%); }
+  .ap-3 { background: linear-gradient(135deg, #C9A96E 0%, #9E7A45 100%); }
+  .ap-4 { background: linear-gradient(135deg, #B5C4D8 0%, #7A96B5 100%); }
+  .ap-5 { background: linear-gradient(135deg, #D4B5C4 0%, #A87A96 100%); }
+
+  .art-label {
+    position: absolute; bottom: 0.75rem; left: 0.75rem;
+    background: rgba(250,247,242,0.9);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    color: var(--ink);
+  }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--ink);
+    overflow: hidden;
+    padding: 0.85rem 0;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-item {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream);
+    padding: 0 3rem;
+    opacity: 0.7;
+  }
+  .marquee-dot {
+    color: var(--rose);
+    opacity: 1 !important;
+    padding: 0;
+  }
+
+  /* HOME FEATURED */
+  .section { padding: 6rem 3rem; }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+  }
+  .section-link {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .section-link:hover { text-decoration: underline; }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .home-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+  .home-card:first-child {
+    grid-column: span 2;
+    aspect-ratio: unset;
+  }
+  .home-card-art {
+    width: 100%; height: 100%;
+    min-height: 320px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    transition: transform 0.5s ease;
+  }
+  .home-card:hover .home-card-art { transform: scale(1.04); }
+  .home-card-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(26,23,20,0.7) 0%, transparent 100%);
+    transform: translateY(30%);
+    transition: transform 0.35s ease;
+  }
+  .home-card:hover .home-card-overlay { transform: translateY(0); }
+  .home-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: white;
+    font-style: italic;
+  }
+  .home-card-type {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.3rem;
+  }
+
+  /* ===== PORTFOLIO PAGE ===== */
+  .portfolio-hero {
+    padding: 4rem 3rem 2rem;
+    text-align: center;
+  }
+  .page-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .page-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .page-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    font-weight: 300;
+  }
+
+  .filter-bar {
+    display: flex; justify-content: center; gap: 0.5rem;
+    padding: 2rem 3rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  .portfolio-masonry {
+    columns: 3;
+    column-gap: 1rem;
+    padding: 0 3rem 6rem;
+  }
+  .porto-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+    display: block;
+  }
+  .porto-art {
+    width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s ease;
+  }
+  .porto-item:hover .porto-art { transform: scale(1.02); }
+  .porto-overlay {
+    position: absolute; inset: 0;
+    background: rgba(26,23,20,0.65);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .porto-item:hover .porto-overlay { opacity: 1; }
+  .porto-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .porto-tag {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* animated pieces special badge */
+  .animated-badge {
+    position: absolute; top: 0.75rem; right: 0.75rem;
+    background: var(--rose);
+    color: white;
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    font-weight: 500;
+    z-index: 2;
+  }
+
+  /* ===== SHOP PAGE ===== */
+  .shop-hero {
+    padding: 4rem 3rem 0;
+  }
+  .shop-banner {
+    position: relative;
+    overflow: hidden;
+    padding: 2.75rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    min-height: 165px;
+    background: #E8856A;
+  }
+  .shop-banner-waves {
+    position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  }
+  .shop-banner-content { position: relative; z-index: 2; }
+  .shop-banner-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1;
+    color: #F0EEF8;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+  .shop-banner-title em {
+    color: #D4C8E8;
+    font-style: oblique;
+  }
+  .shop-banner-sub {
+    color: rgba(240,238,248,0.65);
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    font-weight: 300;
+  }
+  .shop-banner-btn {
+    position: relative; z-index: 2;
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    border: 1px solid rgba(240,238,248,0.5);
+    color: #F0EEF8;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s, border-color 0.25s, transform 0.2s;
+  }
+  .shop-banner-btn:hover {
+    background: rgba(240,238,248,0.15);
+    border-color: #F0EEF8;
+    transform: translateY(-2px);
+  }
+
+  .shop-tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin: 0 3rem 3rem;
+  }
+  .shop-tab {
+    padding: 1rem 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none; background: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .shop-tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--rose);
+  }
+  .shop-tab:hover { color: var(--ink); }
+
+  .shop-panel { display: none; padding: 0 3rem 6rem; }
+  .shop-panel.active { display: block; }
+
+  .prints-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .print-card {
+    position: relative;
+  }
+  .print-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .print-img-inner { transition: transform 0.4s ease; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .print-card:hover .print-img-inner { transform: scale(1.04); }
+  .print-card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .print-card-price {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+  .print-card-btn {
+    margin-top: 0.75rem;
+    width: 100%;
+    padding: 0.65rem;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .print-card-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+  /* Commissions */
+  .commissions-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .comm-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .comm-info p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .comm-tiers {
+    display: flex; flex-direction: column; gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .tier-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+  }
+  .tier-name { font-weight: 500; font-size: 0.9rem; }
+  .tier-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+  .tier-price { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--rose); }
+  .comm-status {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #d4edda; color: #2d6a4f;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #2d6a4f; }
+  .comm-examples { display: flex; flex-direction: column; gap: 1rem; }
+  .comm-example {
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Partnerships */
+  .partners-intro {
+    max-width: 600px;
+    margin-bottom: 3rem;
+  }
+  .partners-intro p { color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .partner-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .partner-logo {
+    height: 60px;
+    display: flex; align-items: center;
+    font-size: 1.8rem;
+  }
+  .partner-name {
+    font-weight: 500; font-size: 1rem;
+  }
+  .partner-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .partner-year {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 500;
+    margin-top: auto;
+  }
+
+  /* ===== ABOUT PAGE ===== */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 80px);
+  }
+  .about-portrait {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #E8C4B2 0%, #C4736A 60%, #8BA888 100%);
+    min-height: 600px;
+    display: flex; align-items: flex-end;
+  }
+  .about-portrait-art {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    position: absolute; inset: 0;
+  }
+  .about-portrait-caption {
+    position: relative; z-index: 2;
+    padding: 2rem;
+    color: white;
+  }
+  .about-portrait-caption strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+  }
+  .about-portrait-caption span {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .about-content {
+    padding: 5rem 3.5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-tag {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .about-name {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+  .about-name em { font-style: italic; color: var(--rose); display: block; }
+  .about-bio {
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .about-stats {
+    display: flex; gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--rose);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  .socials-section { margin-top: 1rem; }
+  .socials-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+  .socials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .social-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .social-link::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--ink);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .social-link:hover::before { transform: translateX(0); }
+  .social-link:hover { color: var(--cream); border-color: var(--ink); }
+  .social-link:hover .social-icon { color: var(--cream); }
+  .social-icon {
+    font-size: 1.2rem;
+    position: relative; z-index: 1;
+    width: 24px; text-align: center;
+    transition: color 0.25s;
+  }
+  .social-info { position: relative; z-index: 1; }
+  .social-name {
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: block;
+    transition: color 0.25s;
+  }
+  .social-handle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    transition: color 0.25s;
+  }
+  .social-link:hover .social-handle { color: rgba(250,247,242,0.7); }
+
+  /* Twitch card special */
+  .social-link.twitch:hover::before { background: #9146FF; }
+  .social-link.twitch:hover { border-color: #9146FF; }
+  .social-link.instagram:hover::before { background: #E1306C; }
+  .social-link.instagram:hover { border-color: #E1306C; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 4rem 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  .footer-logo em { color: var(--blush); font-style: italic; }
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.5);
+    line-height: 1.6;
+    font-weight: 300;
+    max-width: 240px;
+  }
+  .footer-nav-title {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.4);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+  .footer-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-nav-links a {
+    color: rgba(250,247,242,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+  .footer-nav-links a:hover { color: var(--blush); }
+  .footer-bottom {
+    grid-column: 1/-1;
+    border-top: 1px solid rgba(250,247,242,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(250,247,242,0.35);
+    margin-top: 1rem;
+  }
+
+  /* ===== ADMIN ===== */
+  #page-admin { background: #0F0E0D; color: #FAF7F2; min-height: 100vh; }
+
+  /* Login screen */
+  .admin-login {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0;
+    background: #0F0E0D;
+  }
+  .admin-login-box {
+    width: 380px;
+    border: 1px solid rgba(250,247,242,0.1);
+    padding: 3rem;
+  }
+  .admin-login-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .admin-login-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FAF7F2;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+  .admin-login-title em { font-style: italic; color: var(--rose); }
+  .admin-login-sub {
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.4);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .admin-field { margin-bottom: 1.25rem; }
+  .admin-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.4);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+  .admin-input {
+    width: 100%;
+    background: rgba(250,247,242,0.05);
+    border: 1px solid rgba(250,247,242,0.12);
+    color: #FAF7F2;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .admin-input:focus { border-color: var(--rose); }
+  .admin-input::placeholder { color: rgba(250,247,242,0.2); }
+  .admin-login-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--rose);
+    color: white;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .admin-login-btn:hover { background: #a85e56; transform: translateY(-1px); }
+  .admin-error {
+    font-size: 0.8rem;
+    color: #E57373;
+    margin-top: 0.75rem;
+    display: none;
+  }
+
+  /* Admin dashboard */
+  .admin-dash { display: none; }
+  .admin-topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: #0F0E0D;
+    border-bottom: 1px solid rgba(250,247,242,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+  }
+  .admin-topbar-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #FAF7F2;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .admin-badge {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--rose);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+  .admin-topbar-actions { display: flex; align-items: center; gap: 1rem; }
+  .admin-view-site-btn {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.5);
+    background: none;
+    border: 1px solid rgba(250,247,242,0.12);
+    padding: 0.45rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .admin-view-site-btn:hover { color: #FAF7F2; border-color: rgba(250,247,242,0.3); }
+  .admin-logout-btn {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.35);
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .admin-logout-btn:hover { color: var(--rose); }
+
+  /* Admin sidebar + main */
+  .admin-body {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+    padding-top: 60px;
+  }
+  .admin-sidebar {
+    background: #0A0908;
+    border-right: 1px solid rgba(250,247,242,0.06);
+    padding: 2rem 0;
+    position: sticky; top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+  .sidebar-section-label {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.25);
+    font-weight: 500;
+    padding: 0 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1.75rem;
+  }
+  .sidebar-section-label:first-child { margin-top: 0; }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.5);
+    font-weight: 400;
+    transition: color 0.2s, background 0.2s;
+    border-left: 2px solid transparent;
+    width: 100%;
+    background: none;
+    border-top: none; border-right: none; border-bottom: none;
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+  }
+  .sidebar-item:hover { color: #FAF7F2; background: rgba(250,247,242,0.04); }
+  .sidebar-item.active { color: #FAF7F2; border-left-color: var(--rose); background: rgba(196,115,106,0.08); }
+  .sidebar-icon { font-size: 0.9rem; width: 16px; text-align: center; opacity: 0.7; }
+  .sidebar-count {
+    margin-left: auto;
+    background: rgba(250,247,242,0.08);
+    color: rgba(250,247,242,0.4);
+    font-size: 0.65rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  /* Admin main area */
+  .admin-main { padding: 2.5rem; overflow-y: auto; }
+  .admin-section { display: none; }
+  .admin-section.active { display: block; }
+
+  /* Editorial header */
+  .admin-section-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 1px solid rgba(250,247,242,0.08);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .admin-section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FAF7F2;
+    line-height: 1;
+  }
+  .admin-section-title em { font-style: italic; color: var(--rose); }
+  .admin-section-sub {
+    font-size: 0.8rem;
+    color: rgba(250,247,242,0.35);
+    margin-top: 0.4rem;
+    font-weight: 300;
+  }
+
+  /* Stats row */
+  .admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(250,247,242,0.06);
+    border: 1px solid rgba(250,247,242,0.06);
+    margin-bottom: 2.5rem;
+  }
+  .admin-stat {
+    background: #0F0E0D;
+    padding: 1.5rem;
+  }
+  .admin-stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #FAF7F2;
+    line-height: 1;
+  }
+  .admin-stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.35);
+    margin-top: 0.4rem;
+  }
+  .admin-stat-delta {
+    font-size: 0.75rem;
+    color: var(--sage);
+    margin-top: 0.25rem;
+  }
+
+  /* Upload zone */
+  .upload-zone {
+    border: 1px dashed rgba(250,247,242,0.15);
+    padding: 3rem;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--rose);
+    background: rgba(196,115,106,0.04);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; width: 100%; height: 100%;
+  }
+  .upload-icon { font-size: 2rem; margin-bottom: 1rem; opacity: 0.5; }
+  .upload-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    color: #FAF7F2;
+    margin-bottom: 0.5rem;
+  }
+  .upload-sub { font-size: 0.8rem; color: rgba(250,247,242,0.35); font-weight: 300; }
+  .upload-types {
+    display: flex; justify-content: center; gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .upload-type-tag {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(250,247,242,0.15);
+    color: rgba(250,247,242,0.4);
+  }
+
+  /* Work grid in admin */
+  .admin-work-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  .admin-work-toolbar-left { display: flex; gap: 0.5rem; }
+  .admin-filter-pill {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(250,247,242,0.12);
+    color: rgba(250,247,242,0.4);
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .admin-filter-pill.active, .admin-filter-pill:hover {
+    border-color: var(--rose);
+    color: var(--rose);
+  }
+  .admin-view-toggle { display: flex; gap: 0; }
+  .view-btn {
+    padding: 0.4rem 0.6rem;
+    background: none;
+    border: 1px solid rgba(250,247,242,0.12);
+    color: rgba(250,247,242,0.35);
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  .view-btn.active { background: rgba(250,247,242,0.06); color: #FAF7F2; }
+
+  .admin-work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(250,247,242,0.06);
+    margin-bottom: 2rem;
+  }
+  .admin-work-card {
+    background: #0F0E0D;
+    position: relative;
+    overflow: hidden;
+    group: true;
+  }
+  .admin-work-thumb {
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .admin-work-actions {
+    position: absolute; inset: 0;
+    background: rgba(15,14,13,0.8);
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .admin-work-card:hover .admin-work-actions { opacity: 1; }
+  .admin-action-btn {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgba(250,247,242,0.3);
+    color: #FAF7F2;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .admin-action-btn:hover { background: var(--rose); border-color: var(--rose); }
+  .admin-action-btn.danger:hover { background: #c0392b; border-color: #c0392b; }
+  .admin-work-meta {
+    padding: 0.9rem 1rem;
+    border-top: 1px solid rgba(250,247,242,0.06);
+  }
+  .admin-work-name {
+    font-size: 0.85rem;
+    color: #FAF7F2;
+    font-weight: 400;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .admin-work-tags {
+    display: flex; gap: 0.35rem;
+    margin-top: 0.4rem; flex-wrap: wrap;
+  }
+  .admin-tag {
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    background: rgba(250,247,242,0.06);
+    color: rgba(250,247,242,0.4);
+  }
+  .admin-tag.anim { background: rgba(196,115,106,0.15); color: var(--rose); }
+  .admin-tag.published { background: rgba(139,168,136,0.15); color: var(--sage); }
+  .admin-tag.draft { background: rgba(201,169,110,0.15); color: var(--gold); }
+
+  /* Add work modal overlay */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(10,9,8,0.85);
+    backdrop-filter: blur(4px);
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4rem 1rem;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: #161412;
+    border: 1px solid rgba(250,247,242,0.1);
+    width: 100%; max-width: 680px;
+    padding: 2.5rem;
+    position: relative;
+  }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(250,247,242,0.08);
+  }
+  .modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #FAF7F2;
+  }
+  .modal-title em { font-style: italic; color: var(--rose); }
+  .modal-close {
+    background: none; border: none;
+    color: rgba(250,247,242,0.35);
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: color 0.2s;
+    padding: 0.25rem;
+  }
+  .modal-close:hover { color: #FAF7F2; }
+  .modal-field { margin-bottom: 1.5rem; }
+  .modal-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.35);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+  .modal-input, .modal-select, .modal-textarea {
+    width: 100%;
+    background: rgba(250,247,242,0.04);
+    border: 1px solid rgba(250,247,242,0.1);
+    color: #FAF7F2;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .modal-input:focus, .modal-select:focus, .modal-textarea:focus { border-color: var(--rose); }
+  .modal-select { appearance: none; }
+  .modal-textarea { resize: vertical; min-height: 90px; }
+  .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .modal-upload-mini {
+    border: 1px dashed rgba(250,247,242,0.12);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(250,247,242,0.35);
+    transition: border-color 0.2s;
+    position: relative;
+    cursor: pointer;
+  }
+  .modal-upload-mini:hover { border-color: var(--rose); color: var(--rose); }
+  .modal-upload-mini input { position: absolute; inset: 0; opacity: 0; width: 100%; }
+  .modal-upload-preview {
+    width: 100%; aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(250,247,242,0.04);
+    border: 1px solid rgba(250,247,242,0.08);
+    margin-bottom: 0.75rem;
+    font-size: 3rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .modal-upload-preview img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: none;
+  }
+  .modal-footer {
+    display: flex; gap: 0.75rem; justify-content: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(250,247,242,0.08);
+    margin-top: 0.5rem;
+  }
+  .btn-admin-secondary {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: 1px solid rgba(250,247,242,0.15);
+    color: rgba(250,247,242,0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-admin-secondary:hover { color: #FAF7F2; border-color: rgba(250,247,242,0.35); }
+  .btn-admin-primary {
+    padding: 0.75rem 1.5rem;
+    background: var(--rose);
+    border: none;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-admin-primary:hover { background: #a85e56; }
+  .btn-admin-draft {
+    padding: 0.75rem 1.5rem;
+    background: rgba(201,169,110,0.15);
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-admin-draft:hover { background: rgba(201,169,110,0.25); }
+
+  /* Shop admin table */
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .admin-table th {
+    text-align: left;
+    font-size: 0.62rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.3);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(250,247,242,0.06);
+  }
+  .admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(250,247,242,0.04);
+    color: rgba(250,247,242,0.75);
+    vertical-align: middle;
+  }
+  .admin-table tr:hover td { background: rgba(250,247,242,0.02); }
+  .table-thumb {
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    background: rgba(250,247,242,0.04);
+    border: 1px solid rgba(250,247,242,0.06);
+  }
+  .price-input {
+    background: rgba(250,247,242,0.04);
+    border: 1px solid rgba(250,247,242,0.1);
+    color: #FAF7F2;
+    padding: 0.35rem 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    width: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .price-input:focus { border-color: var(--rose); }
+  .toggle-switch {
+    position: relative; width: 36px; height: 20px;
+    display: inline-block;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute; inset: 0;
+    background: rgba(250,247,242,0.12);
+    transition: .3s;
+    border-radius: 20px;
+  }
+  .toggle-slider:before {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    left: 3px; top: 3px;
+    background: rgba(250,247,242,0.4);
+    border-radius: 50%;
+    transition: .3s;
+  }
+  .toggle-switch input:checked + .toggle-slider { background: var(--rose); }
+  .toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(16px);
+    background: white;
+  }
+
+  /* Partnerships admin */
+  .admin-partner-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(250,247,242,0.06);
+    margin-bottom: 1.5rem;
+  }
+  .admin-partner-card {
+    background: #0F0E0D;
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    position: relative;
+  }
+  .admin-partner-card-actions {
+    position: absolute; top: 1rem; right: 1rem;
+    display: flex; gap: 0.35rem;
+  }
+  .icon-btn {
+    width: 28px; height: 28px;
+    background: rgba(250,247,242,0.06);
+    border: none;
+    color: rgba(250,247,242,0.4);
+    font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { background: rgba(250,247,242,0.12); color: #FAF7F2; }
+  .icon-btn.danger:hover { background: rgba(192,57,43,0.2); color: #E57373; }
+  .admin-partner-emoji { font-size: 1.75rem; }
+  .admin-partner-name { font-size: 0.95rem; color: #FAF7F2; font-weight: 500; }
+  .admin-partner-desc { font-size: 0.8rem; color: rgba(250,247,242,0.4); line-height: 1.5; font-weight: 300; }
+  .admin-partner-year { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--rose); font-weight: 500; }
+
+  /* Commission status toggle */
+  .commission-status-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(250,247,242,0.08);
+    margin-bottom: 2rem;
+    background: rgba(250,247,242,0.02);
+  }
+  .cstatus-left { display: flex; flex-direction: column; gap: 0.25rem; }
+  .cstatus-title { font-size: 0.9rem; color: #FAF7F2; font-weight: 500; }
+  .cstatus-sub { font-size: 0.78rem; color: rgba(250,247,242,0.35); font-weight: 300; }
+  .cstatus-indicator {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .cstatus-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .cstatus-dot.open { background: var(--sage); }
+  .cstatus-dot.closed { background: var(--rose); }
+
+  /* Add new btn */
+  .btn-add {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    background: rgba(196,115,106,0.12);
+    border: 1px solid rgba(196,115,106,0.3);
+    color: var(--rose);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-add:hover { background: rgba(196,115,106,0.22); }
+
+  /* Success toast */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: #1a1a1a;
+    border: 1px solid rgba(139,168,136,0.4);
+    color: var(--sage);
+    padding: 0.85rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    z-index: 9999;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .section { padding: 4rem 1.5rem; }
+    .home-grid { grid-template-columns: 1fr 1fr; }
+    .home-card:first-child { grid-column: span 2; }
+    .portfolio-masonry { columns: 2; padding: 0 1.5rem 4rem; }
+    .filter-bar { padding: 1.5rem; }
+    .prints-grid { grid-template-columns: repeat(2, 1fr); }
+    .commissions-layout { grid-template-columns: 1fr; }
+    .partners-grid { grid-template-columns: 1fr 1fr; }
+    .about-layout { grid-template-columns: 1fr; }
+    .about-portrait { min-height: 400px; }
+    .about-content { padding: 3rem 1.5rem; }
+    footer { grid-template-columns: 1fr; gap: 2rem; }
+    .shop-hero, .shop-tabs, .shop-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-left { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo" onclick="showPage('home')">Jiomie</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('portfolio')" id="nav-portfolio">Portfolio</a></li>
+    <li><a href="#" onclick="showPage('shop')" id="nav-shop">Shop</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow fade-up">Illustrator</p>
+      <h1 class="hero-title fade-up-2">
+        Art that<br>
+        <em>lives &amp; breathes</em>
+      </h1>
+      <p class="hero-sub fade-up-3">Original illustrations, animated characters, and prints crafted with warmth and a touch of magic. Based everywhere, rooted in story.</p>
+      <div class="hero-ctas fade-up-4">
+        <a href="#" class="btn-primary" onclick="showPage('portfolio')">View Portfolio</a>
+        <a href="#" class="btn-outline" onclick="showPage('shop')">Shop Prints</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-art-grid">
+        <div class="hero-art-piece">
+          <div class="art-placeholder ap-1">🌸</div>
+          <div class="art-label">Featured</div>
+        </div>
+        <div class="hero-art-piece">
+          <div class="art-placeholder ap-2">🌿</div>
+        </div>
+        <div class="hero-art-piece">
+          <div class="art-placeholder ap-3">✨</div>
+        </div>
+        <div class="hero-art-piece">
+          <div class="art-placeholder ap-4">🌙</div>
+        </div>
+        <div class="hero-art-piece">
+          <div class="art-placeholder ap-5">🦋</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span class="marquee-item">Illustrations</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Animated Assets</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Fine Art Prints</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Character Design</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Brand Partnerships</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Commissions Open</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Illustrations</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Animated Assets</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Fine Art Prints</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Character Design</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Brand Partnerships</span><span class="marquee-item marquee-dot">✦</span>
+      <span class="marquee-item">Commissions Open</span><span class="marquee-item marquee-dot">✦</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Recent Work</h2>
+      <a href="#" class="section-link" onclick="showPage('portfolio')">View All →</a>
+    </div>
+    <div class="home-grid">
+      <div class="home-card">
+        <div class="home-card-art" style="background: linear-gradient(135deg,#E8C4B2,#C4736A,#8BA888); font-size:6rem;">🌺</div>
+        <div class="home-card-overlay">
+          <div class="home-card-title">Bloom Series</div>
+          <div class="home-card-type">Illustration · 2024</div>
+        </div>
+      </div>
+      <div class="home-card">
+        <div class="home-card-art" style="background: linear-gradient(135deg,#C9A96E,#8BA888);">🦊</div>
+        <div class="home-card-overlay">
+          <div class="home-card-title">Forest Friends</div>
+          <div class="home-card-type">Animated · 2024</div>
+        </div>
+      </div>
+      <div class="home-card">
+        <div class="home-card-art" style="background: linear-gradient(135deg,#B5C4D8,#7A96B5);">🌙</div>
+        <div class="home-card-overlay">
+          <div class="home-card-title">Lunar Dreams</div>
+          <div class="home-card-type">Print · 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--ink); padding: 5rem 3rem; text-align:center;">
+    <p style="font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--blush);font-weight:500;margin-bottom:1rem;">Commissions</p>
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(2rem,4vw,3rem);color:var(--cream);font-weight:700;margin-bottom:1rem;">
+      Let's make something<br><em style="font-style:italic;color:var(--blush);">together</em>
+    </h2>
+    <p style="color:rgba(250,247,242,0.55);font-weight:300;font-size:1rem;max-width:480px;margin:0 auto 2rem;line-height:1.7;">Custom illustrations, character sheets, stream overlays, and more. Currently accepting new clients.</p>
+    <a href="#" class="btn-primary" onclick="showPage('shop');showTab('commissions')" style="background:var(--rose);">View Commission Info</a>
+  </section>
+</div>
+
+<!-- ===== PORTFOLIO ===== -->
+<div class="page" id="page-portfolio">
+
+  <style>
+    /* ── Artwork-derived palette ── */
+    :root {
+      --pal-indigo:   #3D3560;
+      --pal-lavender: #9490A8;
+      --pal-slate:    #6E7D8A;
+      --pal-caramel:  #C4736A;
+      --pal-teal:     #3D5260;
+      /* from the artwork */
+      --wave-coral:   #E8937A;
+      --wave-rose:    #C4788A;
+      --wave-violet:  #6B5B8A;
+      --wave-blue:    #7AADCC;
+      --wave-deep:    #2E2845;
+    }
+
+    /* ── Light theme (default) ── */
+    #page-portfolio {
+      background: #F6F4F0;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    #page-portfolio.dark-gallery {
+      background: #1A1726;
+    }
+
+    /* ── Dark theme overrides ── */
+    .dark-gallery .gallery-year          { color: #C4A8D0; }
+    .dark-gallery .gallery-glyph         { color: var(--wave-coral); }
+    .dark-gallery .gallery-rule          { background: rgba(255,255,255,0.1); }
+    .dark-gallery .gallery-count         { color: rgba(255,255,255,0.35); }
+    .dark-gallery .gallery-intro-title   { color: #F0EEF8; }
+    .dark-gallery .gallery-intro-sub     { color: rgba(255,255,255,0.4); }
+    .dark-gallery .g-pull-quote          { color: #D4C8E8; }
+    .dark-gallery .g-pull-quote em       { color: var(--wave-coral); }
+    .dark-gallery .g-big-glyph           { color: var(--wave-rose); }
+    .dark-gallery .wave-divider-block    { background: #231E34 !important; }
+    .dark-gallery .wave-commission-block { background: #2A2240 !important; }
+    .dark-gallery .wave-commission-block .g-pull-quote { color: #D4C8E8; }
+    .dark-gallery .wave-commission-block a { color: #C4A8D0 !important; border-bottom-color: #C4A8D0 !important; }
+    .dark-gallery .wave-commission-block .comm-label { color: var(--wave-coral) !important; }
+    .dark-gallery .wave-end-glyphs       { color: var(--wave-rose) !important; }
+
+    /* ── Theme toggle button ── */
+    .gallery-theme-toggle {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: none; border: 1px solid rgba(61,53,96,0.25);
+      padding: 0.45rem 1rem;
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif; font-weight: 500;
+      color: var(--pal-indigo);
+      cursor: pointer !important;
+      transition: all 0.25s;
+    }
+    .dark-gallery .gallery-theme-toggle {
+      border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    .gallery-theme-toggle:hover { background: rgba(61,53,96,0.07); }
+    .dark-gallery .gallery-theme-toggle:hover { background: rgba(255,255,255,0.06); }
+    .toggle-icon { font-size: 0.9rem; }
+
+    /* ── Wave SVG containers ── */
+    .wave-band {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wave-band svg { display: block; width: 100%; }
+
+    /* Floating wave strip between sections */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin: 0.5rem 0;
+      opacity: 0.55;
+    }
+    .dark-gallery .wave-divider { opacity: 0.35; }
+
+    /* ── Gallery layout ── */
+    .gallery-intro {
+      padding: 3.5rem 2.5rem 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .gallery-intro-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      line-height: 1;
+      color: var(--pal-indigo);
+      transition: color 0.4s;
+    }
+    .gallery-intro-title em { color: var(--pal-caramel); font-style: oblique; }
+    .gallery-intro-sub {
+      font-size: 0.8rem;
+      color: var(--pal-slate);
+      font-weight: 300;
+      max-width: 260px;
+      line-height: 1.6;
+      text-align: right;
+      transition: color 0.4s;
+    }
+    .gallery-intro-right { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
+
+    .gallery-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 8rem;
+    }
+    .gallery-year-row {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin: 3rem 0 2rem;
+    }
+    .gallery-year {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 10vw, 7rem);
+      letter-spacing: -3px;
+      color: var(--pal-indigo);
+      line-height: 1;
+      text-transform: uppercase;
+      transition: color 0.4s;
+    }
+    .gallery-glyph { font-size: 1.5rem; color: var(--pal-caramel); opacity: 0.8; transition: color 0.4s; }
+    .gallery-rule  { flex: 1; height: 1px; background: rgba(61,53,96,0.15); transition: background 0.4s; }
+    .gallery-count { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--pal-slate); font-weight: 500; transition: color 0.4s; }
+
+    .gallery-row { display: grid; gap: 1rem; margin-bottom: 1rem; align-items: end; }
+    .gallery-row.r-2-1   { grid-template-columns: 2fr 1fr; }
+    .gallery-row.r-1-2   { grid-template-columns: 1fr 2fr; }
+    .gallery-row.r-1-1   { grid-template-columns: 1fr 1fr; }
+    .gallery-row.r-1-1-1 { grid-template-columns: 1fr 1fr 1fr; }
+    .gallery-row.r-full  { grid-template-columns: 1fr; }
+
+    .g-piece { position: relative; overflow: hidden; display: block; }
+    .g-piece .g-img {
+      width: 100%; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .g-piece:hover .g-img { transform: scale(1.03); }
+    .g-piece.h-tall  .g-img { height: 520px; }
+    .g-piece.h-med   .g-img { height: 380px; }
+    .g-piece.h-sq    .g-img { height: 320px; }
+    .g-piece.h-wide  .g-img { height: 280px; }
+
+    .g-anim-badge {
+      position: absolute; top: 0.75rem; left: 0.75rem;
+      background: var(--pal-caramel); color: white;
+      font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.25rem 0.65rem; font-weight: 500; z-index: 3;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .g-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.25rem 1rem;
+      background: linear-gradient(to top, rgba(30,22,50,0.78) 0%, transparent 100%);
+      opacity: 0; transition: opacity 0.3s ease;
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .g-piece:hover .g-info { opacity: 1; }
+    .g-info-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem; font-weight: 900; color: white;
+      text-transform: uppercase; letter-spacing: 0.5px; line-height: 1;
+    }
+    .g-info-meta { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: 'DM Sans', sans-serif; }
+
+    .g-text-block { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 0.5rem; }
+    .g-big-glyph { font-size: clamp(4rem,8vw,6rem); color: var(--wave-rose); line-height: 1; opacity: 0.2; font-family: serif; transition: color 0.4s; }
+    .g-pull-quote {
+      font-family: 'Cinzel', serif; font-weight: 900;
+      font-size: clamp(1.8rem,3.5vw,2.8rem); text-transform: uppercase;
+      color: var(--pal-indigo); line-height: 1; letter-spacing: -1px; transition: color 0.4s;
+    }
+    .g-pull-quote em { color: var(--pal-caramel); font-style: oblique; }
+
+    @media (max-width: 768px) {
+      .gallery-row.r-2-1,.gallery-row.r-1-2,.gallery-row.r-1-1-1 { grid-template-columns: 1fr; }
+      .gallery-row.r-1-1 { grid-template-columns: 1fr 1fr; }
+      .g-piece.h-tall .g-img { height: 340px; }
+      .gallery-intro { flex-direction: column; align-items: flex-start; }
+      .gallery-intro-sub { text-align: left; }
+      .gallery-intro-right { align-items: flex-start; }
+    }
+  </style>
+
+  <!-- ── Hero wave banner ── -->
+  <div class="wave-band" style="height:200px;background:linear-gradient(160deg,#2E2845 0%,#6B5B8A 40%,#C4788A 70%,#E8937A 100%);">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 3rem;gap:2rem;">
+      <div style="font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:rgba(255,255,255,0.95);text-transform:uppercase;letter-spacing:-1px;line-height:1.05;">
+        Work &amp;<br><span style="font-style:oblique;color:#F5C4A8;">Gallery</span>
+      </div>
+      <div style="flex:1;"></div>
+      <div style="font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);font-family:'DM Sans',sans-serif;text-align:right;max-width:200px;line-height:1.7;">
+        Illustrations, animated assets &amp; characters
+      </div>
+    </div>
+    <!-- SVG waves overlaid on banner -->
+    <svg style="position:absolute;bottom:0;left:0;width:100%;" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C200,80 400,0 600,40 C800,80 1000,10 1200,45 C1320,65 1380,50 1440,40 L1440,80 L0,80 Z" fill="rgba(122,173,204,0.25)"/>
+      <path d="M0,55 C150,20 350,70 550,45 C750,20 950,65 1150,40 C1300,22 1380,55 1440,55 L1440,80 L0,80 Z" fill="rgba(196,120,138,0.2)"/>
+      <path d="M0,65 C250,45 500,78 700,62 C900,46 1100,72 1300,60 L1440,65 L1440,80 L0,80 Z" fill="rgba(246,244,240,0.9)"/>
+    </svg>
+  </div>
+
+  <!-- ── Toggle + sub-header ── -->
+  <div style="max-width:1100px;margin:0 auto;padding:1.5rem 2.5rem 0;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--pal-slate);font-family:'DM Sans',sans-serif;">Updated regularly</div>
+    <button class="gallery-theme-toggle" onclick="toggleGalleryDark(this)" id="gallery-dark-btn">
+      <span class="toggle-icon">◐</span> Dark Mode
+    </button>
+  </div>
+
+  <div class="gallery-wrap">
+
+    <!-- ✦ 2024 ✦ -->
+    <div class="gallery-year-row">
+      <span class="gallery-year">2024</span>
+      <span class="gallery-glyph">✦</span>
+      <div class="gallery-rule"></div>
+      <span class="gallery-count">5 works</span>
+    </div>
+
+    <!-- Row 1: big left, stacked right -->
+    <div class="gallery-row r-2-1" style="align-items:stretch;">
+      <div class="g-piece h-tall">
+        <div class="g-img" style="height:100%;min-height:460px;background:linear-gradient(160deg,#9490A8,#3D3560);">
+          <span style="font-size:6rem;">🌸</span>
+          <div class="g-info"><div class="g-info-title">Bloom in April</div><div class="g-info-meta">Illustration · 2024</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="g-piece" style="flex:1;">
+          <div class="g-anim-badge">Animated</div>
+          <div class="g-img" style="height:100%;min-height:220px;background:linear-gradient(160deg,#6E7D8A,#3D5260);">
+            <span style="font-size:4rem;animation:float 3s ease-in-out infinite;">🦊</span>
+            <div class="g-info"><div class="g-info-title">Fox Spirit Loop</div><div class="g-info-meta">Animated · 2024</div></div>
+          </div>
+        </div>
+        <div class="wave-divider-block g-text-block" style="padding:1.25rem 1rem;background:#3D3560;flex-shrink:0;min-height:110px;justify-content:center;">
+          <div class="g-pull-quote" style="color:#F0EEF8;">Every piece<br>tells a <em style="color:var(--wave-coral);">story</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave divider 1 -->
+    <div class="wave-divider">
+      <svg viewBox="0 0 1100 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="height:36px;">
+        <path d="M0,18 C150,36 300,0 450,18 C600,36 750,4 900,20 C1000,30 1060,12 1100,18" fill="none" stroke="#C4788A" stroke-width="1.5"/>
+        <path d="M0,26 C120,10 280,32 440,20 C600,8 760,30 920,16 C1020,8 1070,24 1100,26" fill="none" stroke="#7AADCC" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <!-- Row 2: three across -->
+    <div class="gallery-row r-1-1-1">
+      <div class="g-piece h-sq">
+        <div class="g-img" style="background:linear-gradient(160deg,#3D5260,#2A3A46);">
+          <span style="font-size:4rem;">🌙</span>
+          <div class="g-info"><div class="g-info-title">Lunar Still Life</div><div class="g-info-meta">Print · 2024</div></div>
+        </div>
+      </div>
+      <div class="g-text-block" style="align-items:center;justify-content:center;padding:2rem;gap:0.5rem;">
+        <div class="g-big-glyph" style="font-size:4rem;text-align:center;">✧</div>
+        <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;opacity:0.3;margin:0.5rem 0;">
+          <path d="M10,20 C30,5 50,35 70,20 C90,5 110,30 120,20" fill="none" stroke="#C4788A" stroke-width="1.5"/>
+          <path d="M0,28 C25,15 45,38 65,25 C85,12 105,32 120,28" fill="none" stroke="#7AADCC" stroke-width="1"/>
+        </svg>
+        <div style="font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--pal-slate);text-align:center;font-family:'DM Sans',sans-serif;">2024</div>
+      </div>
+      <div class="g-piece h-sq">
+        <div class="g-img" style="background:linear-gradient(160deg,#C4736A,#2E4A42);">
+          <span style="font-size:4rem;">🧚</span>
+          <div class="g-info"><div class="g-info-title">Fae Character Sheet</div><div class="g-info-meta">Character · 2024</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: wide panoramic with wave overlay -->
+    <div class="gallery-row r-full" style="position:relative;">
+      <div class="g-piece">
+        <div class="g-anim-badge">Animated</div>
+        <div class="g-img h-wide" style="background:linear-gradient(160deg,#9490A8,#6E7D8A);">
+          <span style="font-size:5rem;animation:float 2.5s ease-in-out infinite 0.5s;">✨</span>
+          <!-- wave overlay on this piece -->
+          <svg style="position:absolute;bottom:0;left:0;width:100%;pointer-events:none;" viewBox="0 0 1100 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,25 C180,50 360,0 540,28 C720,50 900,5 1100,25 L1100,50 L0,50 Z" fill="rgba(232,147,122,0.18)"/>
+            <path d="M0,38 C220,15 440,48 660,32 C880,16 990,42 1100,38 L1100,50 L0,50 Z" fill="rgba(122,173,204,0.15)"/>
+          </svg>
+          <div class="g-info"><div class="g-info-title">Sparkle Overlay Pack</div><div class="g-info-meta">Stream Asset · 2024</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave divider 2 -->
+    <div class="wave-divider" style="margin:1.5rem 0;">
+      <svg viewBox="0 0 1100 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="height:48px;">
+        <path d="M0,24 C100,48 220,4 360,28 C500,48 640,8 780,30 C920,48 1020,14 1100,24" fill="none" stroke="#E8937A" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M0,36 C140,16 300,44 460,28 C620,12 760,40 900,24 C980,16 1050,32 1100,36" fill="none" stroke="#9490A8" stroke-width="1"/>
+        <path d="M0,14 C200,28 380,4 560,18 C740,32 880,6 1100,20" fill="none" stroke="#7AADCC" stroke-width="0.75" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- ✣ 2023 ✣ -->
+    <div class="gallery-year-row">
+      <span class="gallery-year">2023</span>
+      <span class="gallery-glyph">✣</span>
+      <div class="gallery-rule"></div>
+      <span class="gallery-count">4 works</span>
+    </div>
+
+    <!-- Row 4: stacked left + tall right -->
+    <div class="gallery-row r-1-2" style="align-items:stretch;">
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="g-piece" style="flex:1;">
+          <div class="g-img" style="height:100%;min-height:200px;background:linear-gradient(160deg,#6E7D8A,#9490A8);">
+            <span style="font-size:3.5rem;">🌿</span>
+            <div class="g-info"><div class="g-info-title">Herb Garden Study</div><div class="g-info-meta">Illustration · 2023</div></div>
+          </div>
+        </div>
+        <div class="g-piece" style="flex:1;">
+          <div class="g-anim-badge">Animated</div>
+          <div class="g-img" style="height:100%;min-height:200px;background:linear-gradient(160deg,#C4736A,#3D5260);">
+            <span style="font-size:3rem;animation:float 3.5s ease-in-out infinite 1s;">🦋</span>
+            <div class="g-info"><div class="g-info-title">Butterfly Transition</div><div class="g-info-meta">Stream Asset · 2023</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="g-piece h-tall">
+        <div class="g-img" style="height:100%;min-height:440px;background:linear-gradient(160deg,#3D3560,#6B5B8A);">
+          <!-- wave detail inside tall piece -->
+          <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.12;" viewBox="0 0 400 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-50,100 C50,60 150,140 250,100 C350,60 420,120 500,100" fill="none" stroke="#E8937A" stroke-width="3"/>
+            <path d="M-50,180 C80,220 200,150 320,190 C400,215 470,170 550,180" fill="none" stroke="#7AADCC" stroke-width="2"/>
+            <path d="M-50,260 C60,240 180,290 300,255 C420,220 460,270 550,260" fill="none" stroke="#C4788A" stroke-width="2.5"/>
+            <path d="M-50,340 C100,370 220,315 360,345 C450,362 500,330 550,340" fill="none" stroke="#9490A8" stroke-width="1.5"/>
+          </svg>
+          <span style="font-size:5.5rem;position:relative;z-index:2;">🐰</span>
+          <div class="g-info"><div class="g-info-title">Cottagecore Bunny</div><div class="g-info-meta">Character · 2023</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 5: wide + commission block -->
+    <div class="gallery-row r-2-1">
+      <div class="g-piece h-med">
+        <div class="g-img" style="background:linear-gradient(160deg,#C4736A,#9490A8);">
+          <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.15;" viewBox="0 0 600 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,120 C100,80 220,160 340,120 C460,80 540,140 600,120" fill="none" stroke="white" stroke-width="2"/>
+            <path d="M0,200 C120,240 250,175 370,210 C490,245 560,190 600,200" fill="none" stroke="white" stroke-width="1.5"/>
+            <path d="M0,280 C140,260 270,300 400,272 C510,250 570,282 600,280" fill="none" stroke="white" stroke-width="1"/>
+          </svg>
+          <span style="font-size:5rem;position:relative;z-index:2;">🍂</span>
+          <div class="g-info"><div class="g-info-title">Autumn Reverie</div><div class="g-info-meta">Print · 2023</div></div>
+        </div>
+      </div>
+      <div class="wave-commission-block" style="display:flex;flex-direction:column;justify-content:space-between;padding:2rem 1.5rem;background:#EDE8F2;position:relative;overflow:hidden;">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.2;" viewBox="0 0 300 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M-20,60 C40,30 100,90 160,60 C220,30 280,75 320,60" fill="none" stroke="#6B5B8A" stroke-width="2"/>
+          <path d="M-20,130 C50,160 120,110 200,140 C270,165 310,130 340,130" fill="none" stroke="#C4788A" stroke-width="1.5"/>
+          <path d="M-20,210 C60,190 140,230 220,205 C300,180 330,215 360,210" fill="none" stroke="#7AADCC" stroke-width="1.5"/>
+          <path d="M-20,290 C80,320 180,268 280,295 C340,310 370,285 400,290" fill="none" stroke="#E8937A" stroke-width="2"/>
+        </svg>
+        <span class="g-big-glyph" style="color:#E8856A;opacity:0.35;font-size:2.5rem;position:relative;z-index:1;">☩</span>
+        <div style="position:relative;z-index:1;">
+          <div class="comm-label" style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:#E8856A;margin-bottom:0.75rem;font-weight:500;font-family:'DM Sans',sans-serif;">Commission open</div>
+          <div class="g-pull-quote" style="font-size:1.6rem;">Want something<br><em>custom?</em></div>
+          <a href="#" onclick="showPage('shop');showTab('commissions')" style="display:inline-block;margin-top:1.25rem;font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;color:#3D3560;text-decoration:none;border-bottom:1px solid #3D3560;padding-bottom:2px;font-weight:500;font-family:'DM Sans',sans-serif;">View Tiers →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- End wave + glyphs -->
+    <div style="margin-top:3rem;text-align:center;position:relative;">
+      <svg viewBox="0 0 1100 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:60px;opacity:0.4;">
+        <path d="M0,30 C120,60 280,5 440,32 C600,55 740,8 880,35 C980,52 1050,20 1100,30" fill="none" stroke="#E8937A" stroke-width="1.5"/>
+        <path d="M0,42 C150,18 330,50 510,30 C690,10 850,48 1000,28 C1060,18 1090,38 1100,42" fill="none" stroke="#7AADCC" stroke-width="1"/>
+        <path d="M0,20 C200,40 380,8 560,22 C740,36 900,10 1100,20" fill="none" stroke="#C4788A" stroke-width="0.75"/>
+      </svg>
+      <div class="wave-end-glyphs" style="font-size:1.5rem;color:#E8856A;opacity:0.5;letter-spacing:2rem;margin-top:1rem;">✦ ✣ ✧</div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleGalleryDark(btn) {
+      const page = document.getElementById('page-portfolio');
+      const isDark = page.classList.toggle('dark-gallery');
+      btn.innerHTML = isDark
+        ? '<span class="toggle-icon">○</span> Light Mode'
+        : '<span class="toggle-icon">◐</span> Dark Mode';
+    }
+  </script>
+</div>
+
+<!-- ===== SHOP ===== -->
+<div class="page" id="page-shop">
+  <div class="shop-hero">
+    <div class="shop-banner">
+      <svg class="shop-banner-waves" viewBox="0 0 900 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M520,0 C475,28 458,60 442,92 C426,124 418,150 410,160 L900,160 L900,0 Z" fill="rgba(46,40,69,0.32)"/>
+        <path d="M640,0 C608,20 596,50 582,82 C568,114 562,148 556,160 L900,160 L900,0 Z" fill="rgba(46,40,69,0.18)"/>
+        <path d="M-20,42 C80,26 200,56 340,38 C480,20 600,50 760,34 C840,24 885,40 920,36" fill="none" stroke="rgba(240,238,248,0.3)" stroke-width="1.5"/>
+        <path d="M-20,65 C100,50 240,74 400,58 C560,42 680,68 840,52 L920,50" fill="none" stroke="rgba(240,238,248,0.18)" stroke-width="1"/>
+        <path d="M-20,90 C100,76 230,102 380,86 C530,70 660,96 820,80 L920,78" fill="none" stroke="#8BAEC4" stroke-width="1.2" opacity="0.45"/>
+        <path d="M-20,112 C120,100 260,120 420,106 C580,92 700,115 860,100 L920,98" fill="none" stroke="#8BAEC4" stroke-width="0.9" opacity="0.3"/>
+        <path d="M-20,132 C80,122 200,140 360,130 C520,120 660,138 820,124 L920,122 L920,160 L-20,160 Z" fill="rgba(46,40,69,0.15)"/>
+      </svg>
+      <div class="shop-banner-content">
+        <div class="shop-banner-title">Shop &amp; <em>Collaborate</em></div>
+        <div class="shop-banner-sub">Prints, commissions &amp; past brand partnerships</div>
+      </div>
+      <a href="#" class="shop-banner-btn" onclick="showTab('commissions')">Commission Me</a>
+    </div>
+  </div>
+
+  <div class="shop-tabs">
+    <button class="shop-tab active" onclick="showTab('prints')">Art Prints</button>
+    <button class="shop-tab" onclick="showTab('commissions')">Commissions</button>
+    <button class="shop-tab" onclick="showTab('partnerships')">Partnerships</button>
+  </div>
+
+  <div class="shop-panel active" id="tab-prints">
+    <div class="prints-grid">
+      <div class="print-card">
+        <div class="print-img" style="background:linear-gradient(135deg,#E8C4B2,#C4736A);">
+          <div class="print-img-inner" style="font-size:3rem;">🌸</div>
+        </div>
+        <div class="print-card-name">Bloom in April</div>
+        <div class="print-card-price">$28 CAD · A4 / A3 available</div>
+        <button class="print-card-btn">Add to Cart</button>
+      </div>
+      <div class="print-card">
+        <div class="print-img" style="background:linear-gradient(160deg,#B5C4D8,#3A5A7A);">
+          <div class="print-img-inner" style="font-size:3rem;">🌙</div>
+        </div>
+        <div class="print-card-name">Lunar Still Life</div>
+        <div class="print-card-price">$32 CAD · A4 / A3 available</div>
+        <button class="print-card-btn">Add to Cart</button>
+      </div>
+      <div class="print-card">
+        <div class="print-img" style="background:linear-gradient(160deg,#E0D0B5,#9E7A45);">
+          <div class="print-img-inner" style="font-size:3rem;">🍂</div>
+        </div>
+        <div class="print-card-name">Autumn Reverie</div>
+        <div class="print-card-price">$28 CAD · A4 / A3 available</div>
+        <button class="print-card-btn">Add to Cart</button>
+      </div>
+      <div class="print-card">
+        <div class="print-img" style="background:linear-gradient(135deg,#C8E6C9,#66BB6A);">
+          <div class="print-img-inner" style="font-size:3rem;">🌿</div>
+        </div>
+        <div class="print-card-name">Herb Garden Study</div>
+        <div class="print-card-price">$24 CAD · A4 / A3 available</div>
+        <button class="print-card-btn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-panel" id="tab-commissions">
+    <div class="commissions-layout">
+      <div class="comm-info">
+        <div class="comm-status"><div class="status-dot"></div> Commissions Open</div>
+        <h3>Custom <em style="font-style:italic;color:var(--rose);">Artwork</em><br>Just for You</h3>
+        <p>From character portraits to animated stream overlays, I create original pieces tailored to your vision. Every commission includes a sketch review and two rounds of revisions.</p>
+        <div class="comm-tiers">
+          <div class="tier-row">
+            <div>
+              <div class="tier-name">Sketch / Lineart</div>
+              <div class="tier-desc">Black &amp; white, single character</div>
+            </div>
+            <div class="tier-price">from $45 CAD</div>
+          </div>
+          <div class="tier-row">
+            <div>
+              <div class="tier-name">Full Illustration</div>
+              <div class="tier-desc">Full colour, detailed background</div>
+            </div>
+            <div class="tier-price">from $120 CAD</div>
+          </div>
+          <div class="tier-row">
+            <div>
+              <div class="tier-name">Animated Asset</div>
+              <div class="tier-desc">Looping GIF or stream overlay</div>
+            </div>
+            <div class="tier-price">from $200 CAD</div>
+          </div>
+          <div class="tier-row">
+            <div>
+              <div class="tier-name">Character Sheet</div>
+              <div class="tier-desc">Full ref with expressions &amp; poses</div>
+            </div>
+            <div class="tier-price">from $250 CAD</div>
+          </div>
+        </div>
+        <a href="#" class="btn-primary" onclick="showPage('about')">Contact Me to Book</a>
+      </div>
+      <div class="comm-examples">
+        <div class="comm-example" style="background:linear-gradient(135deg,#E1C9F5,#9C5FCC);">🧚</div>
+        <div class="comm-example" style="background:linear-gradient(135deg,#D4B5C4,#A87A96); animation: float 4s ease-in-out infinite;">🐰</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-panel" id="tab-partnerships">
+    <div class="partners-intro">
+      <h3 style="font-family:'Cinzel',serif;font-size:1.8rem;margin-bottom:1rem;">Past <em style="font-style:italic;color:var(--rose);">Partnerships</em></h3>
+      <p>Collaborations with brands, games, and creators I believe in. Open to new opportunities — reach out via the About page.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-logo">✨</div>
+        <div class="partner-name">Artrinary</div>
+        <div class="partner-desc">Twitch streamer. Created 6 Twitch assets — emotes.</div>
+        <div class="partner-year">2021</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🖊️</div>
+        <div class="partner-name">Sartsy</div>
+        <div class="partner-desc">Twitch streamer. Logo design for LLC.</div>
+        <div class="partner-year">2021</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">💻</div>
+        <div class="partner-name">CYLK Creative Tech Ltd.</div>
+        <div class="partner-desc">Creative collaborations to bring life to their main character. Concept character intended to be rigged for game studio use.</div>
+        <div class="partner-year">2022</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🎸</div>
+        <div class="partner-name">GaijinCard</div>
+        <div class="partner-desc">Previously known as Awagii, a Japanese Rock artist. Collaborated for their album art.</div>
+        <div class="partner-year">2023</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🎮</div>
+        <div class="partner-name">Dean-a-ling</div>
+        <div class="partner-desc">Twitch streamer. Collaborated on a half-body fan art of a Genshin character (2023), half-body original character in colour (2024), and Twitch assets including emotes (2024).</div>
+        <div class="partner-year">2023 – 2024</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🏘️</div>
+        <div class="partner-name">Burnaby Neighbourhood House</div>
+        <div class="partner-desc">Illustration and visual design work supporting community programs and events.</div>
+        <div class="partner-year">2024</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">💜</div>
+        <div class="partner-name">bluesapphic</div>
+        <div class="partner-desc">Character design used as their Twitch asset.</div>
+        <div class="partner-year">2024</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🐉</div>
+        <div class="partner-name">K.L. Illustration</div>
+        <div class="partner-desc">DND character illustration for anniversary.</div>
+        <div class="partner-year">2024</div>
+      </div>
+    </div>
+    <a href="#" class="btn-outline" onclick="showPage('about')">Get in Touch for Collabs →</a>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<div class="page" id="page-about">
+<style>
+  /* ── Artwork-extracted palette ── */
+  /* Coral sky: #C4736A, warm rose: #C4736A, powder blue: #8BAEC4, deep violet: #3D2E5A, twilight: #2E2845 */
+
+  #page-about {
+    background: #1E1828;
+    color: #F0EEF8;
+    overflow-x: hidden;
+  }
+
+  /* ── Hero gradient banner — mirrors the painting ── */
+  .ap-hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+  .ap-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 0%, #C4736A 0%, transparent 55%),
+      radial-gradient(ellipse 60% 80% at 30% 30%, #C4736A 0%, transparent 50%),
+      radial-gradient(ellipse 70% 90% at 50% 60%, #4A3870 0%, transparent 60%),
+      radial-gradient(ellipse 90% 100% at 20% 100%, #2E2845 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 85% 80%, #8BAEC4 0%, transparent 50%);
+    z-index: 0;
+  }
+  /* flowing wave layer over hero */
+  .ap-hero-waves {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.18;
+  }
+
+  .ap-hero-left {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 5rem 3rem 5rem 3.5rem;
+    padding-top: calc(80px + 4rem);
+  }
+  .ap-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(232,133,106,0.8);
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 1rem;
+  }
+  .ap-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    color: #F0EEF8;
+    margin-bottom: 1.5rem;
+  }
+  .ap-name em {
+    display: block;
+    font-style: oblique;
+    color: #E8856A;
+    font-size: 0.65em;
+    letter-spacing: 0;
+  }
+  .ap-tagline {
+    font-size: 1rem;
+    color: rgba(240,238,248,0.55);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 320px;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 2.5rem;
+  }
+  .ap-hero-scroll-hint {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(240,238,248,0.3);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .ap-hero-scroll-hint::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: rgba(240,238,248,0.2);
+  }
+
+  .ap-hero-right {
+    position: relative; z-index: 2;
+    display: flex; align-items: flex-end; justify-content: flex-end;
+    padding: 3rem 3rem 3rem 0;
+  }
+  .ap-hero-photo-frame {
+    width: 320px;
+    position: relative;
+  }
+  .ap-hero-photo {
+    width: 100%;
+    aspect-ratio: 2/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #9490A8 0%, #3D2E5A 100%);
+  }
+  .ap-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .ap-hero-photo-label {
+    position: absolute; bottom: 1rem; left: 1rem;
+    font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Sans', sans-serif;
+  }
+  /* floating number behind frame */
+  .ap-hero-photo-frame::before {
+    content: '01';
+    position: absolute; top: -1.5rem; left: -1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 8rem; font-weight: 900;
+    color: rgba(232,133,106,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* ── Scroll section ── */
+  .ap-body {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 3rem 8rem;
+  }
+
+  /* Gradient band transition from hero to body */
+  .ap-transition-band {
+    height: 180px;
+    background: linear-gradient(to bottom, transparent 0%, #1E1828 100%);
+    margin-top: -180px;
+    position: relative; z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Section divider line with glyph */
+  .ap-rule {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 4rem 0 3rem;
+    opacity: 0.3;
+  }
+  .ap-rule::before, .ap-rule::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(240,238,248,0.4), transparent);
+  }
+  .ap-rule-glyph {
+    font-size: 0.8rem; color: #E8856A;
+    font-family: serif;
+  }
+
+  /* Bio section: text + photo side by side */
+  .ap-bio-row {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 0;
+  }
+  .ap-bio-row.reversed {
+    grid-template-columns: 280px 1fr;
+  }
+  .ap-bio-row.reversed .ap-side-photo { order: -1; }
+
+  .ap-section-label {
+    font-size: 0.62rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #E8856A;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 1.25rem;
+    opacity: 0.8;
+  }
+  .ap-section-heading {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: #F0EEF8;
+    margin-bottom: 1.5rem;
+  }
+  .ap-section-heading em { color: #E8856A; font-style: oblique; }
+
+  .ap-para {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: rgba(240,238,248,0.6);
+    font-weight: 300;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 1.2rem;
+  }
+  .ap-para strong {
+    color: rgba(240,238,248,0.85);
+    font-weight: 500;
+  }
+  .ap-para a {
+    color: #E8856A;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,133,106,0.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+  .ap-para a:hover { border-color: #E8856A; }
+
+  /* Side vertical photo */
+  .ap-side-photo {
+    position: relative;
+  }
+  .ap-side-photo-img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .ap-side-photo-img img { width: 100%; height: 100%; object-fit: cover; }
+  .ap-side-photo::after {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -2rem; right: -1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 6rem; font-weight: 900;
+    color: rgba(196,115,138,0.07);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .ap-side-caption {
+    font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(240,238,248,0.25);
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 0.75rem;
+  }
+
+  /* Colour accent strip */
+  .ap-colour-strip {
+    display: flex; gap: 0; height: 3px; margin: 3rem 0;
+    opacity: 0.5;
+  }
+  .ap-colour-strip span { flex: 1; }
+
+  /* Socials minimal list */
+  .ap-socials {
+    display: flex; flex-direction: column; gap: 0;
+    margin-top: 1.5rem;
+    border-top: 1px solid rgba(240,238,248,0.08);
+  }
+  .ap-social-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(240,238,248,0.06);
+    text-decoration: none;
+    transition: padding-left 0.2s;
+  }
+  .ap-social-item:hover { padding-left: 0.5rem; }
+  .ap-social-platform {
+    font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(240,238,248,0.35); font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .ap-social-handle {
+    font-size: 0.9rem; color: rgba(240,238,248,0.7);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    transition: color 0.2s;
+  }
+  .ap-social-item:hover .ap-social-handle { color: #E8856A; }
+  .ap-social-arrow { color: rgba(232,133,106,0.4); font-size: 0.8rem; transition: transform 0.2s; }
+  .ap-social-item:hover .ap-social-arrow { transform: translateX(4px); color: #E8856A; }
+
+  /* ── Contact form ── */
+  .ap-contact {
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(240,238,248,0.08);
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 5rem;
+    align-items: start;
+  }
+  .ap-form { display: flex; flex-direction: column; gap: 0; }
+  .ap-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .ap-form-field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .ap-form-label {
+    font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(240,238,248,0.3); font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; gap: 0.5rem; align-items: center;
+  }
+  .ap-form-req { color: #E8856A; opacity: 0.7; }
+  .ap-form-input, .ap-form-textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(240,238,248,0.12);
+    color: rgba(240,238,248,0.8);
+    padding: 0.65rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 300;
+    outline: none; width: 100%;
+    transition: border-color 0.25s;
+    border-radius: 0;
+  }
+  .ap-form-input:focus, .ap-form-textarea:focus { border-bottom-color: #E8856A; }
+  .ap-form-input::placeholder, .ap-form-textarea::placeholder { color: rgba(240,238,248,0.18); }
+  .ap-form-textarea { resize: vertical; min-height: 110px; }
+  .ap-form-check {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.82rem; color: rgba(240,238,248,0.35);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .ap-form-check input { accent-color: #E8856A; width: 14px; height: 14px; }
+  .ap-form-submit {
+    align-self: flex-start;
+    background: linear-gradient(135deg, #C4736A, #C4736A);
+    color: white; border: none;
+    padding: 0.9rem 2.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 1px;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .ap-form-submit:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  .ap-contact-aside {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    padding-top: 4rem;
+  }
+  .ap-contact-photo-wrap {
+    position: relative;
+    margin-left: 1.5rem;
+  }
+  .ap-contact-photo {
+    width: 100%; aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4.5rem; overflow: hidden;
+  }
+  .ap-contact-photo img { width: 100%; height: 100%; object-fit: cover; }
+  /* paint smear accent in corner */
+  .ap-contact-photo-wrap::before {
+    content: '';
+    position: absolute; top: -8px; right: -8px;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, rgba(232,133,106,0.25), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* glow soft ambient behind each section */
+  .ap-glow-coral {
+    position: absolute; width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,133,106,0.07), transparent 70%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 860px) {
+    .ap-hero { grid-template-columns: 1fr; }
+    .ap-hero-right { display: none; }
+    .ap-bio-row, .ap-bio-row.reversed { grid-template-columns: 1fr; }
+    .ap-bio-row.reversed .ap-side-photo { order: 0; }
+    .ap-contact { grid-template-columns: 1fr; }
+    .ap-contact-aside { padding-top: 0; }
+    .ap-contact-photo-wrap { margin-left: 0; }
+    .ap-form-row { grid-template-columns: 1fr; }
+    .ap-body { padding: 0 1.5rem 6rem; }
+  }
+</style>
+
+<!-- ══ HERO ══ -->
+<div class="ap-hero">
+  <!-- flowing wave SVG -->
+  <svg class="ap-hero-waves" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-100,200 C100,120 300,280 500,200 C700,120 900,260 1100,190 C1200,155 1250,175 1300,190" fill="none" stroke="#E8856A" stroke-width="3"/>
+    <path d="M-100,320 C150,260 350,380 600,310 C850,240 1000,350 1300,300" fill="none" stroke="#E8856A" stroke-width="2"/>
+    <path d="M-100,440 C200,400 400,480 650,430 C900,380 1100,450 1300,420" fill="none" stroke="#8BAEC4" stroke-width="2.5"/>
+    <path d="M-100,560 C180,520 420,590 680,550 C940,510 1100,570 1300,540" fill="none" stroke="#4A3870" stroke-width="2"/>
+    <path d="M100,100 C200,60 350,130 450,90 C600,40 700,110 850,75 C950,50 1050,90 1200,70" fill="none" stroke="#E8856A" stroke-width="1.5" opacity="0.5"/>
+  </svg>
+
+  <div class="ap-hero-left">
+    <div class="ap-eyebrow">Illustrator &amp; Animator</div>
+    <h1 class="ap-name">
+      Jiomie
+      <em>Vancouver, BC</em>
+    </h1>
+    <p class="ap-tagline">Creating whimsical fantastical worlds to dramatic character designs. Vivid colours, dynamic figures and stories through imagery.</p>
+    <div class="ap-hero-scroll-hint">Scroll to explore</div>
+  </div>
+
+  <div class="ap-hero-right">
+    <div class="ap-hero-photo-frame">
+      <div class="ap-hero-photo">
+        🌸
+        <div class="ap-hero-photo-label">Studio portrait</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ap-transition-band"></div>
+
+<!-- ══ BODY ══ -->
+<div class="ap-body">
+
+  <!-- Section 1: Bio + Photo -->
+  <div class="ap-bio-row">
+    <div>
+      <div class="ap-section-label">About the work</div>
+      <h2 class="ap-section-heading">The <em>Spirit</em><br>Behind It</h2>
+      <p class="ap-para">
+        My work draws inspiration from water and music. The colours derive from sunsets reflecting on water — melancholic varied hues, waves, and how all colours connect with each other. The sharpness draws from music, notably jazz, that contrasts a dynamic articulation of quick, sharp drums and saxophones with the raspy voices. Creating a symphony of vivid, dynamic pieces that feels ethereal and fluid.
+      </p>
+      <p class="ap-para">
+        I am a mosaic of all the art and memories cultivated from travels around the world, along with anime — notably Ghibli Studios artwork. Initially starting with watercolour, acrylic, and mixed media before jumping to digital painting in 2021, where I first started streaming the process of learning a new medium.
+      </p>
+      <p class="ap-para">
+        Now if you're ever curious, join me on Twitch — you might find me playing games with our community or studying new artists and their techniques. And if I'm not there, I'm probably trying to venture to new art scenes.
+      </p>
+    </div>
+    <div class="ap-side-photo" data-num="01">
+      <div class="ap-side-photo-img" style="background:linear-gradient(160deg,#9490A8 0%,#3D2E5A 100%);">🌸</div>
+      <div class="ap-side-caption">At the studio, 2024</div>
+    </div>
+  </div>
+
+  <!-- Colour strip -->
+  <div class="ap-colour-strip">
+    <span style="background:#E8856A;"></span>
+    <span style="background:#E8856A;"></span>
+    <span style="background:#9490A8;"></span>
+    <span style="background:#8BAEC4;"></span>
+    <span style="background:#4A3870;"></span>
+    <span style="background:#2E2845;"></span>
+  </div>
+
+  <!-- Section 2: Reversed — Photo left, text right -->
+  <div class="ap-bio-row reversed">
+    <div class="ap-side-photo" data-num="02" style="margin-top:1rem;">
+      <div class="ap-side-photo-img" style="background:linear-gradient(160deg,#C4736A 0%,#4A3870 100%);">🌿</div>
+      <div class="ap-side-caption">Vancouver Island, 2024</div>
+    </div>
+    <div>
+      <div class="ap-section-label">Collaborations</div>
+      <h2 class="ap-section-heading">Past<br><em>Work</em></h2>
+      <p class="ap-para">
+        Past collaborations include <strong>CYLK Creative Tech Ltd.</strong> and <strong>Burnaby Neighbourhood House.</strong> Open to brand partnerships, game studios, musicians, and editorial clients.
+      </p>
+      <p class="ap-para">
+        Interested in collaborating or would like to explore more of my work? Please feel free to <a href="#" onclick="document.getElementById('ap-contact-section').scrollIntoView({behavior:'smooth'})">reach out</a> — I would love to hear from you.
+      </p>
+    </div>
+  </div>
+
+  <div class="ap-rule"><span class="ap-rule-glyph">✦</span></div>
+
+  <!-- Section 3: Socials -->
+  <div class="ap-bio-row" style="align-items:start;">
+    <div>
+      <div class="ap-section-label">Find me online</div>
+      <h2 class="ap-section-heading">Social &amp;<br><em>Links</em></h2>
+      <p class="ap-para">Live painting sessions, WIP sketches, and behind-the-scenes on Twitch and Instagram.</p>
+      <nav class="ap-socials">
+        <a href="https://www.twitch.tv/supjiomie" class="ap-social-item" target="_blank" rel="noopener">
+          <span class="ap-social-platform">Twitch</span>
+          <span class="ap-social-handle">/supjiomie</span>
+          <span class="ap-social-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com/supjiomie/" class="ap-social-item" target="_blank" rel="noopener">
+          <span class="ap-social-platform">Instagram</span>
+          <span class="ap-social-handle">@supjiomie</span>
+          <span class="ap-social-arrow">→</span>
+        </a>
+        <a href="#" class="ap-social-item" onclick="showPage('shop');showTab('commissions')">
+          <span class="ap-social-platform">Commissions</span>
+          <span class="ap-social-handle">View open slots</span>
+          <span class="ap-social-arrow">→</span>
+        </a>
+      </nav>
+    </div>
+    <div class="ap-side-photo" data-num="03" style="margin-top:1rem;">
+      <div class="ap-side-photo-img" style="background:linear-gradient(160deg,#8BAEC4 0%,#2E2845 100%);">🦋</div>
+      <div class="ap-side-caption">In the field, 2023</div>
+    </div>
+  </div>
+
+  <div class="ap-rule"><span class="ap-rule-glyph">✣</span></div>
+
+  <!-- ══ Contact form ══ -->
+  <div class="ap-contact" id="ap-contact-section">
+    <div>
+      <div class="ap-section-label">Get in touch</div>
+      <h2 class="ap-section-heading">Let's<br>Make Something<br><em>Together</em></h2>
+      <p class="ap-para" style="margin-bottom:2.5rem;">For commissions, collaborations, or just to say hello — fill out the form below.</p>
+      <div class="ap-form">
+        <div class="ap-form-row">
+          <div class="ap-form-field">
+            <label class="ap-form-label">First Name <span class="ap-form-req">required</span></label>
+            <input class="ap-form-input" id="cf-firstname" type="text" placeholder="First name">
+          </div>
+          <div class="ap-form-field">
+            <label class="ap-form-label">Last Name <span class="ap-form-req">required</span></label>
+            <input class="ap-form-input" id="cf-lastname" type="text" placeholder="Last name">
+          </div>
+        </div>
+        <div class="ap-form-field">
+          <label class="ap-form-label">Email <span class="ap-form-req">required</span></label>
+          <input class="ap-form-input" id="cf-email" type="email" placeholder="your@email.com">
+        </div>
+        <div class="ap-form-field">
+          <label class="ap-form-label">Subject <span class="ap-form-req">required</span></label>
+          <input class="ap-form-input" id="cf-subject" type="text" placeholder="Commission · Collaboration · General">
+        </div>
+        <div class="ap-form-field">
+          <label class="ap-form-label">Message <span class="ap-form-req">required</span></label>
+          <textarea class="ap-form-textarea" id="cf-message" placeholder="Tell me about your project or idea..."></textarea>
+        </div>
+        <div class="ap-form-check">
+          <input type="checkbox" id="ap-news">
+          <label for="ap-news">Sign up for news and updates</label>
+        </div>
+        <button class="ap-form-submit" onclick="sendContactEmail(this)">Send Message</button>
+      </div>
+    </div>
+
+    <div class="ap-contact-aside">
+      <div class="ap-contact-photo-wrap">
+        <div class="ap-contact-photo" style="background:linear-gradient(160deg,#C4736A 0%,#4A3870 100%);">🌙</div>
+      </div>
+      <!-- ambient glow -->
+      <div class="ap-glow-coral" style="top:-50px;right:-80px;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Wave home button -->
+<div style="text-align:center;padding:3rem 0 5rem;position:relative;overflow:hidden;">
+  <!-- background wave lines -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.12;" viewBox="0 0 1200 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C200,80 400,10 600,50 C800,90 1000,20 1200,50" fill="none" stroke="#E8856A" stroke-width="1.5"/>
+    <path d="M0,70 C180,30 380,90 580,65 C780,40 980,85 1200,65" fill="none" stroke="#E8856A" stroke-width="1"/>
+    <path d="M0,100 C220,120 440,75 660,105 C880,130 1060,85 1200,100" fill="none" stroke="#8BAEC4" stroke-width="1"/>
+    <path d="M0,130 C250,110 480,145 700,125 C920,105 1080,138 1200,130" fill="none" stroke="#4A3870" stroke-width="0.75"/>
+  </svg>
+  <button onclick="showPage('home')" style="
+    position:relative;z-index:2;
+    background:none;border:none;
+    display:inline-flex;flex-direction:column;align-items:center;gap:0.75rem;
+    cursor:pointer;
+    transition:transform 0.3s ease;
+  " onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
+    <!-- mini wave SVG inside button -->
+    <svg width="120" height="24" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,12 C15,4 30,20 45,12 C60,4 75,20 90,12 C105,4 115,18 120,12" fill="none" stroke="#E8856A" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M5,17 C20,10 35,22 50,17 C65,10 80,22 95,17 C108,12 116,20 120,17" fill="none" stroke="#E8856A" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <span style="
+      font-family:'Cinzel',serif;
+      font-size:0.75rem;font-weight:900;
+      letter-spacing:4px;text-transform:uppercase;
+      color:rgba(240,238,248,0.45);
+      transition:color 0.25s;
+    " onmouseenter="this.style.color='#C4736A'" onmouseleave="this.style.color='rgba(240,238,248,0.45)'">
+      ↑ &nbsp; Return Home
+    </span>
+  </button>
+</div>
+</div>
+
+<!-- ===== ADMIN (hidden, password protected) ===== -->
+<div class="page" id="page-admin" style="padding-top:0;">
+
+  <!-- Login Screen -->
+  <div class="admin-login" id="admin-login">
+    <div class="admin-login-box">
+      <div class="admin-login-eyebrow">Studio Access</div>
+      <div class="admin-login-title">Owner<br><em>Dashboard</em></div>
+      <div class="admin-login-sub">Private area — Jiomie only</div>
+      <div class="admin-field">
+        <label class="admin-label">Password</label>
+        <input type="password" class="admin-input" id="admin-password" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()">
+      </div>
+      <button class="admin-login-btn" onclick="adminLogin()">Enter Studio</button>
+      <div class="admin-error" id="admin-error">Incorrect password. Try again.</div>
+    </div>
+  </div>
+
+  <!-- Dashboard (shown after login) -->
+  <div class="admin-dash" id="admin-dash">
+    <div class="admin-topbar">
+      <div class="admin-topbar-logo">
+        Jiomie <span class="admin-badge">Studio</span>
+      </div>
+      <div class="admin-topbar-actions">
+        <button class="admin-view-site-btn" onclick="exitAdmin()">← View Site</button>
+        <button class="admin-logout-btn" onclick="adminLogout()">Log Out</button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div class="sidebar-section-label">Overview</div>
+        <button class="sidebar-item active" onclick="adminSection('overview', this)">
+          <span class="sidebar-icon">◈</span> Dashboard
+        </button>
+
+        <div class="sidebar-section-label">Content</div>
+        <button class="sidebar-item" onclick="adminSection('portfolio', this)">
+          <span class="sidebar-icon">◻</span> Portfolio
+          <span class="sidebar-count" id="porto-count">9</span>
+        </button>
+        <button class="sidebar-item" onclick="adminSection('prints', this)">
+          <span class="sidebar-icon">◻</span> Shop Prints
+          <span class="sidebar-count">4</span>
+        </button>
+        <button class="sidebar-item" onclick="adminSection('commissions', this)">
+          <span class="sidebar-icon">◻</span> Commissions
+        </button>
+        <button class="sidebar-item" onclick="adminSection('partnerships', this)">
+          <span class="sidebar-icon">◻</span> Partnerships
+          <span class="sidebar-count">6</span>
+        </button>
+
+        <div class="sidebar-section-label">Settings</div>
+        <button class="sidebar-item" onclick="adminSection('about', this)">
+          <span class="sidebar-icon">◻</span> About Page
+        </button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="admin-main">
+
+        <!-- Overview -->
+        <div class="admin-section active" id="admin-overview">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">Good to see you, <em>Jiomie</em></div>
+              <div class="admin-section-sub">Here's what's going on with your site today</div>
+            </div>
+          </div>
+          <div class="admin-stats">
+            <div class="admin-stat">
+              <div class="admin-stat-num">9</div>
+              <div class="admin-stat-label">Portfolio Items</div>
+              <div class="admin-stat-delta">↑ Add more anytime</div>
+            </div>
+            <div class="admin-stat">
+              <div class="admin-stat-num">4</div>
+              <div class="admin-stat-label">Shop Prints</div>
+              <div class="admin-stat-delta">All published</div>
+            </div>
+            <div class="admin-stat">
+              <div class="admin-stat-num">6</div>
+              <div class="admin-stat-label">Partnerships</div>
+              <div class="admin-stat-delta">2022 – 2024</div>
+            </div>
+            <div class="admin-stat">
+              <div class="admin-stat-num" id="overview-comm-status">Open</div>
+              <div class="admin-stat-label">Commissions</div>
+              <div class="admin-stat-delta">Toggle in Commissions</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(250,247,242,0.06);">
+            <div style="background:#0F0E0D;padding:2rem;">
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Quick Actions</div>
+              <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                <button class="btn-add" onclick="adminSection('portfolio', document.querySelector('.sidebar-item:nth-child(4)'));openAddModal()" style="justify-content:flex-start;">+ Add Portfolio Piece</button>
+                <button class="btn-add" onclick="adminSection('prints', document.querySelector('.sidebar-item:nth-child(5)'));openPrintModal()" style="justify-content:flex-start;">+ Add Print to Shop</button>
+                <button class="btn-add" onclick="adminSection('partnerships', document.querySelector('.sidebar-item:nth-child(6)'));openPartnerModal()" style="justify-content:flex-start;">+ Add Partnership</button>
+              </div>
+            </div>
+            <div style="background:#0F0E0D;padding:2rem;">
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Commission Status</div>
+              <div class="commission-status-bar" style="margin-bottom:0;">
+                <div class="cstatus-left">
+                  <div class="cstatus-title">Accepting Commissions</div>
+                  <div class="cstatus-sub">Toggle shows/hides the "Open" badge on your site</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="comm-toggle-overview" checked onchange="syncCommToggle(this)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="admin-section" id="admin-portfolio">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title"><em>Portfolio</em> Manager</div>
+              <div class="admin-section-sub">Add, edit or remove illustrations and animated assets</div>
+            </div>
+            <button class="btn-add" onclick="openAddModal()">+ Add New Work</button>
+          </div>
+
+          <div class="upload-zone" id="drop-zone">
+            <input type="file" multiple accept="image/*,.gif" onchange="handleDrop(event)">
+            <div class="upload-icon">⬆</div>
+            <div class="upload-title">Drop images here</div>
+            <div class="upload-sub">Or click to browse — adds to portfolio gallery</div>
+            <div class="upload-types">
+              <span class="upload-type-tag">JPG</span>
+              <span class="upload-type-tag">PNG</span>
+              <span class="upload-type-tag">GIF</span>
+              <span class="upload-type-tag">WEBP</span>
+            </div>
+          </div>
+
+          <div class="admin-work-toolbar">
+            <div class="admin-work-toolbar-left">
+              <button class="admin-filter-pill active" onclick="adminFilterWork('all',this)">All</button>
+              <button class="admin-filter-pill" onclick="adminFilterWork('illustration',this)">Illustrations</button>
+              <button class="admin-filter-pill" onclick="adminFilterWork('animated',this)">Animated</button>
+              <button class="admin-filter-pill" onclick="adminFilterWork('character',this)">Characters</button>
+              <button class="admin-filter-pill" onclick="adminFilterWork('print',this)">Prints</button>
+            </div>
+            <div class="admin-view-toggle">
+              <button class="view-btn active">⊞</button>
+              <button class="view-btn">☰</button>
+            </div>
+          </div>
+
+          <div class="admin-work-grid" id="admin-work-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Prints -->
+        <div class="admin-section" id="admin-prints">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">Shop <em>Prints</em></div>
+              <div class="admin-section-sub">Manage print listings, prices and availability</div>
+            </div>
+            <button class="btn-add" onclick="openPrintModal()">+ Add Print</button>
+          </div>
+          <table class="admin-table" id="prints-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Sizes</th>
+                <th>Published</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="prints-tbody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Commissions -->
+        <div class="admin-section" id="admin-commissions">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title"><em>Commission</em> Settings</div>
+              <div class="admin-section-sub">Control your open/closed status and tier pricing</div>
+            </div>
+          </div>
+
+          <div class="commission-status-bar">
+            <div class="cstatus-left">
+              <div class="cstatus-title">Commission Status</div>
+              <div class="cstatus-sub">This controls the "Open / Closed" badge visible to visitors</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <div class="cstatus-indicator" id="comm-label">
+                <span class="cstatus-dot open" id="comm-dot"></span>
+                <span id="comm-text">Open</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="comm-toggle-main" checked onchange="syncCommToggle(this)">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Tier Pricing</div>
+          <table class="admin-table" style="margin-bottom:2rem;">
+            <thead>
+              <tr><th>Tier</th><th>Description</th><th>Starting Price</th><th></th></tr>
+            </thead>
+            <tbody id="tier-tbody">
+              <tr>
+                <td style="color:#FAF7F2;font-weight:500;">Sketch / Lineart</td>
+                <td>Black &amp; white, single character</td>
+                <td><input class="price-input" value="$45" onfocus="this.select()"></td>
+                <td><button class="admin-action-btn" onclick="showToast('Price saved')">Save</button></td>
+              </tr>
+              <tr>
+                <td style="color:#FAF7F2;font-weight:500;">Full Illustration</td>
+                <td>Full colour, detailed background</td>
+                <td><input class="price-input" value="$120" onfocus="this.select()"></td>
+                <td><button class="admin-action-btn" onclick="showToast('Price saved')">Save</button></td>
+              </tr>
+              <tr>
+                <td style="color:#FAF7F2;font-weight:500;">Animated Asset</td>
+                <td>Looping GIF or stream overlay</td>
+                <td><input class="price-input" value="$200" onfocus="this.select()"></td>
+                <td><button class="admin-action-btn" onclick="showToast('Price saved')">Save</button></td>
+              </tr>
+              <tr>
+                <td style="color:#FAF7F2;font-weight:500;">Character Sheet</td>
+                <td>Full ref with expressions &amp; poses</td>
+                <td><input class="price-input" value="$250" onfocus="this.select()"></td>
+                <td><button class="admin-action-btn" onclick="showToast('Price saved')">Save</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn-admin-primary" onclick="showToast('Commission settings saved ✓')">Save All Changes</button>
+        </div>
+
+        <!-- Partnerships -->
+        <div class="admin-section" id="admin-partnerships">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">Past <em>Partnerships</em></div>
+              <div class="admin-section-sub">Add or remove brand collaborations shown on your shop page</div>
+            </div>
+            <button class="btn-add" onclick="openPartnerModal()">+ Add Partnership</button>
+          </div>
+          <div class="admin-partner-cards" id="partner-cards-grid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="admin-section" id="admin-about">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">About <em>Page</em></div>
+              <div class="admin-section-sub">Edit your bio, stats and displayed photo</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div>
+              <div class="modal-field">
+                <label class="modal-label">Bio (paragraph 1)</label>
+                <textarea class="modal-textarea" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:110px;">I'm a freelance illustrator and animator with a love for soft palettes, whimsical characters, and storytelling through imagery. My work lives somewhere between fairy tale and daydream.</textarea>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Bio (paragraph 2)</label>
+                <textarea class="modal-textarea" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:110px;">I've worked with indie game studios, small brands, and musicians, and I spend my streaming hours painting live on Twitch. When I'm not drawing, I'm probably foraging for mushroom references or rewatching Studio Ghibli for the hundredth time.</textarea>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+                <div class="modal-field" style="margin:0;">
+                  <label class="modal-label">Commissions stat</label>
+                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="200+">
+                </div>
+                <div class="modal-field" style="margin:0;">
+                  <label class="modal-label">Brand collabs stat</label>
+                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="6+">
+                </div>
+                <div class="modal-field" style="margin:0;">
+                  <label class="modal-label">Followers stat</label>
+                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="8k+">
+                </div>
+                <div class="modal-field" style="margin:0;">
+                  <label class="modal-label">Years freelancing</label>
+                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="5yrs">
+                </div>
+              </div>
+              <button class="btn-admin-primary" onclick="showToast('About page saved ✓')">Save Changes</button>
+            </div>
+            <div>
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Portrait / Hero Image</div>
+              <div class="modal-upload-preview" id="about-preview" style="aspect-ratio:3/4;min-height:280px;">
+                <span id="about-preview-emoji" style="font-size:4rem;">🌸</span>
+                <img id="about-preview-img" src="" alt="">
+              </div>
+              <div class="modal-upload-mini" style="margin-top:0.75rem;">
+                <input type="file" accept="image/*" onchange="previewAbout(event)">
+                ⬆ Upload new portrait image
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- Add Work Modal -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">Add <em>New Work</em></div>
+      <button class="modal-close" onclick="closeModal('add-modal')">✕</button>
+    </div>
+    <div class="modal-upload-preview" id="add-preview">
+      <span id="add-preview-emoji">🖼</span>
+      <img id="add-preview-img" src="" alt="">
+    </div>
+    <div class="modal-upload-mini" style="margin:0.75rem 0 1.5rem;">
+      <input type="file" accept="image/*,.gif" onchange="previewUpload(event,'add-preview-img','add-preview-emoji')">
+      ⬆ Upload artwork file
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label class="modal-label">Title</label>
+        <input class="modal-input" id="add-title" placeholder="e.g. Bloom in April">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Year</label>
+        <input class="modal-input" id="add-year" placeholder="2025">
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label class="modal-label">Category</label>
+        <select class="modal-select" id="add-category">
+          <option value="illustration">Illustration</option>
+          <option value="animated">Animated</option>
+          <option value="character">Character</option>
+          <option value="print">Print</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Status</label>
+        <select class="modal-select" id="add-status">
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Description (optional)</label>
+      <textarea class="modal-textarea" id="add-desc" placeholder="Short description shown on hover..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-admin-secondary" onclick="closeModal('add-modal')">Cancel</button>
+      <button class="btn-admin-draft" onclick="saveWork('draft')">Save as Draft</button>
+      <button class="btn-admin-primary" onclick="saveWork('published')">Publish</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Print Modal -->
+<div class="modal-overlay" id="print-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">Add <em>Print</em></div>
+      <button class="modal-close" onclick="closeModal('print-modal')">✕</button>
+    </div>
+    <div class="modal-upload-preview" id="print-preview">
+      <span id="print-preview-emoji">🖼</span>
+      <img id="print-preview-img" src="" alt="">
+    </div>
+    <div class="modal-upload-mini" style="margin:0.75rem 0 1.5rem;">
+      <input type="file" accept="image/*" onchange="previewUpload(event,'print-preview-img','print-preview-emoji')">
+      ⬆ Upload print image
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label class="modal-label">Title</label>
+        <input class="modal-input" id="print-title" placeholder="e.g. Bloom in April">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Price (e.g. $28)</label>
+        <input class="modal-input" id="print-price" placeholder="$28">
+      </div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Available Sizes</label>
+      <input class="modal-input" id="print-sizes" placeholder="e.g. A4, A3, 5x7">
+    </div>
+    <div class="modal-footer">
+      <button class="btn-admin-secondary" onclick="closeModal('print-modal')">Cancel</button>
+      <button class="btn-admin-primary" onclick="savePrint()">Add to Shop</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Partnership Modal -->
+<div class="modal-overlay" id="partner-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">Add <em>Partnership</em></div>
+      <button class="modal-close" onclick="closeModal('partner-modal')">✕</button>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label class="modal-label">Brand / Client Name</label>
+        <input class="modal-input" id="partner-name" placeholder="e.g. Cozy Grove">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Emoji Icon</label>
+        <input class="modal-input" id="partner-emoji" placeholder="e.g. 🎮" maxlength="4">
+      </div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Description</label>
+      <textarea class="modal-textarea" id="partner-desc" placeholder="What did you create for them?"></textarea>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Year</label>
+      <input class="modal-input" id="partner-year" placeholder="2025">
+    </div>
+    <div class="modal-footer">
+      <button class="btn-admin-secondary" onclick="closeModal('partner-modal')">Cancel</button>
+      <button class="btn-admin-primary" onclick="savePartner()">Add Partnership</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">Jiomie</div>
+    <div class="footer-tagline">Illustrations &amp; animated art crafted with warmth. Available for commissions and collaborations.</div>
+  </div>
+  <div>
+    <div class="footer-nav-title">Navigate</div>
+    <ul class="footer-nav-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+      <li><a href="#" onclick="showPage('shop')">Shop Prints</a></li>
+      <li><a href="#" onclick="showPage('shop');showTab('commissions')">Commissions</a></li>
+      <li><a href="#" onclick="showPage('about')">About</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-nav-title">Social</div>
+    <ul class="footer-nav-links">
+      <li><a href="https://www.twitch.tv/supjiomie" target="_blank" rel="noopener">Twitch</a></li>
+      <li><a href="https://www.instagram.com/supjiomie/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="#">Email</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Jiomie. All artwork original.</span>
+    <span>Built with love ✦</span>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 80);
+  });
+  document.querySelectorAll('a, button, .porto-item, .home-card, .print-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      ring.style.opacity = '0';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // Contact form → mailto
+  function sendContactEmail(btn) {
+    const first   = document.getElementById('cf-firstname').value.trim();
+    const last    = document.getElementById('cf-lastname').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const subject = document.getElementById('cf-subject').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+    if (!first || !email || !subject || !message) {
+      alert('Please fill in all required fields before sending.');
+      return;
+    }
+    const body = encodeURIComponent(
+      `Name: ${first} ${last}\nFrom: ${email}\n\n${message}`
+    );
+    const sub = encodeURIComponent(subject);
+    window.location.href = `mailto:supjiomie@gmail.com?subject=${sub}&body=${body}`;
+    btn.textContent = 'Opening mail app ✓';
+    btn.style.background = '#5C7A6B';
+  }
+
+  // Page navigation
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    // Dark nav + body for About page
+    const isAbout = id === 'about';
+    document.body.classList.toggle('on-about', isAbout);
+    document.querySelector('nav').classList.toggle('nav-dark', isAbout);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // Shop tabs
+  function showTab(id) {
+    document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.shop-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    const tabs = document.querySelectorAll('.shop-tab');
+    const map = { prints: 0, commissions: 1, partnerships: 2 };
+    if (map[id] !== undefined) tabs[map[id]].classList.add('active');
+  }
+
+  // Portfolio filter
+  function filterPortfolio(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.porto-item').forEach(item => {
+      if (type === 'all' || item.dataset.type === type) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // Contact form → mailto
+  function sendContactEmail(btn) {
+    const first   = document.getElementById('cf-firstname').value.trim();
+    const last    = document.getElementById('cf-lastname').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const subject = document.getElementById('cf-subject').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+    if (!first || !email || !subject || !message) {
+      alert('Please fill in all required fields before sending.');
+      return;
+    }
+    const body = encodeURIComponent(
+      `Name: ${first} ${last}\nFrom: ${email}\n\n${message}`
+    );
+    const sub = encodeURIComponent(subject);
+    window.location.href = `mailto:supjiomie@gmail.com?subject=${sub}&body=${body}`;
+    btn.textContent = 'Opening mail app ✓';
+    btn.style.background = '#5C7A6B';
+  }
+
+  // Page navigation
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    // Dark nav + body for About page
+    const isAbout = id === 'about';
+    document.body.classList.toggle('on-about', isAbout);
+    document.querySelector('nav').classList.toggle('nav-dark', isAbout);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // Shop tabs
+  function showTab(id) {
+    document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.shop-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    const tabs = document.querySelectorAll('.shop-tab');
+    const map = { prints: 0, commissions: 1, partnerships: 2 };
+    if (map[id] !== undefined) tabs[map[id]].classList.add('active');
+  }
+
+  // Portfolio filter
+  function filterPortfolio(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.porto-item').forEach(item => {
+      if (type === 'all' || item.dataset.type === type) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+
+</script>
+
+<!-- ===== FIREBASE ===== -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDcRg54yrKSs7o7rm2Bk0v8zqtz7ccFVwk",
+    authDomain: "jiomie-website.firebaseapp.com",
+    projectId: "jiomie-website",
+    storageBucket: "jiomie-website.firebasestorage.app",
+    messagingSenderId: "924571776702",
+    appId: "1:924571776702:web:dd1be337affaea0a7b90ef"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ── Default seed data ──
+  const defaultPortfolio = [
+    { id:'1', title:'Bloom in April', year:'2024', category:'illustration', status:'published', emoji:'🌸', bg:'linear-gradient(135deg,#9490A8,#3D3560)' },
+    { id:'2', title:'Fox Spirit Loop', year:'2024', category:'animated', status:'published', emoji:'🦊', bg:'linear-gradient(160deg,#6E7D8A,#3D5260)' },
+    { id:'3', title:'Lunar Still Life', year:'2024', category:'print', status:'published', emoji:'🌙', bg:'linear-gradient(160deg,#3D5260,#2A3A46)' },
+    { id:'4', title:'Fae Character Sheet', year:'2024', category:'character', status:'published', emoji:'🧚', bg:'linear-gradient(160deg,#C4736A,#2E4A42)' },
+    { id:'5', title:'Sparkle Overlay Pack', year:'2024', category:'animated', status:'published', emoji:'✨', bg:'linear-gradient(160deg,#9490A8,#6E7D8A)' },
+    { id:'6', title:'Herb Garden Study', year:'2023', category:'illustration', status:'published', emoji:'🌿', bg:'linear-gradient(160deg,#6E7D8A,#9490A8)' },
+    { id:'7', title:'Cottagecore Bunny', year:'2023', category:'character', status:'published', emoji:'🐰', bg:'linear-gradient(160deg,#3D3560,#6E7D8A)' },
+    { id:'8', title:'Butterfly Transition', year:'2023', category:'animated', status:'published', emoji:'🦋', bg:'linear-gradient(160deg,#C4736A,#3D5260)' },
+    { id:'9', title:'Autumn Reverie', year:'2023', category:'print', status:'published', emoji:'🍂', bg:'linear-gradient(160deg,#C4736A,#9490A8)' },
+  ];
+  const defaultPrints = [
+    { id:'1', title:'Bloom in April', price:'$28 CAD', sizes:'A4, A3', published:true, emoji:'🌸', bg:'linear-gradient(135deg,#E8C4B2,#C4736A)' },
+    { id:'2', title:'Lunar Still Life', price:'$32 CAD', sizes:'A4, A3', published:true, emoji:'🌙', bg:'linear-gradient(160deg,#B5C4D8,#3A5A7A)' },
+    { id:'3', title:'Autumn Reverie', price:'$28 CAD', sizes:'A4, A3', published:true, emoji:'🍂', bg:'linear-gradient(160deg,#E0D0B5,#9E7A45)' },
+    { id:'4', title:'Herb Garden Study', price:'$24 CAD', sizes:'A4, A3', published:true, emoji:'🌿', bg:'linear-gradient(135deg,#C8E6C9,#66BB6A)' },
+  ];
+  const defaultPartners = [
+    { id:'1', emoji:'✨', name:'Artrinary', desc:'Twitch streamer. Created 6 Twitch assets — emotes.', year:'2021' },
+    { id:'2', emoji:'🖊️', name:'Sartsy', desc:'Twitch streamer. Logo design for LLC.', year:'2021' },
+    { id:'3', emoji:'💻', name:'CYLK Creative Tech Ltd.', desc:'Creative collaborations to bring life to their main character. Concept character intended to be rigged for game studio use.', year:'2022' },
+    { id:'4', emoji:'🎸', name:'GaijinCard', desc:'Previously known as Awagii, a Japanese Rock artist. Collaborated for their album art.', year:'2023' },
+    { id:'5', emoji:'🎮', name:'Dean-a-ling', desc:'Twitch streamer. Collaborated on a half-body fan art of a Genshin character (2023), half-body original character in colour (2024), and Twitch assets including emotes (2024).', year:'2023 – 2024' },
+    { id:'6', emoji:'🏘️', name:'Burnaby Neighbourhood House', desc:'Illustration and visual design work supporting community programs and events.', year:'2024' },
+    { id:'7', emoji:'💜', name:'bluesapphic', desc:'Character design used as their Twitch asset.', year:'2024' },
+    { id:'8', emoji:'🐉', name:'K.L. Illustration', desc:'DND character illustration for anniversary.', year:'2024' },
+  ];
+  const defaultTiers = [
+    { id:'1', name:'Sketch / Lineart', desc:'Black & white, single character', price:'from $45 CAD' },
+    { id:'2', name:'Full Illustration', desc:'Full colour, detailed background', price:'from $120 CAD' },
+    { id:'3', name:'Animated Asset', desc:'Looping GIF or stream overlay', price:'from $200 CAD' },
+    { id:'4', name:'Character Sheet', desc:'Full ref with expressions & poses', price:'from $250 CAD' },
+  ];
+
+  // ── In-memory state (synced from Firestore) ──
+  window.fbPortfolio  = [...defaultPortfolio];
+  window.fbPrints     = [...defaultPrints];
+  window.fbPartners   = [...defaultPartners];
+  window.fbTiers      = [...defaultTiers];
+  window.fbCommOpen   = true;
+
+  // ── Helpers ──
+  const bgs = [
+    'linear-gradient(135deg,#9490A8,#3D3560)',
+    'linear-gradient(160deg,#6E7D8A,#3D5260)',
+    'linear-gradient(160deg,#C4736A,#2E4A42)',
+    'linear-gradient(160deg,#3D3560,#6E7D8A)',
+  ];
+
+  function toast(msg) {
+    const t = document.getElementById('toast') || document.getElementById('admin-toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // ── Seed Firestore if empty ──
+  async function seedIfEmpty(colName, defaults) {
+    const snap = await getDocs(collection(db, colName));
+    if (snap.empty) {
+      for (const item of defaults) {
+        await setDoc(doc(db, colName, String(item.id)), item);
+      }
+    }
+  }
+
+  // ── Load all data from Firestore ──
+  async function loadAll() {
+    await Promise.all([
+      seedIfEmpty('portfolio', defaultPortfolio),
+      seedIfEmpty('prints', defaultPrints),
+      seedIfEmpty('partners', defaultPartners),
+      seedIfEmpty('tiers', defaultTiers),
+    ]);
+
+    // Portfolio
+    onSnapshot(collection(db, 'portfolio'), snap => {
+      window.fbPortfolio = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if (document.getElementById('admin-work-grid')) renderAdminPortfolio();
+      document.getElementById('porto-count').textContent = window.fbPortfolio.length;
+    });
+
+    // Prints
+    onSnapshot(collection(db, 'prints'), snap => {
+      window.fbPrints = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if (document.getElementById('prints-tbody')) renderAdminPrints();
+    });
+
+    // Partners
+    onSnapshot(collection(db, 'partners'), snap => {
+      window.fbPartners = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => String(a.year).localeCompare(String(b.year)));
+      if (document.getElementById('partner-cards-grid')) renderAdminPartners();
+    });
+
+    // Commission settings
+    onSnapshot(collection(db, 'settings'), snap => {
+      snap.docs.forEach(d => {
+        if (d.id === 'commissions') {
+          window.fbCommOpen = d.data().open ?? true;
+          syncCommUI(window.fbCommOpen);
+        }
+      });
+    });
+
+    // Tiers
+    onSnapshot(collection(db, 'tiers'), snap => {
+      window.fbTiers = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => String(a.id).localeCompare(String(b.id)));
+    });
+  }
+
+  loadAll();
+
+  // ── Sync commission UI ──
+  function syncCommUI(isOpen) {
+    ['comm-toggle-main','comm-toggle-overview'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.checked = isOpen;
+    });
+    const dot  = document.getElementById('comm-dot');
+    const text = document.getElementById('comm-text');
+    const stat = document.getElementById('overview-comm-status');
+    if (dot)  { dot.className = 'cstatus-dot ' + (isOpen ? 'open' : 'closed'); }
+    if (text)  text.textContent = isOpen ? 'Open' : 'Closed';
+    if (stat)  stat.textContent = isOpen ? 'Open' : 'Closed';
+  }
+
+  // ── Admin login ──
+  window.adminLogin = function() {
+    const pw = document.getElementById('admin-password').value;
+    if (pw === 'jiomie2025') {
+      document.getElementById('admin-login').style.display = 'none';
+      document.getElementById('admin-dash').style.display = 'block';
+      renderAdminPortfolio();
+      renderAdminPrints();
+      renderAdminPartners();
+    } else {
+      const err = document.getElementById('admin-error');
+      err.style.display = 'block';
+      document.getElementById('admin-password').value = '';
+      setTimeout(() => err.style.display = 'none', 3000);
+    }
+  };
+
+  window.adminLogout = function() {
+    document.getElementById('admin-dash').style.display = 'none';
+    document.getElementById('admin-login').style.display = 'flex';
+    document.getElementById('admin-password').value = '';
+  };
+
+  // ── Render admin portfolio ──
+  function renderAdminPortfolio(filter = 'all') {
+    const grid = document.getElementById('admin-work-grid');
+    if (!grid) return;
+    const items = filter === 'all' ? window.fbPortfolio : window.fbPortfolio.filter(i => i.category === filter);
+    grid.innerHTML = items.map(item => `
+      <div class="admin-work-card" data-id="${item.id}">
+        <div class="admin-work-thumb" style="background:${item.bg || bgs[0]}">
+          <span style="font-size:2.5rem;">${item.emoji || '🎨'}</span>
+          <div class="admin-work-actions">
+            <button class="admin-action-btn" onclick="window.editWork('${item.id}')">Edit</button>
+            <button class="admin-action-btn danger" onclick="window.deleteWork('${item.id}')">Remove</button>
+          </div>
+        </div>
+        <div class="admin-work-meta">
+          <div class="admin-work-name">${item.title}</div>
+          <div class="admin-work-tags">
+            <span class="admin-tag">${item.category}</span>
+            <span class="admin-tag ${item.category === 'animated' ? 'anim' : ''}">${item.year}</span>
+            <span class="admin-tag ${item.status}">${item.status}</span>
+          </div>
+        </div>
+      </div>`).join('');
+    document.getElementById('porto-count').textContent = window.fbPortfolio.length;
+  }
+
+  window.adminFilterWork = function(type, btn) {
+    document.querySelectorAll('.admin-filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderAdminPortfolio(type);
+  };
+
+  window.deleteWork = async function(id) {
+    await deleteDoc(doc(db, 'portfolio', String(id)));
+    toast('Item removed');
+  };
+
+  window.editWork = function(id) {
+    const item = window.fbPortfolio.find(i => String(i.id) === String(id));
+    if (!item) return;
+    document.getElementById('add-title').value = item.title;
+    document.getElementById('add-year').value = item.year;
+    document.getElementById('add-category').value = item.category;
+    document.getElementById('add-status').value = item.status;
+    document.getElementById('add-preview-emoji').textContent = item.emoji;
+    document.getElementById('add-modal').classList.add('open');
+  };
+
+  window.saveWork = async function(status) {
+    const title    = document.getElementById('add-title').value.trim() || 'Untitled';
+    const year     = document.getElementById('add-year').value.trim() || '2025';
+    const category = document.getElementById('add-category').value;
+    const emoji    = document.getElementById('add-preview-emoji').textContent === '🖼' ? '🎨' : document.getElementById('add-preview-emoji').textContent;
+    const id       = String(Date.now());
+    await setDoc(doc(db, 'portfolio', id), { id, title, year, category, status, emoji, bg: bgs[Math.floor(Math.random() * bgs.length)] });
+    document.getElementById('add-modal').classList.remove('open');
+    document.getElementById('add-title').value = '';
+    document.getElementById('add-year').value  = '';
+    document.getElementById('add-preview-emoji').textContent = '🖼';
+    toast(status === 'published' ? 'Work published ✓' : 'Saved as draft ✓');
+  };
+
+  // ── Render admin prints ──
+  function renderAdminPrints() {
+    const tbody = document.getElementById('prints-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = window.fbPrints.map(item => `
+      <tr>
+        <td><div class="table-thumb" style="background:${item.bg}">${item.emoji}</div></td>
+        <td style="color:#FAF7F2;">${item.title}</td>
+        <td><input class="price-input" value="${item.price}" onchange="window.updatePrintPrice('${item.id}', this.value)" onfocus="this.select()"></td>
+        <td style="color:rgba(250,247,242,0.5);font-size:0.8rem;">${item.sizes}</td>
+        <td>
+          <label class="toggle-switch">
+            <input type="checkbox" ${item.published ? 'checked' : ''} onchange="window.togglePrint('${item.id}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </td>
+        <td><button class="admin-action-btn danger" onclick="window.deletePrint('${item.id}')">Remove</button></td>
+      </tr>`).join('');
+  }
+
+  window.updatePrintPrice = async function(id, price) {
+    const item = window.fbPrints.find(i => String(i.id) === String(id));
+    if (item) await setDoc(doc(db, 'prints', String(id)), { ...item, price });
+    toast('Price saved ✓');
+  };
+
+  window.togglePrint = async function(id, val) {
+    const item = window.fbPrints.find(i => String(i.id) === String(id));
+    if (item) await setDoc(doc(db, 'prints', String(id)), { ...item, published: val });
+    toast(val ? 'Print published' : 'Print hidden');
+  };
+
+  window.deletePrint = async function(id) {
+    await deleteDoc(doc(db, 'prints', String(id)));
+    toast('Print removed');
+  };
+
+  window.savePrint = async function() {
+    const title = document.getElementById('print-title').value.trim() || 'New Print';
+    const price = document.getElementById('print-price').value.trim() || '$0 CAD';
+    const sizes = document.getElementById('print-sizes').value.trim() || 'A4';
+    const emoji = document.getElementById('print-preview-emoji').textContent === '🖼' ? '🖼' : document.getElementById('print-preview-emoji').textContent;
+    const id    = String(Date.now());
+    await setDoc(doc(db, 'prints', id), { id, title, price, sizes, published: true, emoji, bg: bgs[0] });
+    document.getElementById('print-modal').classList.remove('open');
+    ['print-title','print-price','print-sizes'].forEach(i => document.getElementById(i).value = '');
+    toast('Print added to shop ✓');
+  };
+
+  // ── Render admin partners ──
+  function renderAdminPartners() {
+    const grid = document.getElementById('partner-cards-grid');
+    if (!grid) return;
+    grid.innerHTML = window.fbPartners.map(item => `
+      <div class="admin-partner-card">
+        <div class="admin-partner-card-actions">
+          <button class="icon-btn danger" onclick="window.deletePartner('${item.id}')">✕</button>
+        </div>
+        <div class="admin-partner-emoji">${item.emoji}</div>
+        <div class="admin-partner-name">${item.name}</div>
+        <div class="admin-partner-desc">${item.desc}</div>
+        <div class="admin-partner-year">${item.year}</div>
+      </div>`).join('');
+  }
+
+  window.deletePartner = async function(id) {
+    await deleteDoc(doc(db, 'partners', String(id)));
+    toast('Partnership removed');
+  };
+
+  window.savePartner = async function() {
+    const name  = document.getElementById('partner-name').value.trim() || 'New Partner';
+    const emoji = document.getElementById('partner-emoji').value.trim() || '✦';
+    const desc  = document.getElementById('partner-desc').value.trim() || '';
+    const year  = document.getElementById('partner-year').value.trim() || '2025';
+    const id    = String(Date.now());
+    await setDoc(doc(db, 'partners', id), { id, name, emoji, desc, year });
+    document.getElementById('partner-modal').classList.remove('open');
+    ['partner-name','partner-emoji','partner-desc','partner-year'].forEach(i => document.getElementById(i).value = '');
+    toast('Partnership added ✓');
+  };
+
+  // ── Commission toggle ──
+  window.syncCommToggle = async function(el) {
+    const isOpen = el.checked;
+    await setDoc(doc(db, 'settings', 'commissions'), { open: isOpen });
+    toast('Commissions ' + (isOpen ? 'opened' : 'closed'));
+  };
+
+  // ── Modals ──
+  window.openAddModal     = () => document.getElementById('add-modal').classList.add('open');
+  window.openPrintModal   = () => document.getElementById('print-modal').classList.add('open');
+  window.openPartnerModal = () => document.getElementById('partner-modal').classList.add('open');
+  window.closeModal       = id => document.getElementById(id).classList.remove('open');
+
+  document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+  });
+
+  // ── Image previews ──
+  window.previewUpload = function(event, imgId, emojiId) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById(imgId);
+      const emoji = document.getElementById(emojiId);
+      img.src = e.target.result;
+      img.style.display = 'block';
+      if (emoji) emoji.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  };
+
+  window.previewAbout = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById('about-preview-img');
+      const emoji = document.getElementById('about-preview-emoji');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      if (emoji) emoji.style.display = 'none';
+      toast('Portrait updated ✓');
+    };
+    reader.readAsDataURL(file);
+  };
+
+  window.handleDrop = function(event) {
+    const files = event.target.files;
+    if (!files.length) return;
+    Array.from(files).forEach(async (file, i) => {
+      const id = String(Date.now() + i);
+      await setDoc(doc(db, 'portfolio', id), {
+        id, title: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
+        year: new Date().getFullYear().toString(),
+        category: 'illustration', status: 'draft',
+        emoji: '🖼', bg: bgs[Math.floor(Math.random() * bgs.length)]
+      });
+    });
+    setTimeout(() => toast(files.length + ' item(s) added as draft ✓'), 400);
+  };
+
+  // ── Drag over styles ──
+  const dz = document.getElementById('drop-zone');
+  if (dz) {
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+    dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); });
+  }
+
+  // ── Toast ──
+  window.showToast = function(msg) {
+    const t = document.getElementById('toast') || document.getElementById('admin-toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  };
+
+  // ── Admin section nav ──
+  window.adminSection = function(id, btn) {
+    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+    document.getElementById('admin-' + id).classList.add('active');
+    if (btn) btn.classList.add('active');
+  };
+
+  window.exitAdmin = function() {
+    document.getElementById('admin-panel') && document.getElementById('admin-panel').classList.remove('visible');
+    document.querySelector('nav').style.display = '';
+    document.querySelector('footer').style.display = '';
+    window.showPage('home');
+  };
+
+  window.toggleGalleryDark = function(btn) {
+    const page = document.getElementById('page-portfolio');
+    const isDark = page.classList.toggle('dark-gallery');
+    btn.innerHTML = isDark ? '<span class="toggle-icon">○</span> Light Mode' : '<span class="toggle-icon">◐</span> Dark Mode';
+  };
+
+</script>
+</body>
+</html>
