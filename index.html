@@ -3650,28 +3650,6 @@
   }
 
   // ── Admin login ──
-  window.adminLogin = function() {
-    const pw = document.getElementById('admin-password').value;
-    if (pw === 'jiomie2025') {
-      document.getElementById('admin-login').style.display = 'none';
-      document.getElementById('admin-dash').style.display = 'block';
-      renderAdminPortfolio();
-      renderAdminPrints();
-      renderAdminPartners();
-    } else {
-      const err = document.getElementById('admin-error');
-      err.style.display = 'block';
-      document.getElementById('admin-password').value = '';
-      setTimeout(() => err.style.display = 'none', 3000);
-    }
-  };
-
-  window.adminLogout = function() {
-    document.getElementById('admin-dash').style.display = 'none';
-    document.getElementById('admin-login').style.display = 'flex';
-    document.getElementById('admin-password').value = '';
-  };
-
   // ── Render admin portfolio ──
   function renderAdminPortfolio(filter = 'all') {
     const grid = document.getElementById('admin-work-grid');
@@ -4055,6 +4033,12 @@
       document.getElementById('admin-password').value = '';
       setTimeout(() => err.style.display = 'none', 3000);
     }
+  };
+
+  window.adminLogout = function() {
+    document.getElementById('admin-dash').style.display = 'none';
+    document.getElementById('admin-login').style.display = 'flex';
+    document.getElementById('admin-password').value = '';
   };
 
   // ── Analytics tracking ──
