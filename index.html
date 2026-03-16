@@ -609,7 +609,8 @@
   .dark-shop .tier-row { border-color: rgba(255,255,255,0.06); }
   .dark-shop .tier-name { color: #EBEEE4; }
   .dark-shop .tier-desc { color: rgba(255,255,255,0.4); }
-  .dark-shop .comm-status { background: rgba(255,255,255,0.05) !important; }
+  .dark-shop .comm-status { background: #d4edda !important; color: #2d6a4f !important; }
+  .dark-shop .status-dot { background: #2d6a4f !important; }
   .dark-shop .partners-intro h3 { color: #F0EEF8; }
   .dark-shop .partners-intro p { color: rgba(255,255,255,0.45); }
   .dark-shop .btn-outline { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
@@ -2337,33 +2338,8 @@
     </div>
     <div class="partners-grid" id="public-partners-grid">
       <div class="partner-card">
-        <div class="partner-name">Artrinary</div>
-        <div class="partner-desc">Twitch streamer. Created 6 Twitch assets — emotes.</div>
-        <div class="partner-year">2021</div>
-      </div>
-      <div class="partner-card">
-        <div class="partner-name">Sartsy</div>
-        <div class="partner-desc">Twitch streamer. Logo design for LLC.</div>
-        <div class="partner-year">2021</div>
-      </div>
-      <div class="partner-card">
-        <div class="partner-name">CYLK Creative Tech Ltd.</div>
-        <div class="partner-desc">Creative collaborations to bring life to their main character. Concept character intended to be rigged for game studio use.</div>
-        <div class="partner-year">2022</div>
-      </div>
-      <div class="partner-card">
-        <div class="partner-name">GaijinCard</div>
-        <div class="partner-desc">Previously known as Awagii, a Japanese Rock artist. Collaborated for their album art.</div>
-        <div class="partner-year">2023</div>
-      </div>
-      <div class="partner-card">
-        <div class="partner-name">Dean-a-ling</div>
-        <div class="partner-desc">Twitch streamer. Collaborated on a half-body fan art of a Genshin character (2023), half-body original character in colour (2024), and Twitch assets including emotes (2024).</div>
-        <div class="partner-year">2023 – 2024</div>
-      </div>
-      <div class="partner-card">
-        <div class="partner-name">Burnaby Neighbourhood House</div>
-        <div class="partner-desc">Illustration and visual design work supporting community programs and events.</div>
+        <div class="partner-name">K.L. Illustration</div>
+        <div class="partner-desc">DND character illustration for anniversary.</div>
         <div class="partner-year">2024</div>
       </div>
       <div class="partner-card">
@@ -2372,9 +2348,34 @@
         <div class="partner-year">2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-name">K.L. Illustration</div>
-        <div class="partner-desc">DND character illustration for anniversary.</div>
+        <div class="partner-name">Burnaby Neighbourhood House</div>
+        <div class="partner-desc">Illustration and visual design work supporting community programs and events.</div>
         <div class="partner-year">2024</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-name">Dean-a-ling</div>
+        <div class="partner-desc">Twitch streamer. Collaborated on a half-body fan art of a Genshin character (2023), half-body original character in colour (2024), and Twitch assets including emotes (2024).</div>
+        <div class="partner-year">2023 – 2024</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-name">GaijinCard</div>
+        <div class="partner-desc">Previously known as Awagii, a Japanese Rock artist. Collaborated for their album art.</div>
+        <div class="partner-year">2023</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-name">CYLK Creative Tech Ltd.</div>
+        <div class="partner-desc">Creative collaborations to bring life to their main character. Concept character intended to be rigged for game studio use.</div>
+        <div class="partner-year">2022</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-name">Sartsy</div>
+        <div class="partner-desc">Twitch streamer. Logo design for LLC.</div>
+        <div class="partner-year">2021</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-name">Artrinary</div>
+        <div class="partner-desc">Twitch streamer. Created 6 Twitch assets — emotes.</div>
+        <div class="partner-year">2021</div>
       </div>
     </div>
     <a href="#" class="btn-outline" onclick="showPage('about')">Get in Touch for Collabs →</a>
@@ -3474,6 +3475,7 @@
       <li><a href="#" onclick="showPage('shop')">Shop Prints</a></li>
       <li><a href="#" onclick="showPage('shop');showTab('commissions')">Commissions</a></li>
       <li><a href="#" onclick="showPage('about')">About</a></li>
+      <li><a href="#" onclick="showPage('admin')" style="color:rgba(255,255,255,0.2);font-size:0.7rem;letter-spacing:1px;">Admin</a></li>
     </ul>
   </div>
   <div>
@@ -3536,7 +3538,8 @@
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
-    document.getElementById('nav-' + id).classList.add('active');
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
     // Dark nav + body for About page
     const isAbout = id === 'about';
     document.body.classList.toggle('on-about', isAbout);
@@ -3642,7 +3645,7 @@
   // ── In-memory state (synced from Firestore) ──
   window.fbPortfolio  = [...defaultPortfolio];
   window.fbPrints     = [...defaultPrints];
-  window.fbPartners   = [...defaultPartners];
+  window.fbPartners   = [...defaultPartners].sort((a,b)=>String(b.year).localeCompare(String(a.year)));
   window.fbTiers      = [...defaultTiers];
   window.fbCommOpen   = true;
 
@@ -3673,8 +3676,6 @@
   }
 
   // ── Load all data from Firestore ──
-  async 
-
   loadAll();
   // Render defaults immediately
   renderHomeRecentWork(window.fbPortfolio);
@@ -3738,19 +3739,6 @@
     document.getElementById('add-modal').classList.add('open');
   };
 
-  window.saveWork = async function(status) {
-    const title    = document.getElementById('add-title').value.trim() || 'Untitled';
-    const year     = document.getElementById('add-year').value.trim() || '2025';
-    const category = document.getElementById('add-category').value;
-    const emoji    = document.getElementById('add-preview-emoji').textContent === '🖼' ? '🎨' : document.getElementById('add-preview-emoji').textContent;
-    const id       = String(Date.now());
-    await setDoc(doc(db, 'portfolio', id), { id, title, year, category, status, emoji, bg: bgs[Math.floor(Math.random() * bgs.length)] });
-    document.getElementById('add-modal').classList.remove('open');
-    document.getElementById('add-title').value = '';
-    document.getElementById('add-year').value  = '';
-    document.getElementById('add-preview-emoji').textContent = '🖼';
-    toast(status === 'published' ? 'Work published ✓' : 'Saved as draft ✓');
-  };
 
   // ── Render admin prints ──
   function renderAdminPrints() {
@@ -3787,18 +3775,6 @@
   window.deletePrint = async function(id) {
     await deleteDoc(doc(db, 'prints', String(id)));
     toast('Print removed');
-  };
-
-  window.savePrint = async function() {
-    const title = document.getElementById('print-title').value.trim() || 'New Print';
-    const price = document.getElementById('print-price').value.trim() || '$0 CAD';
-    const sizes = document.getElementById('print-sizes').value.trim() || 'A4';
-    const emoji = document.getElementById('print-preview-emoji').textContent === '🖼' ? '🖼' : document.getElementById('print-preview-emoji').textContent;
-    const id    = String(Date.now());
-    await setDoc(doc(db, 'prints', id), { id, title, price, sizes, published: true, emoji, bg: bgs[0] });
-    document.getElementById('print-modal').classList.remove('open');
-    ['print-title','print-price','print-sizes'].forEach(i => document.getElementById(i).value = '');
-    toast('Print added to shop ✓');
   };
 
   // ── Render admin partners ──
@@ -3861,50 +3837,7 @@
     m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
   });
 
-  // ── Image previews ──
-  window.previewUpload = function(event, imgId, emojiId) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.getElementById(imgId);
-      const emoji = document.getElementById(emojiId);
-      img.src = e.target.result;
-      img.style.display = 'block';
-      if (emoji) emoji.style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  };
 
-  window.previewAbout = function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.getElementById('about-preview-img');
-      const emoji = document.getElementById('about-preview-emoji');
-      img.src = e.target.result;
-      img.style.display = 'block';
-      if (emoji) emoji.style.display = 'none';
-      toast('Portrait updated ✓');
-    };
-    reader.readAsDataURL(file);
-  };
-
-  window.handleDrop = function(event) {
-    const files = event.target.files;
-    if (!files.length) return;
-    Array.from(files).forEach(async (file, i) => {
-      const id = String(Date.now() + i);
-      await setDoc(doc(db, 'portfolio', id), {
-        id, title: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
-        year: new Date().getFullYear().toString(),
-        category: 'illustration', status: 'draft',
-        emoji: '🖼', bg: bgs[Math.floor(Math.random() * bgs.length)]
-      });
-    });
-    setTimeout(() => toast(files.length + ' item(s) added as draft ✓'), 400);
-  };
 
   // ── Drag over styles ──
   const dz = document.getElementById('drop-zone');
@@ -3923,13 +3856,6 @@
     setTimeout(() => t.classList.remove('show'), 2800);
   };
 
-  // ── Admin section nav ──
-  window.adminSection = function(id, btn) {
-    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
-    document.getElementById('admin-' + id).classList.add('active');
-    if (btn) btn.classList.add('active');
-  };
 
   window.exitAdmin = function() {
     document.getElementById('admin-panel') && document.getElementById('admin-panel').classList.remove('visible');
@@ -3940,38 +3866,8 @@
 
   // toggleGalleryDark and toggleShopDark defined in main script block above
 
-  window.previewUpload = async function(event, imgId, emojiId) {
-    const file=event.target.files[0]; if(!file) return;
-    const img=document.getElementById(imgId), emoji=document.getElementById(emojiId);
-    if(img){img.src=URL.createObjectURL(file);img.style.display='block';img._pendingFile=file;}
-    if(emoji) emoji.style.display='none';
-    toast('Image ready — click Save/Publish to upload ✓');
-  };
 
-  window.previewAbout = async function(event) {
-    const file=event.target.files[0]; if(!file) return;
-    const img=document.getElementById('about-preview-img'),emoji=document.getElementById('about-preview-emoji');
-    img.src=URL.createObjectURL(file); img.style.display='block'; if(emoji) emoji.style.display='none';
-    toast('Uploading portrait…');
-    try { img.src=await uploadToCloudinary(file); toast('Portrait uploaded ✓'); } catch(e){toast('Upload failed');}
-  };
-
-  window.handleDrop = async function(event) {
-    const files=Array.from(event.target.files); if(!files.length) return;
-    toast(`Uploading ${files.length} image${files.length>1?'s':''}…`);
-    let done=0;
-    for(const file of files){
-      try{
-        const url=await uploadToCloudinary(file,pct=>toast(`Uploading ${file.name} — ${pct}%`));
-        const id=String(Date.now()+Math.random());
-        await setDoc(doc(db,'portfolio',id),{id,title:file.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' '),year:new Date().getFullYear().toString(),category:'illustration',status:'draft',emoji:'🖼',bg:bgs[Math.floor(Math.random()*bgs.length)],imgSrc:url});
-        done++; toast(`${done}/${files.length} uploaded ✓`);
-      }catch(e){toast(`Failed: ${file.name}`);}
-    }
-    toast(`${done} image${done!==1?'s':''} added to portfolio ✓`);
-  };
-
-  // ── Public renders ──
+// ── Public renders ──
 
 
   function syncCommUI(isOpen){
@@ -3984,35 +3880,6 @@
     if(ps){ps.innerHTML=`<div class="status-dot" style="background:${isOpen?'#2d6a4f':'#c0392b'};"></div> Commissions ${isOpen?'Open':'Closed'}`;ps.style.background=isOpen?'#d4edda':'#fde8e8';ps.style.color=isOpen?'#2d6a4f':'#c0392b';}
   }
 
-  // ── saveWork with Cloudinary ──
-  window.saveWork = async function(status){
-    const title=document.getElementById('add-title').value.trim()||'Untitled';
-    const year=document.getElementById('add-year').value.trim()||'2025';
-    const category=document.getElementById('add-category').value;
-    const imgEl=document.getElementById('add-preview-img');
-    const emojiEl=document.getElementById('add-preview-emoji');
-    const emoji=emojiEl.textContent==='🖼'?'🎨':emojiEl.textContent;
-    const id=String(Date.now());
-    const data={id,title,year,category,status,emoji,bg:bgs[Math.floor(Math.random()*bgs.length)]};
-    if(imgEl&&imgEl._pendingFile){toast('Uploading image…');try{data.imgSrc=await uploadToCloudinary(imgEl._pendingFile,pct=>toast(`Uploading… ${pct}%`));}catch(e){toast('Image upload failed');}}
-    await setDoc(doc(db,'portfolio',id),data);
-    document.getElementById('add-modal').classList.remove('open');
-    document.getElementById('add-title').value='';document.getElementById('add-year').value='';
-    if(imgEl){imgEl.src='';imgEl.style.display='none';imgEl._pendingFile=null;}
-    emojiEl.textContent='🖼';if(emojiEl)emojiEl.style.display='';
-    toast(status==='published'?'Work published ✓':'Saved as draft ✓');
-  };
-
-  // ── savePrint with Cloudinary ──
-  window.savePrint = async function(){
-    const title=document.getElementById('print-title').value.trim()||'New Print';
-    const price=document.getElementById('print-price').value.trim()||'$0 CAD';
-    const sizes=document.getElementById('print-sizes').value.trim()||'A4';
-    const imgEl=document.getElementById('print-preview-img');
-    const emojiEl=document.getElementById('print-preview-emoji');
-    const emoji=emojiEl&&emojiEl.textContent!=='🖼'?emojiEl.textContent:'🖼';
-    const id=String(Date.now());
-    const data={id,title,price,sizes,published:true,emoji,bg:bgs[0]};
     if(imgEl&&imgEl._pendingFile){toast('Uploading image…');try{data.imgSrc=await uploadToCloudinary(imgEl._pendingFile,pct=>toast(`Uploading… ${pct}%`));}catch(e){toast('Image upload failed');}}
     await setDoc(doc(db,'prints',id),data);
     document.getElementById('print-modal').classList.remove('open');
@@ -4023,36 +3890,29 @@
   };
 
   // ── savePrintRow ──
-  window.savePrintRow = async function(id){
-    const item=window.fbPrints.find(i=>String(i.id)===String(id)); if(!item) return;
-    const title=document.getElementById('ptitle-'+id)?.value.trim()||item.title;
-    const price=document.getElementById('pprice-'+id)?.value.trim()||item.price;
-    const sizes=document.getElementById('psizes-'+id)?.value.trim()||item.sizes;
-    await setDoc(doc(db,'prints',String(id)),{...item,title,price,sizes});
-    toast('Print saved ✓');
-  };
-
-  // ── saveWorkTitle ──
-  window.saveWorkTitle = async function(id){
-    const input=document.getElementById('wtitle-'+id); if(!input) return;
-    const item=window.fbPortfolio.find(i=>String(i.id)===String(id));
-    if(item){await setDoc(doc(db,'portfolio',String(id)),{...item,title:input.value.trim()});toast('Title saved ✓');}
+  window.savePrintRow = async function(id) {
+    const item = window.fbPrints.find(i => String(i.id) === String(id)); if (!item) return;
+    const title = document.getElementById('t-prtitle-'+id)?.value.trim() || item.title;
+    const price = document.getElementById('t-prprice-'+id)?.value.trim() || item.price;
+    const sizes = document.getElementById('t-prsizes-'+id)?.value.trim() || item.sizes;
+    await setDoc(doc(db,'prints',String(id)), {...item, title, price, sizes});
+    toast('Saved ✓');
   };
 
   // ── saveTitleRow ──
-  window.saveTitleRow = async function(type,id){
-    if(type==='portfolio'){
-      const item=window.fbPortfolio.find(i=>String(i.id)===String(id)); if(!item) return;
-      const title=document.getElementById('t-ptitle-'+id)?.value.trim()||item.title;
-      const year=document.getElementById('t-pyear-'+id)?.value.trim()||item.year;
-      const cat=document.getElementById('t-pcat-'+id)?.value||item.category;
-      await setDoc(doc(db,'portfolio',String(id)),{...item,title,year,category:cat});
-    }else{
-      const item=window.fbPrints.find(i=>String(i.id)===String(id)); if(!item) return;
-      const title=document.getElementById('t-prtitle-'+id)?.value.trim()||item.title;
-      const price=document.getElementById('t-prprice-'+id)?.value.trim()||item.price;
-      const sizes=document.getElementById('t-prsizes-'+id)?.value.trim()||item.sizes;
-      await setDoc(doc(db,'prints',String(id)),{...item,title,price,sizes});
+  window.saveTitleRow = async function(type, id) {
+    if (type === 'portfolio') {
+      const item = window.fbPortfolio.find(i => String(i.id) === String(id)); if (!item) return;
+      const title    = document.getElementById('t-ptitle-'+id)?.value.trim() || item.title;
+      const year     = document.getElementById('t-pyear-'+id)?.value.trim() || item.year;
+      const category = document.getElementById('t-pcat-'+id)?.value || item.category;
+      await setDoc(doc(db,'portfolio',String(id)), {...item, title, year, category});
+    } else {
+      const item = window.fbPrints.find(i => String(i.id) === String(id)); if (!item) return;
+      const title = document.getElementById('t-prtitle-'+id)?.value.trim() || item.title;
+      const price = document.getElementById('t-prprice-'+id)?.value.trim() || item.price;
+      const sizes = document.getElementById('t-prsizes-'+id)?.value.trim() || item.sizes;
+      await setDoc(doc(db,'prints',String(id)), {...item, title, price, sizes});
     }
     toast('Saved ✓');
   };
@@ -4363,7 +4223,7 @@
       renderPublicPrints(window.fbPrints);
     });
     onSnapshot(collection(db,'partners'),snap=>{
-      window.fbPartners=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.year).localeCompare(String(b.year)));
+      window.fbPartners=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.year).localeCompare(String(a.year)));
       if(document.getElementById('partner-cards-grid'))renderAdminPartners();
       renderPublicPartners(window.fbPartners);
     });
