@@ -2236,49 +2236,41 @@
     </div>
     <div class="partners-grid">
       <div class="partner-card">
-        <div class="partner-logo">✨</div>
         <div class="partner-name">Artrinary</div>
         <div class="partner-desc">Twitch streamer. Created 6 Twitch assets — emotes.</div>
         <div class="partner-year">2021</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🖊️</div>
         <div class="partner-name">Sartsy</div>
         <div class="partner-desc">Twitch streamer. Logo design for LLC.</div>
         <div class="partner-year">2021</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">💻</div>
         <div class="partner-name">CYLK Creative Tech Ltd.</div>
         <div class="partner-desc">Creative collaborations to bring life to their main character. Concept character intended to be rigged for game studio use.</div>
         <div class="partner-year">2022</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🎸</div>
         <div class="partner-name">GaijinCard</div>
         <div class="partner-desc">Previously known as Awagii, a Japanese Rock artist. Collaborated for their album art.</div>
         <div class="partner-year">2023</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🎮</div>
         <div class="partner-name">Dean-a-ling</div>
         <div class="partner-desc">Twitch streamer. Collaborated on a half-body fan art of a Genshin character (2023), half-body original character in colour (2024), and Twitch assets including emotes (2024).</div>
         <div class="partner-year">2023 – 2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🏘️</div>
         <div class="partner-name">Burnaby Neighbourhood House</div>
         <div class="partner-desc">Illustration and visual design work supporting community programs and events.</div>
         <div class="partner-year">2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">💜</div>
         <div class="partner-name">bluesapphic</div>
         <div class="partner-desc">Character design used as their Twitch asset.</div>
         <div class="partner-year">2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🐉</div>
         <div class="partner-name">K.L. Illustration</div>
         <div class="partner-desc">DND character illustration for anniversary.</div>
         <div class="partner-year">2024</div>
@@ -2925,6 +2917,15 @@
         <button class="sidebar-item" onclick="adminSection('about', this)">
           <span class="sidebar-icon">◻</span> About Page
         </button>
+        <button class="sidebar-item" onclick="adminSection('titles', this)">
+          <span class="sidebar-icon">◻</span> Edit Titles
+        </button>
+        <button class="sidebar-item" onclick="adminSection('password', this)">
+          <span class="sidebar-icon">◻</span> Password
+        </button>
+        <button class="sidebar-item" onclick="adminSection('analytics', this)">
+          <span class="sidebar-icon">◻</span> Client Tracker
+        </button>
       </aside>
 
       <!-- Main Content -->
@@ -3177,6 +3178,89 @@
                 ⬆ Upload new portrait image
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- ── Edit Titles ── -->
+        <div class="admin-section" id="admin-titles">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">Edit <em>Titles</em></div>
+              <div class="admin-section-sub">Rename portfolio pieces and shop prints</div>
+            </div>
+          </div>
+
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Portfolio Titles</div>
+          <table class="admin-table" style="margin-bottom:2.5rem;" id="titles-portfolio-table">
+            <thead><tr><th>Current</th><th>Title</th><th>Year</th><th>Category</th><th></th></tr></thead>
+            <tbody id="titles-portfolio-body"></tbody>
+          </table>
+
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Shop Print Titles</div>
+          <table class="admin-table" id="titles-prints-table">
+            <thead><tr><th>Current</th><th>Title</th><th>Price</th><th>Sizes</th><th></th></tr></thead>
+            <tbody id="titles-prints-body"></tbody>
+          </table>
+        </div>
+
+        <!-- ── Password ── -->
+        <div class="admin-section" id="admin-password">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">Change <em>Password</em></div>
+              <div class="admin-section-sub">Update your admin login password</div>
+            </div>
+          </div>
+          <div style="max-width:400px;">
+            <div class="modal-field">
+              <label class="modal-label">Current Password</label>
+              <input type="password" class="modal-input" id="pw-current" placeholder="Enter current password">
+            </div>
+            <div class="modal-field">
+              <label class="modal-label">New Password</label>
+              <input type="password" class="modal-input" id="pw-new" placeholder="Enter new password">
+            </div>
+            <div class="modal-field">
+              <label class="modal-label">Confirm New Password</label>
+              <input type="password" class="modal-input" id="pw-confirm" placeholder="Repeat new password">
+            </div>
+            <div id="pw-msg" style="font-size:0.8rem;margin-bottom:1rem;display:none;"></div>
+            <button class="btn-admin-primary" onclick="changePassword()">Update Password</button>
+          </div>
+        </div>
+
+        <!-- ── Client Tracker ── -->
+        <div class="admin-section" id="admin-analytics">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">Client <em>Tracker</em></div>
+              <div class="admin-section-sub">Live activity — pages visited and clicks</div>
+            </div>
+            <button class="btn-add" onclick="clearAnalytics()">Clear Log</button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(250,247,242,0.06);margin-bottom:2rem;">
+            <div style="background:#0F0E0D;padding:1.5rem;">
+              <div style="font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:#FAF7F2;" id="at-pageviews">0</div>
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.35);margin-top:0.4rem;">Page Views</div>
+            </div>
+            <div style="background:#0F0E0D;padding:1.5rem;">
+              <div style="font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:#FAF7F2;" id="at-clicks">0</div>
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.35);margin-top:0.4rem;">Total Clicks</div>
+            </div>
+            <div style="background:#0F0E0D;padding:1.5rem;">
+              <div style="font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:#FAF7F2;" id="at-toppage">—</div>
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.35);margin-top:0.4rem;">Top Page</div>
+            </div>
+            <div style="background:#0F0E0D;padding:1.5rem;">
+              <div style="font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:#FAF7F2;" id="at-sessions">0</div>
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.35);margin-top:0.4rem;">Sessions</div>
+            </div>
+          </div>
+
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Live Event Log</div>
+          <div id="analytics-log" style="display:flex;flex-direction:column;gap:0;max-height:500px;overflow-y:auto;border:1px solid rgba(250,247,242,0.06);">
+            <div style="padding:2rem;text-align:center;color:rgba(250,247,242,0.25);font-size:0.85rem;">No events yet — activity will appear here as visitors browse.</div>
           </div>
         </div>
 
@@ -3596,23 +3680,36 @@
     grid.innerHTML = items.map(item => `
       <div class="admin-work-card" data-id="${item.id}">
         <div class="admin-work-thumb" style="background:${item.bg || bgs[0]}">
-          <span style="font-size:2.5rem;">${item.emoji || '🎨'}</span>
+          ${item.imgSrc
+            ? `<img src="${item.imgSrc}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">`
+            : `<span style="font-size:2.5rem;">${item.emoji || '🎨'}</span>`}
           <div class="admin-work-actions">
             <button class="admin-action-btn" onclick="window.editWork('${item.id}')">Edit</button>
             <button class="admin-action-btn danger" onclick="window.deleteWork('${item.id}')">Remove</button>
           </div>
         </div>
         <div class="admin-work-meta">
-          <div class="admin-work-name">${item.title}</div>
-          <div class="admin-work-tags">
+          <input class="price-input" style="width:100%;margin-bottom:6px;background:rgba(255,255,255,0.05);" id="wtitle-${item.id}" value="${item.title}" placeholder="Title">
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
             <span class="admin-tag">${item.category}</span>
             <span class="admin-tag ${item.category === 'animated' ? 'anim' : ''}">${item.year}</span>
             <span class="admin-tag ${item.status}">${item.status}</span>
+            <button class="admin-action-btn" style="margin-left:auto;font-size:0.6rem;padding:0.2rem 0.5rem;" onclick="window.saveWorkTitle('${item.id}')">Save</button>
           </div>
         </div>
       </div>`).join('');
     document.getElementById('porto-count').textContent = window.fbPortfolio.length;
   }
+
+  window.saveWorkTitle = async function(id) {
+    const input = document.getElementById('wtitle-' + id);
+    if (!input) return;
+    const item = window.fbPortfolio.find(i => String(i.id) === String(id));
+    if (item) {
+      await setDoc(doc(db, 'portfolio', String(id)), { ...item, title: input.value.trim() });
+      toast('Title saved ✓');
+    }
+  };
 
   window.adminFilterWork = function(type, btn) {
     document.querySelectorAll('.admin-filter-pill').forEach(b => b.classList.remove('active'));
@@ -3640,13 +3737,19 @@
     const title    = document.getElementById('add-title').value.trim() || 'Untitled';
     const year     = document.getElementById('add-year').value.trim() || '2025';
     const category = document.getElementById('add-category').value;
-    const emoji    = document.getElementById('add-preview-emoji').textContent === '🖼' ? '🎨' : document.getElementById('add-preview-emoji').textContent;
+    const imgEl    = document.getElementById('add-preview-img');
+    const emojiEl  = document.getElementById('add-preview-emoji');
+    const imgSrc   = imgEl && imgEl.style.display !== 'none' && imgEl.src ? imgEl.src : null;
+    const emoji    = emojiEl.textContent === '🖼' ? '🎨' : emojiEl.textContent;
     const id       = String(Date.now());
-    await setDoc(doc(db, 'portfolio', id), { id, title, year, category, status, emoji, bg: bgs[Math.floor(Math.random() * bgs.length)] });
+    const data     = { id, title, year, category, status, emoji, bg: bgs[Math.floor(Math.random() * bgs.length)] };
+    if (imgSrc) data.imgSrc = imgSrc;
+    await setDoc(doc(db, 'portfolio', id), data);
     document.getElementById('add-modal').classList.remove('open');
     document.getElementById('add-title').value = '';
     document.getElementById('add-year').value  = '';
-    document.getElementById('add-preview-emoji').textContent = '🖼';
+    if (imgEl) { imgEl.src = ''; imgEl.style.display = 'none'; }
+    emojiEl.textContent = '🖼';
     toast(status === 'published' ? 'Work published ✓' : 'Saved as draft ✓');
   };
 
@@ -3656,19 +3759,32 @@
     if (!tbody) return;
     tbody.innerHTML = window.fbPrints.map(item => `
       <tr>
-        <td><div class="table-thumb" style="background:${item.bg}">${item.emoji}</div></td>
-        <td style="color:#FAF7F2;">${item.title}</td>
-        <td><input class="price-input" value="${item.price}" onchange="window.updatePrintPrice('${item.id}', this.value)" onfocus="this.select()"></td>
-        <td style="color:rgba(250,247,242,0.5);font-size:0.8rem;">${item.sizes}</td>
+        <td><div class="table-thumb" style="background:${item.bg}">${item.imgSrc ? `<img src="${item.imgSrc}" style="width:44px;height:44px;object-fit:cover;">` : item.emoji}</div></td>
+        <td><input class="price-input" style="width:130px;" id="ptitle-${item.id}" value="${item.title}" placeholder="Title" onfocus="this.select()"></td>
+        <td><input class="price-input" id="pprice-${item.id}" value="${item.price}" placeholder="$0 CAD" onfocus="this.select()"></td>
+        <td><input class="price-input" style="width:100px;" id="psizes-${item.id}" value="${item.sizes}" placeholder="A4, A3" onfocus="this.select()"></td>
         <td>
           <label class="toggle-switch">
             <input type="checkbox" ${item.published ? 'checked' : ''} onchange="window.togglePrint('${item.id}', this.checked)">
             <span class="toggle-slider"></span>
           </label>
         </td>
-        <td><button class="admin-action-btn danger" onclick="window.deletePrint('${item.id}')">Remove</button></td>
+        <td style="display:flex;gap:6px;align-items:center;">
+          <button class="admin-action-btn" onclick="window.savePrintRow('${item.id}')">Save</button>
+          <button class="admin-action-btn danger" onclick="window.deletePrint('${item.id}')">Remove</button>
+        </td>
       </tr>`).join('');
   }
+
+  window.savePrintRow = async function(id) {
+    const item  = window.fbPrints.find(i => String(i.id) === String(id));
+    if (!item) return;
+    const title = document.getElementById('ptitle-' + id)?.value.trim() || item.title;
+    const price = document.getElementById('pprice-' + id)?.value.trim() || item.price;
+    const sizes = document.getElementById('psizes-' + id)?.value.trim() || item.sizes;
+    await setDoc(doc(db, 'prints', String(id)), { ...item, title, price, sizes });
+    toast('Print saved ✓');
+  };
 
   window.updatePrintPrice = async function(id, price) {
     const item = window.fbPrints.find(i => String(i.id) === String(id));
@@ -3830,6 +3946,184 @@
     const page = document.getElementById('page-portfolio');
     const isDark = page.classList.toggle('dark-gallery');
     btn.innerHTML = isDark ? '<span class="toggle-icon">○</span> Light Mode' : '<span class="toggle-icon">◐</span> Dark Mode';
+  };
+
+  // ── Edit Titles ──
+  function renderTitlesSection() {
+    const pb = document.getElementById('titles-portfolio-body');
+    const prb = document.getElementById('titles-prints-body');
+    if (pb) {
+      pb.innerHTML = window.fbPortfolio.map(item => `
+        <tr>
+          <td style="color:rgba(250,247,242,0.4);font-size:0.8rem;min-width:120px;">${item.title}</td>
+          <td><input class="price-input" style="width:160px;" id="t-ptitle-${item.id}" value="${item.title}" placeholder="Title"></td>
+          <td><input class="price-input" style="width:80px;" id="t-pyear-${item.id}" value="${item.year}" placeholder="Year"></td>
+          <td>
+            <select id="t-pcat-${item.id}" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.35rem 0.6rem;font-family:'DM Sans',sans-serif;font-size:0.82rem;outline:none;">
+              <option value="illustration" ${item.category==='illustration'?'selected':''}>Illustration</option>
+              <option value="animated" ${item.category==='animated'?'selected':''}>Animated</option>
+              <option value="character" ${item.category==='character'?'selected':''}>Character</option>
+              <option value="print" ${item.category==='print'?'selected':''}>Print</option>
+            </select>
+          </td>
+          <td><button class="admin-action-btn" onclick="window.saveTitleRow('portfolio','${item.id}')">Save</button></td>
+        </tr>`).join('');
+    }
+    if (prb) {
+      prb.innerHTML = window.fbPrints.map(item => `
+        <tr>
+          <td style="color:rgba(250,247,242,0.4);font-size:0.8rem;min-width:120px;">${item.title}</td>
+          <td><input class="price-input" style="width:160px;" id="t-prtitle-${item.id}" value="${item.title}" placeholder="Title"></td>
+          <td><input class="price-input" style="width:90px;" id="t-prprice-${item.id}" value="${item.price}" placeholder="$0 CAD"></td>
+          <td><input class="price-input" style="width:90px;" id="t-prsizes-${item.id}" value="${item.sizes}" placeholder="A4, A3"></td>
+          <td><button class="admin-action-btn" onclick="window.saveTitleRow('prints','${item.id}')">Save</button></td>
+        </tr>`).join('');
+    }
+  }
+
+  window.saveTitleRow = async function(type, id) {
+    if (type === 'portfolio') {
+      const item  = window.fbPortfolio.find(i => String(i.id) === String(id));
+      if (!item) return;
+      const title = document.getElementById('t-ptitle-' + id)?.value.trim() || item.title;
+      const year  = document.getElementById('t-pyear-'  + id)?.value.trim() || item.year;
+      const cat   = document.getElementById('t-pcat-'   + id)?.value        || item.category;
+      await setDoc(doc(db, 'portfolio', String(id)), { ...item, title, year, category: cat });
+    } else {
+      const item  = window.fbPrints.find(i => String(i.id) === String(id));
+      if (!item) return;
+      const title = document.getElementById('t-prtitle-' + id)?.value.trim() || item.title;
+      const price = document.getElementById('t-prprice-' + id)?.value.trim() || item.price;
+      const sizes = document.getElementById('t-prsizes-' + id)?.value.trim() || item.sizes;
+      await setDoc(doc(db, 'prints', String(id)), { ...item, title, price, sizes });
+    }
+    toast('Saved ✓');
+  };
+
+  // Re-render titles when switching to that section
+  const origAdminSection = window.adminSection;
+  window.adminSection = function(id, btn) {
+    origAdminSection(id, btn);
+    if (id === 'titles') renderTitlesSection();
+    if (id === 'analytics') renderAnalytics();
+  };
+
+  // ── Password change ──
+  window.changePassword = async function() {
+    const current = document.getElementById('pw-current').value;
+    const newPw   = document.getElementById('pw-new').value;
+    const confirm = document.getElementById('pw-confirm').value;
+    const msg     = document.getElementById('pw-msg');
+
+    const snap = await getDocs(collection(db, 'settings'));
+    let storedPw = 'jiomie2025';
+    snap.docs.forEach(d => { if (d.id === 'password') storedPw = d.data().value || storedPw; });
+
+    msg.style.display = 'block';
+    if (current !== storedPw) {
+      msg.style.color = '#E57373'; msg.textContent = '✕ Current password is incorrect.'; return;
+    }
+    if (newPw.length < 6) {
+      msg.style.color = '#E57373'; msg.textContent = '✕ New password must be at least 6 characters.'; return;
+    }
+    if (newPw !== confirm) {
+      msg.style.color = '#E57373'; msg.textContent = '✕ Passwords do not match.'; return;
+    }
+    await setDoc(doc(db, 'settings', 'password'), { value: newPw });
+    msg.style.color = '#8BA888'; msg.textContent = '✓ Password updated successfully.';
+    ['pw-current','pw-new','pw-confirm'].forEach(id => document.getElementById(id).value = '');
+    toast('Password updated ✓');
+  };
+
+  // Override adminLogin to check Firebase password
+  window.adminLogin = async function() {
+    const pw = document.getElementById('admin-password').value;
+    let storedPw = 'jiomie2025';
+    try {
+      const snap = await getDocs(collection(db, 'settings'));
+      snap.docs.forEach(d => { if (d.id === 'password') storedPw = d.data().value || storedPw; });
+    } catch(e) {}
+    if (pw === storedPw) {
+      document.getElementById('admin-login').style.display = 'none';
+      document.getElementById('admin-dash').style.display = 'block';
+      renderAdminPortfolio();
+      renderAdminPrints();
+      renderAdminPartners();
+    } else {
+      const err = document.getElementById('admin-error');
+      err.style.display = 'block';
+      document.getElementById('admin-password').value = '';
+      setTimeout(() => err.style.display = 'none', 3000);
+    }
+  };
+
+  // ── Analytics tracking ──
+  let analyticsLog = JSON.parse(localStorage.getItem('jiomie_analytics') || '[]');
+  let sessionCount = parseInt(localStorage.getItem('jiomie_sessions') || '0');
+
+  // New session on load
+  sessionCount++;
+  localStorage.setItem('jiomie_sessions', sessionCount);
+
+  function logEvent(type, label) {
+    const entry = { type, label, time: new Date().toLocaleTimeString(), date: new Date().toLocaleDateString() };
+    analyticsLog.unshift(entry);
+    if (analyticsLog.length > 200) analyticsLog = analyticsLog.slice(0, 200);
+    localStorage.setItem('jiomie_analytics', JSON.stringify(analyticsLog));
+  }
+
+  // Track page navigation
+  const origShowPage = window.showPage;
+  window.showPage = function(id) {
+    logEvent('page', id.charAt(0).toUpperCase() + id.slice(1));
+    return origShowPage(id);
+  };
+
+  // Track all clicks
+  document.addEventListener('click', e => {
+    const el = e.target.closest('a, button, .home-card, .porto-item, .print-card, .partner-card, .shop-tab, .filter-btn');
+    if (!el) return;
+    const label = el.textContent.trim().slice(0, 40) || el.className.split(' ')[0];
+    if (label && !label.includes('admin')) logEvent('click', label);
+  });
+
+  function renderAnalytics() {
+    const log      = document.getElementById('analytics-log');
+    const pvEl     = document.getElementById('at-pageviews');
+    const clEl     = document.getElementById('at-clicks');
+    const topEl    = document.getElementById('at-toppage');
+    const sessEl   = document.getElementById('at-sessions');
+    if (!log) return;
+
+    const pageViews = analyticsLog.filter(e => e.type === 'page');
+    const clicks    = analyticsLog.filter(e => e.type === 'click');
+    const pageCounts = {};
+    pageViews.forEach(e => { pageCounts[e.label] = (pageCounts[e.label] || 0) + 1; });
+    const topPage = Object.entries(pageCounts).sort((a,b) => b[1]-a[1])[0];
+
+    if (pvEl)   pvEl.textContent  = pageViews.length;
+    if (clEl)   clEl.textContent  = clicks.length;
+    if (topEl)  topEl.textContent = topPage ? topPage[0] : '—';
+    if (sessEl) sessEl.textContent = sessionCount;
+
+    if (analyticsLog.length === 0) {
+      log.innerHTML = '<div style="padding:2rem;text-align:center;color:rgba(250,247,242,0.25);font-size:0.85rem;">No events yet.</div>';
+      return;
+    }
+
+    log.innerHTML = analyticsLog.map(e => `
+      <div style="display:flex;align-items:center;gap:1rem;padding:0.75rem 1rem;border-bottom:1px solid rgba(250,247,242,0.04);">
+        <span style="font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.2rem 0.5rem;background:${e.type==='page' ? 'rgba(139,174,196,0.15)' : 'rgba(196,115,106,0.12)'};color:${e.type==='page' ? '#8BAEC4' : '#C4736A'};">${e.type}</span>
+        <span style="font-size:0.85rem;color:#FAF7F2;flex:1;">${e.label}</span>
+        <span style="font-size:0.75rem;color:rgba(250,247,242,0.3);">${e.date} ${e.time}</span>
+      </div>`).join('');
+  }
+
+  window.clearAnalytics = function() {
+    analyticsLog = [];
+    localStorage.removeItem('jiomie_analytics');
+    renderAnalytics();
+    toast('Log cleared');
   };
 
 </script>
