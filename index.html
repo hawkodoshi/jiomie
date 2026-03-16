@@ -3880,14 +3880,6 @@
     if(ps){ps.innerHTML=`<div class="status-dot" style="background:${isOpen?'#2d6a4f':'#c0392b'};"></div> Commissions ${isOpen?'Open':'Closed'}`;ps.style.background=isOpen?'#d4edda':'#fde8e8';ps.style.color=isOpen?'#2d6a4f':'#c0392b';}
   }
 
-    if(imgEl&&imgEl._pendingFile){toast('Uploading image…');try{data.imgSrc=await uploadToCloudinary(imgEl._pendingFile,pct=>toast(`Uploading… ${pct}%`));}catch(e){toast('Image upload failed');}}
-    await setDoc(doc(db,'prints',id),data);
-    document.getElementById('print-modal').classList.remove('open');
-    ['print-title','print-price','print-sizes'].forEach(i=>document.getElementById(i).value='');
-    if(imgEl){imgEl.src='';imgEl.style.display='none';imgEl._pendingFile=null;}
-    if(emojiEl) emojiEl.style.display='';
-    toast('Print added to shop ✓');
-  };
 
   // ── savePrintRow ──
   window.savePrintRow = async function(id) {
