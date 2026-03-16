@@ -581,6 +581,46 @@
   .shop-panel { display: none; padding: 0 3rem 6rem; }
   .shop-panel.active { display: block; }
 
+  /* ── Shop dark mode ── */
+  #page-shop.dark-shop { background: #1A1726; color: #F0EEF8; }
+  .dark-shop .shop-tabs { background: #1A1726; border-bottom-color: rgba(255,255,255,0.08); }
+  .dark-shop .shop-tab { color: rgba(255,255,255,0.45); }
+  .dark-shop .shop-tab.active { color: #F0EEF8; border-bottom-color: var(--rose); }
+  .dark-shop .shop-tab:hover { color: rgba(255,255,255,0.75); }
+  .dark-shop .print-card { background: #1A1726; border-color: rgba(255,255,255,0.06); }
+  .dark-shop .print-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .dark-shop .print-card-name { color: #F0EEF8; }
+  .dark-shop .print-card-price { color: rgba(255,255,255,0.45); }
+  .dark-shop .print-card-btn { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
+  .dark-shop .print-card-btn:hover { background: var(--rose); color: white; border-color: var(--rose); }
+  .dark-shop .partner-card { background: #1A1726; border-color: rgba(255,255,255,0.06); }
+  .dark-shop .partner-name { color: #F0EEF8; }
+  .dark-shop .partner-desc { color: rgba(255,255,255,0.45); }
+  .dark-shop .partner-year { color: rgba(255,255,255,0.25); }
+  .dark-shop .comm-info h3 { color: #F0EEF8; }
+  .dark-shop .comm-info p { color: rgba(255,255,255,0.5); }
+  .dark-shop .tier-row { border-color: rgba(255,255,255,0.06); }
+  .dark-shop .tier-name { color: #F0EEF8; }
+  .dark-shop .tier-desc { color: rgba(255,255,255,0.4); }
+  .dark-shop .comm-status { background: rgba(255,255,255,0.05) !important; }
+  .dark-shop .partners-intro h3 { color: #F0EEF8; }
+  .dark-shop .partners-intro p { color: rgba(255,255,255,0.45); }
+  .dark-shop .btn-outline { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
+  .dark-shop .btn-outline:hover { background: rgba(255,255,255,0.08); color: #F0EEF8; }
+  /* Toggle button */
+  .shop-theme-toggle {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: none; border: 1px solid rgba(61,53,96,0.25);
+    padding: 0.45rem 1rem;
+    font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    color: var(--pal-indigo); cursor: pointer;
+    transition: all 0.25s;
+  }
+  .dark-shop .shop-theme-toggle { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
+  .shop-theme-toggle:hover { background: rgba(61,53,96,0.07); }
+  .dark-shop .shop-theme-toggle:hover { background: rgba(255,255,255,0.06); }
+
   .prints-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -697,6 +737,12 @@
     height: 60px;
     display: flex; align-items: center;
     font-size: 1.8rem;
+    overflow: hidden;
+  }
+  .partner-logo img {
+    width: 60px; height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
   }
   .partner-name {
     font-weight: 500; font-size: 1rem;
@@ -2183,10 +2229,15 @@
     </div>
   </div>
 
-  <div class="shop-tabs">
-    <button class="shop-tab active" onclick="showTab('prints')">Art Prints</button>
-    <button class="shop-tab" onclick="showTab('commissions')">Commissions</button>
-    <button class="shop-tab" onclick="showTab('partnerships')">Partnerships</button>
+  <div class="shop-tabs" style="display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex;">
+      <button class="shop-tab active" onclick="showTab('prints')">Art Prints</button>
+      <button class="shop-tab" onclick="showTab('commissions')">Commissions</button>
+      <button class="shop-tab" onclick="showTab('partnerships')">Partnerships</button>
+    </div>
+    <button class="shop-theme-toggle" id="shop-dark-btn" onclick="toggleShopDark(this)">
+      <span class="toggle-icon">◐</span> Dark Mode
+    </button>
   </div>
 
   <div class="shop-panel active" id="tab-prints">
@@ -2278,49 +2329,41 @@
     </div>
     <div class="partners-grid" id="public-partners-grid">
       <div class="partner-card">
-        <div class="partner-logo">✨</div>
         <div class="partner-name">Artrinary</div>
         <div class="partner-desc">Twitch streamer. Created 6 Twitch assets — emotes.</div>
         <div class="partner-year">2021</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🖊️</div>
         <div class="partner-name">Sartsy</div>
         <div class="partner-desc">Twitch streamer. Logo design for LLC.</div>
         <div class="partner-year">2021</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">💻</div>
         <div class="partner-name">CYLK Creative Tech Ltd.</div>
         <div class="partner-desc">Creative collaborations to bring life to their main character. Concept character intended to be rigged for game studio use.</div>
         <div class="partner-year">2022</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🎸</div>
         <div class="partner-name">GaijinCard</div>
         <div class="partner-desc">Previously known as Awagii, a Japanese Rock artist. Collaborated for their album art.</div>
         <div class="partner-year">2023</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🎮</div>
         <div class="partner-name">Dean-a-ling</div>
         <div class="partner-desc">Twitch streamer. Collaborated on a half-body fan art of a Genshin character (2023), half-body original character in colour (2024), and Twitch assets including emotes (2024).</div>
         <div class="partner-year">2023 – 2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🏘️</div>
         <div class="partner-name">Burnaby Neighbourhood House</div>
         <div class="partner-desc">Illustration and visual design work supporting community programs and events.</div>
         <div class="partner-year">2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">💜</div>
         <div class="partner-name">bluesapphic</div>
         <div class="partner-desc">Character design used as their Twitch asset.</div>
         <div class="partner-year">2024</div>
       </div>
       <div class="partner-card">
-        <div class="partner-logo">🐉</div>
         <div class="partner-name">K.L. Illustration</div>
         <div class="partner-desc">DND character illustration for anniversary.</div>
         <div class="partner-year">2024</div>
@@ -3377,14 +3420,19 @@
       <div class="modal-title">Add <em>Partnership</em></div>
       <button class="modal-close" onclick="closeModal('partner-modal')">✕</button>
     </div>
-    <div class="modal-row">
-      <div class="modal-field">
-        <label class="modal-label">Brand / Client Name</label>
-        <input class="modal-input" id="partner-name" placeholder="e.g. Cozy Grove">
+    <div class="modal-field">
+      <label class="modal-label">Brand / Client Name</label>
+      <input class="modal-input" id="partner-name" placeholder="e.g. Cozy Grove">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Logo / Photo</label>
+      <div class="modal-upload-preview" id="partner-preview" style="aspect-ratio:1;max-width:100px;min-height:80px;">
+        <span id="partner-preview-emoji" style="font-size:2rem;">🤝</span>
+        <img id="partner-preview-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
       </div>
-      <div class="modal-field">
-        <label class="modal-label">Emoji Icon</label>
-        <input class="modal-input" id="partner-emoji" placeholder="e.g. 🎮" maxlength="4">
+      <div class="modal-upload-mini" style="margin-top:0.5rem;">
+        <input type="file" accept="image/*" onchange="previewUpload(event,'partner-preview-img','partner-preview-emoji')">
+        ⬆ Upload logo or photo
       </div>
     </div>
     <div class="modal-field">
@@ -3511,13 +3559,23 @@
   }
 
   // Stubs — overridden by Firebase module once loaded
-  window.adminLogin   = function() { console.log('Firebase loading…'); };
-  window.adminLogout  = function() {};
-  window.adminSection = function() {};
-  window.saveWork     = function() {};
-  window.savePrint    = function() {};
-  window.openCart     = function() {};
-  window.addToCart    = function() {};
+  window.adminLogin      = function() { console.log('Firebase loading…'); };
+  window.adminLogout     = function() {};
+  window.adminSection    = function() {};
+  window.saveWork        = function() {};
+  window.savePrint       = function() {};
+  window.openCart        = function() {};
+  window.addToCart       = function() {};
+  window.toggleGalleryDark = function(btn) {
+    const page = document.getElementById('page-portfolio');
+    const isDark = page.classList.toggle('dark-gallery');
+    btn.innerHTML = isDark ? '<span class="toggle-icon">○</span> Light Mode' : '<span class="toggle-icon">◐</span> Dark Mode';
+  };
+  window.toggleShopDark = function(btn) {
+    const page = document.getElementById('page-shop');
+    const isDark = page.classList.toggle('dark-shop');
+    btn.innerHTML = isDark ? '<span class="toggle-icon">○</span> Light Mode' : '<span class="toggle-icon">◐</span> Dark Mode';
+  };
 
 </script>
 
@@ -3744,7 +3802,9 @@
         <div class="admin-partner-card-actions">
           <button class="icon-btn danger" onclick="window.deletePartner('${item.id}')">✕</button>
         </div>
-        <div class="admin-partner-emoji">${item.emoji}</div>
+        ${item.imgSrc
+          ? `<div style="width:48px;height:48px;overflow:hidden;margin-bottom:0.5rem;"><img src="${item.imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" alt="${item.name}"></div>`
+          : (item.emoji && item.emoji !== '🤝') ? `<div class="admin-partner-emoji">${item.emoji}</div>` : ''}
         <div class="admin-partner-name">${item.name}</div>
         <div class="admin-partner-desc">${item.desc}</div>
         <div class="admin-partner-year">${item.year}</div>
@@ -3758,13 +3818,21 @@
 
   window.savePartner = async function() {
     const name  = document.getElementById('partner-name').value.trim() || 'New Partner';
-    const emoji = document.getElementById('partner-emoji').value.trim() || '✦';
     const desc  = document.getElementById('partner-desc').value.trim() || '';
     const year  = document.getElementById('partner-year').value.trim() || '2025';
+    const imgEl = document.getElementById('partner-preview-img');
     const id    = String(Date.now());
-    await setDoc(doc(db, 'partners', id), { id, name, emoji, desc, year });
+    const data  = { id, name, desc, year, emoji: '🤝' };
+    if (imgEl && imgEl._pendingFile) {
+      toast('Uploading logo…');
+      try { data.imgSrc = await uploadToCloudinary(imgEl._pendingFile); } catch(e) { toast('Image upload failed'); }
+    }
+    await setDoc(doc(db, 'partners', id), data);
     document.getElementById('partner-modal').classList.remove('open');
-    ['partner-name','partner-emoji','partner-desc','partner-year'].forEach(i => document.getElementById(i).value = '');
+    ['partner-name','partner-desc','partner-year'].forEach(i => { const el=document.getElementById(i); if(el) el.value=''; });
+    if (imgEl) { imgEl.src=''; imgEl.style.display='none'; imgEl._pendingFile=null; }
+    const emojiEl = document.getElementById('partner-preview-emoji');
+    if (emojiEl) emojiEl.style.display='';
     toast('Partnership added ✓');
   };
 
@@ -3862,19 +3930,7 @@
     window.showPage('home');
   };
 
-  window.toggleGalleryDark = function(btn) {
-    const page = document.getElementById('page-portfolio');
-    const isDark = page.classList.toggle('dark-gallery');
-    btn.innerHTML = isDark ? '<span class="toggle-icon">○</span> Light Mode' : '<span class="toggle-icon">◐</span> Dark Mode';
-  };
-
-
-  // ── Cloudinary ──
-  const CLOUDINARY_CLOUD  = 'dxo0lbils';
-  const CLOUDINARY_PRESET = 'jiomie_uploads';
-  const CLOUDINARY_URL_UP = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`;
-
-  async 
+  // toggleGalleryDark and toggleShopDark defined in main script block above
 
   window.previewUpload = async function(event, imgId, emojiId) {
     const file=event.target.files[0]; if(!file) return;
@@ -4228,6 +4284,10 @@
     if (items.length===0) { grid.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted);">No partnerships yet.</div>'; return; }
     grid.innerHTML = items.map(item=>`
       <div class="partner-card">
+        ${item.imgSrc
+          ? `<div class="partner-logo"><img src="${item.imgSrc}" alt="${item.name}"></div>`
+          : (item.emoji && item.emoji !== '🤝')
+            ? `<div class="partner-logo">${item.emoji}</div>` : ''}
         <div class="partner-name">${item.name}</div>
         <div class="partner-desc">${item.desc}</div>
         <div class="partner-year">${item.year}</div>
