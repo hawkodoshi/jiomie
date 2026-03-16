@@ -3126,48 +3126,97 @@
           <div class="admin-section-header">
             <div>
               <div class="admin-section-title">About <em>Page</em></div>
-              <div class="admin-section-sub">Edit your bio, stats and displayed photo</div>
+              <div class="admin-section-sub">Edit all content shown on the public About page</div>
             </div>
+            <button class="btn-admin-primary" onclick="saveAboutPage()">Save All Changes</button>
           </div>
+
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
             <div>
+
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Hero Section</div>
               <div class="modal-field">
-                <label class="modal-label">Bio (paragraph 1)</label>
-                <textarea class="modal-textarea" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:110px;">I'm a freelance illustrator and animator with a love for soft palettes, whimsical characters, and storytelling through imagery. My work lives somewhere between fairy tale and daydream.</textarea>
+                <label class="modal-label">Name (displayed in hero)</label>
+                <input class="modal-input" id="ab-name" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="Jiomie">
               </div>
               <div class="modal-field">
-                <label class="modal-label">Bio (paragraph 2)</label>
-                <textarea class="modal-textarea" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:110px;">I've worked with indie game studios, small brands, and musicians, and I spend my streaming hours painting live on Twitch. When I'm not drawing, I'm probably foraging for mushroom references or rewatching Studio Ghibli for the hundredth time.</textarea>
+                <label class="modal-label">Location tag</label>
+                <input class="modal-input" id="ab-location" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="Vancouver, BC">
               </div>
+              <div class="modal-field">
+                <label class="modal-label">Tagline (hero subtitle)</label>
+                <textarea class="modal-textarea" id="ab-tagline" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:70px;">Creating whimsical fantastical worlds to dramatic character designs. Vivid colours, dynamic figures and stories through imagery.</textarea>
+              </div>
+
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin:1.5rem 0 1rem;">"The Spirit Behind It" Section</div>
+              <div class="modal-field">
+                <label class="modal-label">Bio paragraph 1 — Inspiration</label>
+                <textarea class="modal-textarea" id="ab-bio1" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;">My work draws inspiration from water and music. The colours derive from sunsets reflecting on water — melancholic varied hues, waves, and how all colours connect with each other. The sharpness draws from music, notably jazz, that contrasts a dynamic articulation of quick, sharp drums and saxophones with the raspy voices. Creating a symphony of vivid, dynamic pieces that feels ethereal and fluid.</textarea>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Bio paragraph 2 — Background</label>
+                <textarea class="modal-textarea" id="ab-bio2" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;">I am a mosaic of all the art and memories cultivated from travels around the world, along with anime — notably Ghibli Studios artwork. Initially starting with watercolour, acrylic, and mixed media before jumping to digital painting in 2021, where I first started streaming the process of learning a new medium.</textarea>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Bio paragraph 3 — Twitch & community</label>
+                <textarea class="modal-textarea" id="ab-bio3" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:80px;">Now if you're ever curious, join me on Twitch — you might find me playing games with our community or studying new artists and their techniques. And if I'm not there, I'm probably trying to venture to new art scenes.</textarea>
+              </div>
+
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin:1.5rem 0 1rem;">Collaborations Text</div>
+              <div class="modal-field">
+                <label class="modal-label">Collaborations paragraph</label>
+                <textarea class="modal-textarea" id="ab-collabs" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:80px;">Past collaborations include CYLK Creative Tech Ltd. and Burnaby Neighbourhood House. Open to brand partnerships, game studios, musicians, and editorial clients.</textarea>
+              </div>
+
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin:1.5rem 0 1rem;">Social Links</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
                 <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Commissions stat</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="200+">
+                  <label class="modal-label">Twitch URL</label>
+                  <input class="modal-input" id="ab-twitch" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="https://www.twitch.tv/supjiomie">
                 </div>
                 <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Brand collabs stat</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="6+">
-                </div>
-                <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Followers stat</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="8k+">
-                </div>
-                <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Years freelancing</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="5yrs">
+                  <label class="modal-label">Instagram URL</label>
+                  <input class="modal-input" id="ab-instagram" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="https://www.instagram.com/supjiomie/">
                 </div>
               </div>
-              <button class="btn-admin-primary" onclick="showToast('About page saved ✓')">Save Changes</button>
             </div>
+
             <div>
-              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Portrait / Hero Image</div>
-              <div class="modal-upload-preview" id="about-preview" style="aspect-ratio:3/4;min-height:280px;">
-                <span id="about-preview-emoji" style="font-size:4rem;">🌸</span>
-                <img id="about-preview-img" src="" alt="">
-              </div>
-              <div class="modal-upload-mini" style="margin-top:0.75rem;">
-                <input type="file" accept="image/*" onchange="previewAbout(event)">
-                ⬆ Upload new portrait image
+              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Portrait Photos</div>
+              <div style="display:flex;flex-direction:column;gap:1rem;">
+                <div>
+                  <div style="font-size:0.7rem;color:rgba(250,247,242,0.4);margin-bottom:0.5rem;">Photo 1 — Hero portrait</div>
+                  <div class="modal-upload-preview" id="about-preview" style="aspect-ratio:2/3;min-height:200px;">
+                    <span id="about-preview-emoji" style="font-size:3rem;">🌸</span>
+                    <img id="about-preview-img" src="" alt="">
+                  </div>
+                  <div class="modal-upload-mini" style="margin-top:0.5rem;">
+                    <input type="file" accept="image/*" onchange="previewAbout(event)">
+                    ⬆ Upload hero portrait
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:0.7rem;color:rgba(250,247,242,0.4);margin-bottom:0.5rem;">Photo 2 — Studio (scroll section)</div>
+                  <div class="modal-upload-preview" id="about-preview2" style="aspect-ratio:2/3;min-height:200px;">
+                    <span id="about-preview2-emoji" style="font-size:3rem;">🌿</span>
+                    <img id="about-preview2-img" src="" alt="">
+                  </div>
+                  <div class="modal-upload-mini" style="margin-top:0.5rem;">
+                    <input type="file" accept="image/*" onchange="previewAboutPhoto(event,'2')">
+                    ⬆ Upload studio photo
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:0.7rem;color:rgba(250,247,242,0.4);margin-bottom:0.5rem;">Photo 3 — Contact section</div>
+                  <div class="modal-upload-preview" id="about-preview3" style="aspect-ratio:3/4;min-height:180px;">
+                    <span id="about-preview3-emoji" style="font-size:3rem;">🦋</span>
+                    <img id="about-preview3-img" src="" alt="">
+                  </div>
+                  <div class="modal-upload-mini" style="margin-top:0.5rem;">
+                    <input type="file" accept="image/*" onchange="previewAboutPhoto(event,'3')">
+                    ⬆ Upload contact photo
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3757,7 +3806,7 @@
     renderCartBody();
   };
 
-  function submitOrder() {
+  window.submitOrder = function submitOrder() {
     const fname  = sessionStorage.getItem('cf-fname') || '';
     const uname  = sessionStorage.getItem('cf-uname') || '';
     const email  = sessionStorage.getItem('cf-cemail') || '';
@@ -4129,26 +4178,6 @@
     document.getElementById('add-modal').classList.add('open');
   };
 
-  window.saveWork = async function(status) {
-    const title    = document.getElementById('add-title').value.trim() || 'Untitled';
-    const year     = document.getElementById('add-year').value.trim() || '2025';
-    const category = document.getElementById('add-category').value;
-    const imgEl    = document.getElementById('add-preview-img');
-    const emojiEl  = document.getElementById('add-preview-emoji');
-    const imgSrc   = imgEl && imgEl.style.display !== 'none' && imgEl.src ? imgEl.src : null;
-    const emoji    = emojiEl.textContent === '🖼' ? '🎨' : emojiEl.textContent;
-    const id       = String(Date.now());
-    const data     = { id, title, year, category, status, emoji, bg: bgs[Math.floor(Math.random() * bgs.length)] };
-    if (imgSrc) data.imgSrc = imgSrc;
-    await setDoc(doc(db, 'portfolio', id), data);
-    document.getElementById('add-modal').classList.remove('open');
-    document.getElementById('add-title').value = '';
-    document.getElementById('add-year').value  = '';
-    if (imgEl) { imgEl.src = ''; imgEl.style.display = 'none'; }
-    emojiEl.textContent = '🖼';
-    toast(status === 'published' ? 'Work published ✓' : 'Saved as draft ✓');
-  };
-
   // ── Render admin prints ──
   function renderAdminPrints() {
     const tbody = document.getElementById('prints-tbody');
@@ -4199,25 +4228,6 @@
   window.deletePrint = async function(id) {
     await deleteDoc(doc(db, 'prints', String(id)));
     toast('Print removed');
-  };
-
-  window.savePrint = async function() {
-    const title  = document.getElementById('print-title').value.trim() || 'New Print';
-    const price  = document.getElementById('print-price').value.trim() || '$0 CAD';
-    const sizes  = document.getElementById('print-sizes').value.trim() || 'A4';
-    const imgEl  = document.getElementById('print-preview-img');
-    const emojiEl = document.getElementById('print-preview-emoji');
-    const imgSrc = imgEl && imgEl.style.display !== 'none' && imgEl.src ? imgEl.src : null;
-    const emoji  = emojiEl && emojiEl.textContent !== '🖼' ? emojiEl.textContent : '🖼';
-    const id     = String(Date.now());
-    const data   = { id, title, price, sizes, published: true, emoji, bg: bgs[0] };
-    if (imgSrc) data.imgSrc = imgSrc;
-    await setDoc(doc(db, 'prints', id), data);
-    document.getElementById('print-modal').classList.remove('open');
-    ['print-title','print-price','print-sizes'].forEach(i => document.getElementById(i).value = '');
-    if (imgEl) { imgEl.src = ''; imgEl.style.display = 'none'; }
-    if (emojiEl) emojiEl.style.display = '';
-    toast('Print added to shop ✓');
   };
 
   // ── Render admin partners ──
@@ -4271,48 +4281,156 @@
   });
 
   // ── Image previews ──
-  window.previewUpload = function(event, imgId, emojiId) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.getElementById(imgId);
-      const emoji = document.getElementById(emojiId);
-      img.src = e.target.result;
-      img.style.display = 'block';
-      if (emoji) emoji.style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  };
+  // ── Cloudinary config ──
+  const CLOUDINARY_CLOUD  = 'dxo0lbils';
+  const CLOUDINARY_PRESET = 'jiomie_uploads';
+  const CLOUDINARY_URL    = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`;
 
-  window.previewAbout = function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.getElementById('about-preview-img');
-      const emoji = document.getElementById('about-preview-emoji');
-      img.src = e.target.result;
-      img.style.display = 'block';
-      if (emoji) emoji.style.display = 'none';
-      toast('Portrait updated ✓');
-    };
-    reader.readAsDataURL(file);
-  };
-
-  window.handleDrop = function(event) {
-    const files = event.target.files;
-    if (!files.length) return;
-    Array.from(files).forEach(async (file, i) => {
-      const id = String(Date.now() + i);
-      await setDoc(doc(db, 'portfolio', id), {
-        id, title: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
-        year: new Date().getFullYear().toString(),
-        category: 'illustration', status: 'draft',
-        emoji: '🖼', bg: bgs[Math.floor(Math.random() * bgs.length)]
-      });
+  async function uploadToCloudinary(file, onProgress) {
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('upload_preset', CLOUDINARY_PRESET);
+    fd.append('folder', 'jiomie');
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', CLOUDINARY_URL);
+      xhr.upload.onprogress = e => {
+        if (onProgress && e.lengthComputable)
+          onProgress(Math.round(e.loaded / e.total * 100));
+      };
+      xhr.onload = () => {
+        const res = JSON.parse(xhr.responseText);
+        if (res.secure_url) resolve(res.secure_url);
+        else reject(new Error(res.error?.message || 'Upload failed'));
+      };
+      xhr.onerror = () => reject(new Error('Network error'));
+      xhr.send(fd);
     });
-    setTimeout(() => toast(files.length + ' item(s) added as draft ✓'), 400);
+  }
+
+  // ── Upload with preview — shows local preview instantly, uploads to Cloudinary ──
+  window.previewUpload = async function(event, imgId, emojiId) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const img   = document.getElementById(imgId);
+    const emoji = document.getElementById(emojiId);
+    // Show local preview immediately
+    const localUrl = URL.createObjectURL(file);
+    if (img)   { img.src = localUrl; img.style.display = 'block'; }
+    if (emoji) emoji.style.display = 'none';
+    // Store file reference on the element for later use in saveWork/savePrint
+    if (img) img._pendingFile = file;
+    toast('Image ready — click Save/Publish to upload ✓');
+  };
+
+  // ── About portrait upload ──
+  window.previewAbout = async function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const img   = document.getElementById('about-preview-img');
+    const emoji = document.getElementById('about-preview-emoji');
+    // Show local preview
+    img.src = URL.createObjectURL(file);
+    img.style.display = 'block';
+    if (emoji) emoji.style.display = 'none';
+    toast('Uploading portrait…');
+    try {
+      const url = await uploadToCloudinary(file);
+      img.src = url;
+      toast('Portrait uploaded ✓');
+    } catch(e) {
+      toast('Upload failed — try again');
+    }
+  };
+
+  // ── Drop zone — uploads each file to Cloudinary then saves to Firestore ──
+  window.handleDrop = async function(event) {
+    const files = Array.from(event.target.files);
+    if (!files.length) return;
+    toast(`Uploading ${files.length} image${files.length > 1 ? 's' : ''}…`);
+    let done = 0;
+    for (const file of files) {
+      try {
+        const url = await uploadToCloudinary(file, pct => {
+          toast(`Uploading ${file.name} — ${pct}%`);
+        });
+        const id = String(Date.now() + Math.random());
+        await setDoc(doc(db, 'portfolio', id), {
+          id,
+          title: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
+          year: new Date().getFullYear().toString(),
+          category: 'illustration',
+          status: 'draft',
+          emoji: '🖼',
+          bg: bgs[Math.floor(Math.random() * bgs.length)],
+          imgSrc: url
+        });
+        done++;
+        toast(`${done}/${files.length} uploaded ✓`);
+      } catch(e) {
+        toast(`Failed: ${file.name}`);
+      }
+    }
+    toast(`${done} image${done !== 1 ? 's' : ''} added to portfolio ✓`);
+  };
+
+  // ── saveWork — uploads pending image then saves to Firestore ──
+  window.saveWork = async function(status) {
+    const title    = document.getElementById('add-title').value.trim() || 'Untitled';
+    const year     = document.getElementById('add-year').value.trim() || '2025';
+    const category = document.getElementById('add-category').value;
+    const imgEl    = document.getElementById('add-preview-img');
+    const emojiEl  = document.getElementById('add-preview-emoji');
+    const emoji    = emojiEl.textContent === '🖼' ? '🎨' : emojiEl.textContent;
+    const id       = String(Date.now());
+    const data     = { id, title, year, category, status, emoji, bg: bgs[Math.floor(Math.random() * bgs.length)] };
+
+    // Upload to Cloudinary if a file is pending
+    if (imgEl && imgEl._pendingFile) {
+      toast('Uploading image…');
+      try {
+        data.imgSrc = await uploadToCloudinary(imgEl._pendingFile, pct => toast(`Uploading… ${pct}%`));
+      } catch(e) {
+        toast('Image upload failed — saving without image');
+      }
+    }
+
+    await setDoc(doc(db, 'portfolio', id), data);
+    document.getElementById('add-modal').classList.remove('open');
+    document.getElementById('add-title').value = '';
+    document.getElementById('add-year').value  = '';
+    if (imgEl) { imgEl.src = ''; imgEl.style.display = 'none'; imgEl._pendingFile = null; }
+    emojiEl.textContent = '🖼';
+    if (emojiEl) emojiEl.style.display = '';
+    toast(status === 'published' ? 'Work published ✓' : 'Saved as draft ✓');
+  };
+
+  // ── savePrint — uploads pending image then saves to Firestore ──
+  window.savePrint = async function() {
+    const title   = document.getElementById('print-title').value.trim() || 'New Print';
+    const price   = document.getElementById('print-price').value.trim() || '$0 CAD';
+    const sizes   = document.getElementById('print-sizes').value.trim() || 'A4';
+    const imgEl   = document.getElementById('print-preview-img');
+    const emojiEl = document.getElementById('print-preview-emoji');
+    const emoji   = emojiEl && emojiEl.textContent !== '🖼' ? emojiEl.textContent : '🖼';
+    const id      = String(Date.now());
+    const data    = { id, title, price, sizes, published: true, emoji, bg: bgs[0] };
+
+    if (imgEl && imgEl._pendingFile) {
+      toast('Uploading image…');
+      try {
+        data.imgSrc = await uploadToCloudinary(imgEl._pendingFile, pct => toast(`Uploading… ${pct}%`));
+      } catch(e) {
+        toast('Image upload failed — saving without image');
+      }
+    }
+
+    await setDoc(doc(db, 'prints', id), data);
+    document.getElementById('print-modal').classList.remove('open');
+    ['print-title','print-price','print-sizes'].forEach(i => document.getElementById(i).value = '');
+    if (imgEl) { imgEl.src = ''; imgEl.style.display = 'none'; imgEl._pendingFile = null; }
+    if (emojiEl) emojiEl.style.display = '';
+    toast('Print added to shop ✓');
   };
 
   // ── Drag over styles ──
@@ -4457,6 +4575,108 @@
   };
 
   // Override adminLogin to check Firebase password
+  // ── About page admin save ──
+  window.saveAboutPage = async function() {
+    const data = {
+      name:      document.getElementById('ab-name')?.value.trim()     || 'Jiomie',
+      location:  document.getElementById('ab-location')?.value.trim() || 'Vancouver, BC',
+      tagline:   document.getElementById('ab-tagline')?.value.trim()  || '',
+      bio1:      document.getElementById('ab-bio1')?.value.trim()     || '',
+      bio2:      document.getElementById('ab-bio2')?.value.trim()     || '',
+      bio3:      document.getElementById('ab-bio3')?.value.trim()     || '',
+      collabs:   document.getElementById('ab-collabs')?.value.trim()  || '',
+      twitch:    document.getElementById('ab-twitch')?.value.trim()   || '',
+      instagram: document.getElementById('ab-instagram')?.value.trim()|| '',
+    };
+    // Upload any pending photos
+    for (const n of ['', '2', '3']) {
+      const imgEl = document.getElementById(`about-preview${n}-img`);
+      if (imgEl && imgEl._pendingFile) {
+        toast(`Uploading photo ${n || '1'}…`);
+        try {
+          data[`photo${n || '1'}`] = await uploadToCloudinary(imgEl._pendingFile);
+          imgEl._pendingFile = null;
+        } catch(e) { toast(`Photo ${n || '1'} upload failed`); }
+      } else if (imgEl && imgEl.src && imgEl.src.startsWith('http')) {
+        data[`photo${n || '1'}`] = imgEl.src;
+      }
+    }
+    await setDoc(doc(db, 'settings', 'about'), data);
+    toast('About page saved ✓');
+    renderPublicAbout(data);
+  };
+
+  // Preview additional about photos
+  window.previewAboutPhoto = function(event, num) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const img   = document.getElementById(`about-preview${num}-img`);
+    const emoji = document.getElementById(`about-preview${num}-emoji`);
+    if (img) {
+      img.src = URL.createObjectURL(file);
+      img.style.display = 'block';
+      img._pendingFile  = file;
+    }
+    if (emoji) emoji.style.display = 'none';
+    toast('Photo ready — click Save All Changes to upload ✓');
+  };
+
+  // ── Render public About from Firebase data ──
+  function renderPublicAbout(data) {
+    if (!data) return;
+    // Hero
+    const nameEl = document.querySelector('.ap-name');
+    if (nameEl && data.name) nameEl.childNodes[0].textContent = data.name;
+    const locEl = document.querySelector('.ap-name em');
+    if (locEl && data.location) locEl.textContent = data.location;
+    const tagEl = document.querySelector('.ap-tagline');
+    if (tagEl && data.tagline) tagEl.textContent = data.tagline;
+    // Bio paragraphs
+    const paras = document.querySelectorAll('#page-about .ap-para');
+    if (paras[0] && data.bio1) paras[0].textContent = data.bio1;
+    if (paras[1] && data.bio2) paras[1].textContent = data.bio2;
+    if (paras[2] && data.bio3) paras[2].textContent = data.bio3;
+    // Photos
+    ['1','2','3'].forEach(n => {
+      const url = data[`photo${n}`];
+      if (!url) return;
+      const containers = document.querySelectorAll('.ap-side-photo-img, .ap-contact-photo');
+      const idx = parseInt(n) - 1;
+      if (containers[idx]) {
+        containers[idx].innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" alt="About photo ${n}">`;
+      }
+    });
+    // Social links
+    const twitchLinks = document.querySelectorAll('a[href*="twitch"]');
+    twitchLinks.forEach(a => { if (data.twitch) a.href = data.twitch; });
+    const igLinks = document.querySelectorAll('a[href*="instagram"]');
+    igLinks.forEach(a => { if (data.instagram) a.href = data.instagram; });
+  }
+
+  // Load about data on startup
+  getDocs(collection(db, 'settings')).then(snap => {
+    snap.docs.forEach(d => {
+      if (d.id === 'about') {
+        const data = d.data();
+        renderPublicAbout(data);
+        // Pre-fill admin fields
+        ['name','location','tagline','bio1','bio2','bio3','collabs','twitch','instagram'].forEach(k => {
+          const el = document.getElementById('ab-' + k);
+          if (el && data[k]) el.value = data[k];
+        });
+        // Pre-fill photo previews
+        ['1','2','3'].forEach(n => {
+          const url = data[`photo${n}`];
+          if (!url) return;
+          const img   = document.getElementById(`about-preview${n === '1' ? '' : n}-img`);
+          const emoji = document.getElementById(`about-preview${n === '1' ? '' : n}-emoji`);
+          if (img)   { img.src = url; img.style.display = 'block'; }
+          if (emoji) emoji.style.display = 'none';
+        });
+      }
+    });
+  }).catch(() => {});
+
   window.adminLogin = async function() {
     const pw = document.getElementById('admin-password').value;
     let storedPw = 'jiomie2025';
