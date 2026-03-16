@@ -508,7 +508,14 @@
     margin-bottom: 4rem;
     min-height: 165px;
     background: #E8856A;
+    transition: background 0.4s ease;
   }
+  .dark-shop .shop-banner { background: #4A5048; }
+  .dark-shop .shop-banner-title { color: #EBEEE4; }
+  .dark-shop .shop-banner-title em { color: #B9CDB0; }
+  .dark-shop .shop-banner-sub { color: rgba(235,238,228,0.50); }
+  .dark-shop .shop-banner-btn { border-color: rgba(235,238,228,0.40); color: #EBEEE4; }
+  .dark-shop .shop-banner-btn:hover { background: rgba(235,238,228,0.10); border-color: #EBEEE4; }
   .shop-banner-waves {
     position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
   }
@@ -582,25 +589,25 @@
   .shop-panel.active { display: block; }
 
   /* ── Shop dark mode ── */
-  #page-shop.dark-shop { background: #1A1726; color: #F0EEF8; }
-  .dark-shop .shop-tabs { background: #1A1726; border-bottom-color: rgba(255,255,255,0.08); }
+  #page-shop.dark-shop { background: #4A5048; color: #EBEEE4; }
+  .dark-shop .shop-tabs { background: #4A5048; border-bottom-color: rgba(255,255,255,0.08); }
   .dark-shop .shop-tab { color: rgba(255,255,255,0.45); }
-  .dark-shop .shop-tab.active { color: #F0EEF8; border-bottom-color: var(--rose); }
+  .dark-shop .shop-tab.active { color: #EBEEE4; border-bottom-color: var(--rose); }
   .dark-shop .shop-tab:hover { color: rgba(255,255,255,0.75); }
-  .dark-shop .print-card { background: #1A1726; border-color: rgba(255,255,255,0.06); }
+  .dark-shop .print-card { background: #3D4340; border-color: rgba(255,255,255,0.06); }
   .dark-shop .print-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
-  .dark-shop .print-card-name { color: #F0EEF8; }
+  .dark-shop .print-card-name { color: #EBEEE4; }
   .dark-shop .print-card-price { color: rgba(255,255,255,0.45); }
   .dark-shop .print-card-btn { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
   .dark-shop .print-card-btn:hover { background: var(--rose); color: white; border-color: var(--rose); }
-  .dark-shop .partner-card { background: #1A1726; border-color: rgba(255,255,255,0.06); }
-  .dark-shop .partner-name { color: #F0EEF8; }
+  .dark-shop .partner-card { background: #3D4340; border-color: rgba(255,255,255,0.06); }
+  .dark-shop .partner-name { color: #EBEEE4; }
   .dark-shop .partner-desc { color: rgba(255,255,255,0.45); }
   .dark-shop .partner-year { color: rgba(255,255,255,0.25); }
-  .dark-shop .comm-info h3 { color: #F0EEF8; }
+  .dark-shop .comm-info h3 { color: #EBEEE4; }
   .dark-shop .comm-info p { color: rgba(255,255,255,0.5); }
   .dark-shop .tier-row { border-color: rgba(255,255,255,0.06); }
-  .dark-shop .tier-name { color: #F0EEF8; }
+  .dark-shop .tier-name { color: #EBEEE4; }
   .dark-shop .tier-desc { color: rgba(255,255,255,0.4); }
   .dark-shop .comm-status { background: rgba(255,255,255,0.05) !important; }
   .dark-shop .partners-intro h3 { color: #F0EEF8; }
@@ -618,7 +625,7 @@
     transition: all 0.25s;
   }
   .dark-shop .shop-theme-toggle { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
-  .shop-theme-toggle:hover { background: rgba(61,53,96,0.07); }
+  .shop-theme-toggle:hover { background: rgba(74,80,72,0.07); }
   .dark-shop .shop-theme-toggle:hover { background: rgba(255,255,255,0.06); }
 
   .prints-grid {
@@ -2213,13 +2220,14 @@
   <div class="shop-hero">
     <div class="shop-banner">
       <svg class="shop-banner-waves" viewBox="0 0 900 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M520,0 C475,28 458,60 442,92 C426,124 418,150 410,160 L900,160 L900,0 Z" fill="rgba(46,40,69,0.32)"/>
-        <path d="M640,0 C608,20 596,50 582,82 C568,114 562,148 556,160 L900,160 L900,0 Z" fill="rgba(46,40,69,0.18)"/>
-        <path d="M-20,42 C80,26 200,56 340,38 C480,20 600,50 760,34 C840,24 885,40 920,36" fill="none" stroke="rgba(240,238,248,0.3)" stroke-width="1.5"/>
-        <path d="M-20,65 C100,50 240,74 400,58 C560,42 680,68 840,52 L920,50" fill="none" stroke="rgba(240,238,248,0.18)" stroke-width="1"/>
-        <path d="M-20,90 C100,76 230,102 380,86 C530,70 660,96 820,80 L920,78" fill="none" stroke="#8BAEC4" stroke-width="1.2" opacity="0.45"/>
-        <path d="M-20,112 C120,100 260,120 420,106 C580,92 700,115 860,100 L920,98" fill="none" stroke="#8BAEC4" stroke-width="0.9" opacity="0.3"/>
-        <path d="M-20,132 C80,122 200,140 360,130 C520,120 660,138 820,124 L920,122 L920,160 L-20,160 Z" fill="rgba(46,40,69,0.15)"/>
+        <rect width="900" height="160" fill="transparent"/>
+        <path d="M560,0 C515,35 495,75 478,115 C462,152 455,160 450,160 L900,160 L900,0 Z" fill="rgba(60,75,58,0.45)"/>
+        <path d="M680,0 C650,25 638,58 622,92 C606,126 600,155 594,160 L900,160 L900,0 Z" fill="rgba(60,75,58,0.28)"/>
+        <path d="M-20,42 C80,26 200,56 340,38 C480,20 600,50 760,34 C840,24 885,40 920,36" fill="none" stroke="rgba(210,220,200,0.22)" stroke-width="1.5"/>
+        <path d="M-20,65 C100,50 240,74 400,58 C560,42 680,68 840,52 L920,50" fill="none" stroke="rgba(210,220,200,0.14)" stroke-width="1"/>
+        <path d="M-20,90 C100,76 230,102 380,86 C530,70 660,96 820,80 L920,78" fill="none" stroke="rgba(180,200,175,0.20)" stroke-width="1.2"/>
+        <path d="M-20,112 C120,100 260,120 420,106 C580,92 700,115 860,100 L920,98" fill="none" stroke="rgba(180,200,175,0.14)" stroke-width="0.9"/>
+        <path d="M-20,132 C80,122 200,140 360,130 C520,120 660,138 820,124 L920,122 L920,160 L-20,160 Z" fill="rgba(50,65,48,0.22)"/>
       </svg>
       <div class="shop-banner-content">
         <div class="shop-banner-title">Shop &amp; <em>Collaborate</em></div>
