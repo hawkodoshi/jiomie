@@ -3263,51 +3263,126 @@
           <div class="admin-section-header">
             <div>
               <div class="admin-section-title">About <em>Page</em></div>
-              <div class="admin-section-sub">Edit your bio, stats and displayed photo</div>
+              <div class="admin-section-sub">Every field here updates the live about page</div>
+            </div>
+            <button class="btn-admin-primary" onclick="window.saveAboutPage()">Save All Changes</button>
+          </div>
+
+          <!-- ── Hero ── -->
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(250,247,242,0.06);">Hero Section</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;">
+            <div class="modal-field">
+              <label class="modal-label">Name</label>
+              <input class="modal-input" id="ab-name" placeholder="Jiomie" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;width:100%;outline:none;">
+            </div>
+            <div class="modal-field">
+              <label class="modal-label">Location</label>
+              <input class="modal-input" id="ab-location" placeholder="Vancouver, BC" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;width:100%;outline:none;">
+            </div>
+            <div class="modal-field">
+              <label class="modal-label">Tagline (under name)</label>
+              <input class="modal-input" id="ab-tagline" placeholder="Creating whimsical fantastical worlds…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;width:100%;outline:none;">
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+
+          <!-- ── Section 1: The Spirit Behind It ── -->
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(250,247,242,0.06);">Section 1 — "The Spirit Behind It" (3 paragraphs)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
             <div>
               <div class="modal-field">
-                <label class="modal-label">Bio (paragraph 1)</label>
-                <textarea class="modal-textarea" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:110px;">I'm a freelance illustrator and animator with a love for soft palettes, whimsical characters, and storytelling through imagery. My work lives somewhere between fairy tale and daydream.</textarea>
+                <label class="modal-label">Paragraph 1</label>
+                <textarea class="modal-textarea" id="ab-bio1" placeholder="My work draws inspiration from…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;"></textarea>
               </div>
               <div class="modal-field">
-                <label class="modal-label">Bio (paragraph 2)</label>
-                <textarea class="modal-textarea" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:110px;">I've worked with indie game studios, small brands, and musicians, and I spend my streaming hours painting live on Twitch. When I'm not drawing, I'm probably foraging for mushroom references or rewatching Studio Ghibli for the hundredth time.</textarea>
+                <label class="modal-label">Paragraph 2</label>
+                <textarea class="modal-textarea" id="ab-bio2" placeholder="I am a mosaic of all the art…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;"></textarea>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
-                <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Commissions stat</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="200+">
-                </div>
-                <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Brand collabs stat</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="6+">
-                </div>
-                <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Followers stat</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="8k+">
-                </div>
-                <div class="modal-field" style="margin:0;">
-                  <label class="modal-label">Years freelancing</label>
-                  <input class="modal-input" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;" value="5yrs">
-                </div>
+              <div class="modal-field">
+                <label class="modal-label">Paragraph 3</label>
+                <textarea class="modal-textarea" id="ab-bio3" placeholder="Now if you're ever curious, join me on Twitch…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;"></textarea>
               </div>
-              <button class="btn-admin-primary" onclick="showToast('About page saved ✓')">Save Changes</button>
             </div>
             <div>
-              <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1rem;">Portrait / Hero Image</div>
-              <div class="modal-upload-preview" id="about-preview" style="aspect-ratio:3/4;min-height:280px;">
-                <span id="about-preview-emoji" style="font-size:4rem;">🌸</span>
-                <img id="about-preview-img" src="" alt="">
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:0.75rem;">Photo 1 — "At the studio"</div>
+              <div class="modal-upload-preview" id="about-preview-photo1" style="aspect-ratio:3/4;min-height:220px;">
+                <span id="about-preview-emoji" style="font-size:3rem;">🌸</span>
+                <img id="about-preview-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
               </div>
-              <div class="modal-upload-mini" style="margin-top:0.75rem;">
+              <div class="modal-upload-mini" style="margin-top:0.5rem;">
                 <input type="file" accept="image/*" onchange="previewAbout(event)">
-                ⬆ Upload new portrait image
+                ⬆ Upload photo 1
+              </div>
+              <div class="modal-field" style="margin-top:1rem;">
+                <label class="modal-label">Photo 1 caption</label>
+                <input class="modal-input" id="ab-caption1" placeholder="At the studio, 2024" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.6rem 1rem;width:100%;outline:none;">
               </div>
             </div>
           </div>
+
+          <!-- ── Section 2: Past Work ── -->
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(250,247,242,0.06);">Section 2 — "Past Work / Collaborations"</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+            <div>
+              <div class="modal-field">
+                <label class="modal-label">Collaborations paragraph 1</label>
+                <textarea class="modal-textarea" id="ab-collabs" placeholder="Past collaborations include…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;"></textarea>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Collaborations paragraph 2</label>
+                <textarea class="modal-textarea" id="ab-collabs2" placeholder="Interested in collaborating…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:100px;"></textarea>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:0.75rem;">Photo 2 — "Vancouver Island"</div>
+              <div class="modal-upload-preview" id="about-preview-photo2" style="aspect-ratio:3/4;min-height:220px;">
+                <span id="about-preview2-emoji" style="font-size:3rem;">🌿</span>
+                <img id="about-preview2-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="modal-upload-mini" style="margin-top:0.5rem;">
+                <input type="file" accept="image/*" onchange="previewUpload(event,'about-preview2-img','about-preview2-emoji')">
+                ⬆ Upload photo 2
+              </div>
+              <div class="modal-field" style="margin-top:1rem;">
+                <label class="modal-label">Photo 2 caption</label>
+                <input class="modal-input" id="ab-caption2" placeholder="Vancouver Island, 2024" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.6rem 1rem;width:100%;outline:none;">
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Section 3: Social & Links ── -->
+          <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(250,247,242,0.06);">Section 3 — "Social & Links"</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+            <div>
+              <div class="modal-field">
+                <label class="modal-label">Social intro text</label>
+                <textarea class="modal-textarea" id="ab-social-intro" placeholder="Live painting sessions, WIP sketches…" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;width:100%;resize:vertical;min-height:80px;"></textarea>
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Twitch URL</label>
+                <input class="modal-input" id="ab-twitch" placeholder="https://www.twitch.tv/supjiomie" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;width:100%;outline:none;">
+              </div>
+              <div class="modal-field">
+                <label class="modal-label">Instagram URL</label>
+                <input class="modal-input" id="ab-instagram" placeholder="https://www.instagram.com/supjiomie/" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.75rem 1rem;width:100%;outline:none;">
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:0.75rem;">Photo 3 — "In the field"</div>
+              <div class="modal-upload-preview" id="about-preview-photo3" style="aspect-ratio:3/4;min-height:220px;">
+                <span id="about-preview3-emoji" style="font-size:3rem;">🦋</span>
+                <img id="about-preview3-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="modal-upload-mini" style="margin-top:0.5rem;">
+                <input type="file" accept="image/*" onchange="previewUpload(event,'about-preview3-img','about-preview3-emoji')">
+                ⬆ Upload photo 3
+              </div>
+              <div class="modal-field" style="margin-top:1rem;">
+                <label class="modal-label">Photo 3 caption</label>
+                <input class="modal-input" id="ab-caption3" placeholder="In the field, 2023" style="background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.1);color:#FAF7F2;padding:0.6rem 1rem;width:100%;outline:none;">
+              </div>
+            </div>
+          </div>
+
         </div>
 
       
@@ -4203,36 +4278,109 @@
 
   window.saveAboutPage = async function() {
     const data={
-      name:document.getElementById('ab-name')?.value.trim()||'Jiomie',
-      location:document.getElementById('ab-location')?.value.trim()||'Vancouver, BC',
-      tagline:document.getElementById('ab-tagline')?.value.trim()||'',
-      bio1:document.getElementById('ab-bio1')?.value.trim()||'',
-      bio2:document.getElementById('ab-bio2')?.value.trim()||'',
-      bio3:document.getElementById('ab-bio3')?.value.trim()||'',
-      collabs:document.getElementById('ab-collabs')?.value.trim()||'',
-      twitch:document.getElementById('ab-twitch')?.value.trim()||'',
-      instagram:document.getElementById('ab-instagram')?.value.trim()||'',
+      name:        document.getElementById('ab-name')?.value.trim()||'Jiomie',
+      location:    document.getElementById('ab-location')?.value.trim()||'Vancouver, BC',
+      tagline:     document.getElementById('ab-tagline')?.value.trim()||'',
+      bio1:        document.getElementById('ab-bio1')?.value.trim()||'',
+      bio2:        document.getElementById('ab-bio2')?.value.trim()||'',
+      bio3:        document.getElementById('ab-bio3')?.value.trim()||'',
+      collabs:     document.getElementById('ab-collabs')?.value.trim()||'',
+      collabs2:    document.getElementById('ab-collabs2')?.value.trim()||'',
+      socialIntro: document.getElementById('ab-social-intro')?.value.trim()||'',
+      twitch:      document.getElementById('ab-twitch')?.value.trim()||'',
+      instagram:   document.getElementById('ab-instagram')?.value.trim()||'',
+      caption1:    document.getElementById('ab-caption1')?.value.trim()||'',
+      caption2:    document.getElementById('ab-caption2')?.value.trim()||'',
+      caption3:    document.getElementById('ab-caption3')?.value.trim()||'',
     };
-    for (const n of ['','2','3']) {
-      const imgEl=document.getElementById(`about-preview${n}-img`);
-      if(imgEl&&imgEl._pendingFile){toast(`Uploading photo ${n||'1'}…`);try{data[`photo${n||'1'}`]=await uploadToCloudinary(imgEl._pendingFile);imgEl._pendingFile=null;}catch(e){toast(`Photo upload failed`);}}
-      else if(imgEl&&imgEl.src&&imgEl.src.startsWith('http'))data[`photo${n||'1'}`]=imgEl.src;
+    // Upload photos
+    const photoIds = [
+      ['about-preview-img',  '', '1'],
+      ['about-preview2-img', '2', '2'],
+      ['about-preview3-img', '3', '3'],
+    ];
+    for (const [imgId, , num] of photoIds) {
+      const imgEl = document.getElementById(imgId);
+      if (imgEl && imgEl._pendingFile) {
+        toast(`Uploading photo ${num}…`);
+        try { data[`photo${num}`] = await uploadToCloudinary(imgEl._pendingFile); imgEl._pendingFile = null; }
+        catch(e) { toast(`Photo ${num} upload failed`); }
+      } else if (imgEl && imgEl.src && imgEl.src.startsWith('http')) {
+        data[`photo${num}`] = imgEl.src;
+      }
     }
-    await setDoc(doc(db,'settings','about'),data);
+    await setDoc(doc(db,'settings','about'), data);
     toast('About page saved ✓');
     renderPublicAbout(data);
   };
 
   function renderPublicAbout(data) {
-    if(!data) return;
-    const nameEl=document.querySelector('.ap-name');if(nameEl&&data.name)nameEl.childNodes[0].textContent=data.name;
-    const tagEl=document.querySelector('.ap-tagline');if(tagEl&&data.tagline)tagEl.textContent=data.tagline;
-    const paras=document.querySelectorAll('#page-about .ap-para');
-    if(paras[0]&&data.bio1)paras[0].textContent=data.bio1;
-    if(paras[1]&&data.bio2)paras[1].textContent=data.bio2;
-    if(paras[2]&&data.bio3)paras[2].textContent=data.bio3;
-    const twitchLinks=document.querySelectorAll('a[href*="twitch"]');twitchLinks.forEach(a=>{if(data.twitch)a.href=data.twitch;});
-    const igLinks=document.querySelectorAll('a[href*="instagram"]');igLinks.forEach(a=>{if(data.instagram)a.href=data.instagram;});
+    if (!data) return;
+    // Hero
+    const nameEl = document.querySelector('.ap-name');
+    if (nameEl && data.name) nameEl.childNodes[0].textContent = data.name;
+    const locEl = document.querySelector('.ap-name em');
+    if (locEl && data.location) locEl.textContent = data.location;
+    const tagEl = document.querySelector('.ap-tagline');
+    if (tagEl && data.tagline) tagEl.textContent = data.tagline;
+
+    // Bio paragraphs (Section 1)
+    const bioParas = document.querySelectorAll('.ap-bio-row:first-of-type .ap-para');
+    if (bioParas[0] && data.bio1) bioParas[0].textContent = data.bio1;
+    if (bioParas[1] && data.bio2) bioParas[1].textContent = data.bio2;
+    if (bioParas[2] && data.bio3) bioParas[2].textContent = data.bio3;
+
+    // Collabs paragraphs (Section 2)
+    const collabRows = document.querySelectorAll('.ap-bio-row.reversed .ap-para');
+    if (collabRows[0] && data.collabs) collabRows[0].innerHTML = data.collabs;
+    if (collabRows[1] && data.collabs2) collabRows[1].innerHTML = data.collabs2;
+
+    // Social intro (Section 3)
+    const socialParas = document.querySelectorAll('.ap-bio-row:last-of-type .ap-para');
+    if (socialParas[0] && data.socialIntro) socialParas[0].textContent = data.socialIntro;
+
+    // Social links
+    document.querySelectorAll('a[href*="twitch"]').forEach(a => { if (data.twitch) a.href = data.twitch; });
+    document.querySelectorAll('a[href*="instagram"]').forEach(a => { if (data.instagram) a.href = data.instagram; });
+
+    // Photos & captions
+    const photoMap = [
+      { imgId: 'about-preview-img',  photoKey: 'photo1', captionKey: 'caption1', sideNum: 0, emojiId: 'about-preview-emoji' },
+      { imgId: 'about-preview2-img', photoKey: 'photo2', captionKey: 'caption2', sideNum: 1, emojiId: 'about-preview2-emoji' },
+      { imgId: 'about-preview3-img', photoKey: 'photo3', captionKey: 'caption3', sideNum: 2, emojiId: 'about-preview3-emoji' },
+    ];
+    const sidePics = document.querySelectorAll('#page-about .ap-side-photo-img');
+    const sideCaptions = document.querySelectorAll('#page-about .ap-side-caption');
+    photoMap.forEach(({ imgId, photoKey, captionKey, sideNum, emojiId }) => {
+      const url = data[photoKey];
+      // Update admin preview
+      const adminImg = document.getElementById(imgId);
+      const adminEmoji = document.getElementById(emojiId);
+      if (adminImg && url) { adminImg.src = url; adminImg.style.display = 'block'; if (adminEmoji) adminEmoji.style.display = 'none'; }
+      // Update public side photo
+      const pub = sidePics[sideNum];
+      if (pub && url) {
+        pub.style.backgroundImage = `url(${url})`;
+        pub.style.backgroundSize = 'cover';
+        pub.style.backgroundPosition = 'center';
+        pub.innerHTML = '';
+      }
+      // Update caption
+      const cap = sideCaptions[sideNum];
+      if (cap && data[captionKey]) cap.textContent = data[captionKey];
+      // Also update admin caption input
+      const capInput = document.getElementById(`ab-caption${sideNum+1}`);
+      if (capInput && data[captionKey]) capInput.value = data[captionKey];
+    });
+
+    // Populate admin fields from saved data
+    const fields = ['name','location','tagline','bio1','bio2','bio3','collabs','collabs2','socialIntro','twitch','instagram','caption1','caption2','caption3'];
+    const idMap = { socialIntro: 'ab-social-intro' };
+    fields.forEach(f => {
+      const elId = idMap[f] || ('ab-' + f.replace(/([A-Z])/g, c => c.toLowerCase()));
+      const el = document.getElementById(elId.includes('caption') ? 'ab-caption' + f.slice(-1) : elId);
+      if (el && data[f]) el.value = data[f];
+    });
   }
 
   // ── Override loadAll to wire public renders ──
@@ -4272,9 +4420,30 @@
     getDocs(collection(db,'settings')).then(snap=>{
       snap.docs.forEach(d=>{
         if(d.id==='about'){
-          const data=d.data();renderPublicAbout(data);
-          ['name','location','tagline','bio1','bio2','bio3','collabs','twitch','instagram'].forEach(k=>{const el=document.getElementById('ab-'+k);if(el&&data[k])el.value=data[k];});
-          ['1','2','3'].forEach(n=>{const url=data[`photo${n}`];if(!url)return;const img=document.getElementById(`about-preview${n==='1'?'':n}-img`),emoji=document.getElementById(`about-preview${n==='1'?'':n}-emoji`);if(img){img.src=url;img.style.display='block';}if(emoji)emoji.style.display='none';});
+          const data=d.data();
+          renderPublicAbout(data);
+          // Populate all admin fields
+          const fieldMap = {
+            'ab-name':'name','ab-location':'location','ab-tagline':'tagline',
+            'ab-bio1':'bio1','ab-bio2':'bio2','ab-bio3':'bio3',
+            'ab-collabs':'collabs','ab-collabs2':'collabs2',
+            'ab-social-intro':'socialIntro',
+            'ab-twitch':'twitch','ab-instagram':'instagram',
+            'ab-caption1':'caption1','ab-caption2':'caption2','ab-caption3':'caption3',
+          };
+          Object.entries(fieldMap).forEach(([elId, key]) => {
+            const el = document.getElementById(elId);
+            if (el && data[key]) el.value = data[key];
+          });
+          // Populate photo previews
+          [['about-preview-img','about-preview-emoji','photo1'],
+           ['about-preview2-img','about-preview2-emoji','photo2'],
+           ['about-preview3-img','about-preview3-emoji','photo3']].forEach(([imgId,emojiId,key])=>{
+            const url=data[key]; if(!url) return;
+            const img=document.getElementById(imgId), emoji=document.getElementById(emojiId);
+            if(img){img.src=url;img.style.display='block';}
+            if(emoji)emoji.style.display='none';
+          });
         }
       });
     }).catch(()=>{});
